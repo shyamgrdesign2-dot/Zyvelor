@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Velora My open loops · Clean up your own loose ends</title>
+<title>Velora Visit recap · What happened last time, what's still pending</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -208,7 +208,7 @@
       <a href="velora-intent-mdt.html">MDT brief</a>
       <a href="velora-intent-why-flagged.html">Why flagged today</a>
       <a href="velora-intent-active-meds.html">Active meds</a>
-      <a class="active" href="velora-intent-open-loops.html">My open loops</a>
+      <a class="active" href="velora-intent-open-loops.html">Visit recap</a>
     </div>
   </div>
 </nav>
@@ -216,8 +216,8 @@
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>Velora · My open loops</div>
-    <h1 class="h-display">Clean up your own<br/>loose ends.</h1>
+    <div class="eyebrow"><span class="pip"></span>Velora · Visit recap</div>
+    <h1 class="h-display">What happened last time.<br/>What's still pending.</h1>
   </div>
 </section>
 
@@ -225,44 +225,48 @@
 <section id="case">
   <div class="wrap">
     <div class="eyebrow"><span class="pip"></span>The case</div>
-    <h2 class="h-section">Dr. Anjali Pandey · Friday end-of-shift · 17:40</h2>
-    <p>Dr. Pandey's panel has 142 active patients. Across this past month she has ordered <span class="strong">38 labs, sent 9 referrals, booked 22 follow-ups, prescribed 51 in-hospital scripts</span>. Most are closed. <span class="strong">11 chains across 8 patients haven't.</span> The patient charts can't tell her this — each one shows that <em>this</em> patient has one open lab. Velora reads across all 142 panels, groups by chain type, and sorts by age. The doctor's own inbox.</p>
+    <h2 class="h-section">Lakshmi Pandey returns · 10:20 OPD · last seen 12 March</h2>
+    <p>Lakshmi was last in this clinic six weeks ago. The note from that visit set a plan — five things were started: an HbA1c, a referral to Cardiology for atypical chest pain, a fasting glucose, atorvastatin 20 mg, and a follow-up booked for 10 March. <span class="strong">She didn't make the follow-up. None of the five was fully closed.</span> When Dr. Pandey opens the chart at 10:18, the EMR shows the last note. Velora goes one step further: it shows what came of each plan item, and what other departments did with her in the gap.</p>
 
     <div class="case-silos">
       <div class="silo">
-        <div class="silo-head"><span class="dot"></span>Labs unresulted</div>
-        <div class="silo-sub">Ordered by Dr. Pandey, no result_id linked:</div>
+        <div class="silo-head"><span class="dot"></span>Last visit's plan</div>
+        <div class="silo-sub">Five items, set on 12 March:</div>
         <ul>
-          <li><span class="strong">3 chains</span> across 3 patients</li>
-          <li>Oldest: <code>75 days</code> · fasting glucose, Lakshmi P.</li>
-          <li>Threshold: &gt; 7 days → <code>OPEN</code></li>
+          <li>HbA1c ordered · returned 7.2 % (above ICMR target)</li>
+          <li>Cardiology referral · "atypical chest pain w/u"</li>
+          <li>Fasting glucose ordered</li>
+          <li>Atorvastatin 20 mg · 30-day supply</li>
+          <li>Follow-up booked for 10 Mar</li>
         </ul>
       </div>
       <div class="silo">
-        <div class="silo-head"><span class="dot"></span>Referrals never landed</div>
-        <div class="silo-sub">Sent by Dr. Pandey, no destination visit:</div>
+        <div class="silo-head"><span class="dot"></span>Status today</div>
+        <div class="silo-sub">Plan items vs. what closed:</div>
         <ul>
-          <li><span class="strong">2 chains</span> across 2 patients</li>
-          <li>Oldest: <code>85 days</code> · GenMed → Cardiology, Lakshmi P.</li>
-          <li>Threshold: &gt; 30 days → <code>STALE</code></li>
+          <li>HbA1c result returned · <span class="strong">no follow-up note</span></li>
+          <li>Cardiology referral <span class="strong">never landed</span> (85 d stale)</li>
+          <li>Fasting glucose <span class="strong">no result</span> on file (75 d)</li>
+          <li>Atorvastatin <span class="strong">no in-hospital refill</span> in 110 d</li>
+          <li>Follow-up <span class="strong">no-show, never rebooked</span></li>
         </ul>
       </div>
       <div class="silo">
-        <div class="silo-head"><span class="dot"></span>Follow-ups missed · Rx unfilled</div>
-        <div class="silo-sub">No-show or no in-hospital fill:</div>
+        <div class="silo-head"><span class="dot"></span>What's new since</div>
+        <div class="silo-sub">Other departments touched her too:</div>
         <ul>
-          <li><span class="strong">6 chains</span> across 5 patients</li>
-          <li>Oldest miss: <code>60 days</code> since no-show</li>
-          <li>Oldest no-fill: <code>110 days</code> · atorvastatin</li>
+          <li>Cardio Stress Test referral · auto-scheduled 10 Apr</li>
+          <li>Endocrinology consult · Dr. Reddy · 26 Apr</li>
+          <li>"Consider GLP-1 if HbA1c remains &gt; 7"</li>
         </ul>
       </div>
     </div>
 
-    <p style="margin-top: 28px;"><span class="strong">A doctor's queue, not a patient's chart.</span> The chart-level view shows one open chain at a time and asks the doctor to remember the rest. The queue-level view sorts every unfinished item the doctor started, across every patient they've touched, by age. Five minutes a week, end of shift.</p>
+    <p style="margin-top: 28px;"><span class="strong">The chart shows the last note. Velora shows what happened with the plan from that note.</span> Five plan items, two cross-team events, all linked back to a single visit_id. Thirty seconds of pre-read before she walks in.</p>
 
     <blockquote class="pull-quote">
-      "Velora's queue caught two referrals I'd lost track of and a fasting glucose I'd forgotten I ordered. The fasting glucose was on Lakshmi — who came back to ER three weeks later. If I had read the queue then, I would have called her."
-      <span class="attrib">— Dr. Pandey · pilot week 5</span>
+      "I opened her chart and saw the 12 March note. What I didn't see was that the cardiology referral I sent her on never resulted in a visit. Velora put that next to the note and the lab. Saved me asking the wrong question first."
+      <span class="attrib">— Dr. Pandey · pilot week 4 · 8 May 2026</span>
     </blockquote>
   </div>
 </section>
@@ -270,191 +274,132 @@
 <!-- ═══════════ DRAWER MOCK ═══════════ -->
 <section id="drawer">
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>How the queue surface looks</div>
-    <h2 class="h-section">11 chains. 8 patients. One worklist sorted by age.</h2>
-    <p class="narrow">My open loops is a <em>doctor-centric</em> surface — the doctor's own queue across every patient they've touched, not a per-patient drawer. Each chain is a structured event with a stable id; the status pill (<code>OPEN</code> · <code>STALE</code> · <code>UNCLOSED</code> · <code>SIGNAL</code>) is computed against the hospital's signed operational thresholds. Five minutes a week, end of shift.</p>
+    <div class="eyebrow"><span class="pip"></span>How the recap surface looks</div>
+    <h2 class="h-section">Lakshmi's last visit was 6 weeks ago. Here's where each plan item ended up.</h2>
+    <p class="narrow">Visit recap is a <em>per-returning-patient</em> surface. The last clinical contact's plan, side-by-side with the status of every order, referral, follow-up, and prescription that came out of it. Plus what other departments have done with her in the gap. The thirty-second pre-read for a follow-up slot.</p>
 
     <div class="queue-panel">
       <div class="queue-head">
         <div class="left">
-          <div class="label">Velora · My open loops</div>
-          <div class="title">Dr. A. Pandey · 142 active patients · last 30 days</div>
-          <div class="sub">Fri 8 May 2026 · refreshed 17:38 IST · 91 ms</div>
+          <div class="label">Velora · Visit recap</div>
+          <div class="title">Lakshmi Pandey · 64F · T2DM, neuropathy</div>
+          <div class="sub">Last visit: 12 Mar 2026 · Dr. A. Pandey · GenMed · returning today 10:20</div>
         </div>
         <div class="right">
           <span class="stat-pill urgent">2 stale</span>
-          <span class="stat-pill notice">3 open</span>
           <span class="stat-pill notice">3 unclosed</span>
-          <span class="stat-pill">3 signal</span>
         </div>
       </div>
 
       <div class="queue-section-head">
-        <span>Labs unresulted</span>
-        <span class="count">3 chains · 3 patients</span>
+        <span>Last visit's plan · status today</span>
+        <span class="count">5 items · 0 fully closed</span>
       </div>
       <div class="queue-row">
-        <span class="pill-status open">Open</span>
-        <span class="age warn">75 d</span>
+        <span class="pill-status open">Result in</span>
+        <span class="age">7.2 %</span>
         <div>
-          <div class="item-title">Fasting glucose · no result_id linked</div>
-          <div class="item-meta">order_id l-44712 · ordered 22 Feb 2026</div>
+          <div class="item-title">HbA1c ordered 12 Mar · returned 15 Mar</div>
+          <div class="item-meta">result_id r-89400 · above ICMR target (7.0)</div>
         </div>
         <div>
-          <div class="pname">Lakshmi Pandey · 64F</div>
-          <div class="pname-id">P-00482 · T2DM, neuropathy</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status open">Open</span>
-        <span class="age notice">41 d</span>
-        <div>
-          <div class="item-title">Lipid panel · no result_id linked</div>
-          <div class="item-meta">order_id l-46031 · ordered 28 Mar 2026</div>
-        </div>
-        <div>
-          <div class="pname">Suresh Iyer · 62M</div>
-          <div class="pname-id">P-00219 · T2DM, post-MI</div>
+          <div class="pname">No follow-up note attached to result</div>
+          <div class="pname-id">awaiting clinical review</div>
         </div>
         <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status open">Open</span>
-        <span class="age">9 d</span>
-        <div>
-          <div class="item-title">Vitamin D 25-OH · no result_id linked</div>
-          <div class="item-meta">order_id l-46822 · ordered 29 Apr 2026</div>
-        </div>
-        <div>
-          <div class="pname">Anita Mehta · 47F</div>
-          <div class="pname-id">P-00813 · T2DM, HTN</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-
-      <div class="queue-section-head">
-        <span>Referrals never landed</span>
-        <span class="count">2 chains · 2 patients</span>
       </div>
       <div class="queue-row">
         <span class="pill-status stale">Stale</span>
         <span class="age warn">85 d</span>
         <div>
-          <div class="item-title">GenMed → Cardiology · "atypical chest pain w/u"</div>
-          <div class="item-meta">referral_id r-22018 · sent 12 Feb 2026 · no destination visit</div>
+          <div class="item-title">Cardiology referral · "atypical chest pain w/u"</div>
+          <div class="item-meta">referral_id r-22018 · sent 12 Feb · no destination visit</div>
         </div>
         <div>
-          <div class="pname">Lakshmi Pandey · 64F</div>
-          <div class="pname-id">P-00482 · T2DM, neuropathy</div>
+          <div class="pname">Cardiology hasn't seen her</div>
+          <div class="pname-id">threshold &gt; 30 d</div>
         </div>
         <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
       </div>
       <div class="queue-row">
-        <span class="pill-status stale">Stale</span>
-        <span class="age warn">47 d</span>
+        <span class="pill-status open">Pending</span>
+        <span class="age warn">75 d</span>
         <div>
-          <div class="item-title">GenMed → Endo · "thyroid panel review"</div>
-          <div class="item-meta">referral_id r-22344 · sent 22 Mar 2026 · no destination visit</div>
+          <div class="item-title">Fasting glucose ordered 22 Feb</div>
+          <div class="item-meta">order_id l-44712 · no result_id linked</div>
         </div>
         <div>
-          <div class="pname">Mohammed Faisal · 61M</div>
-          <div class="pname-id">P-01122 · T2DM, NAFLD</div>
+          <div class="pname">Lab order open</div>
+          <div class="pname-id">may have been done elsewhere</div>
+        </div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+      <div class="queue-row">
+        <span class="pill-status signal">No fill</span>
+        <span class="age">110 d</span>
+        <div>
+          <div class="item-title">Atorvastatin 20 mg · 30-day supply</div>
+          <div class="item-meta">rx_id rx-72918 · last in-hospital fill 18 Jan · no fill since</div>
+        </div>
+        <div>
+          <div class="pname">Verify outside-hospital fills verbally</div>
+          <div class="pname-id">in-hospital pharmacy data only</div>
+        </div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+      <div class="queue-row">
+        <span class="pill-status unclosed">No-show</span>
+        <span class="age warn">60 d</span>
+        <div>
+          <div class="item-title">Follow-up booked 10 Mar · "HbA1c &amp; medication review"</div>
+          <div class="item-meta">appt_id a-18402 · status no-show · not rebooked</div>
+        </div>
+        <div>
+          <div class="pname">Today is the next contact</div>
+          <div class="pname-id">no rebook on file</div>
         </div>
         <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
       </div>
 
       <div class="queue-section-head">
-        <span>Follow-ups missed · Rx unfilled</span>
-        <span class="count">6 chains · 5 patients</span>
+        <span>Cross-team activity since last visit</span>
+        <span class="count">2 events from other specialties</span>
       </div>
       <div class="queue-row">
-        <span class="pill-status unclosed">Unclosed</span>
-        <span class="age warn">60 d</span>
+        <span class="pill-status open">New</span>
+        <span class="age">28 d</span>
         <div>
-          <div class="item-title">No-show · "HbA1c &amp; medication review"</div>
-          <div class="item-meta">appt_id a-18402 · 10 Mar 2026 · not rebooked</div>
+          <div class="item-title">Cardiology Stress Test referral · auto-scheduled</div>
+          <div class="item-meta">referral_id r-22341 · 10 Apr · awaiting visit</div>
         </div>
         <div>
-          <div class="pname">Lakshmi Pandey · 64F</div>
-          <div class="pname-id">P-00482 · T2DM, neuropathy</div>
+          <div class="pname">Different from Dr. Pandey's referral</div>
+          <div class="pname-id">auto-scheduled by GenMed-Cardio queue</div>
         </div>
         <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
       </div>
       <div class="queue-row">
-        <span class="pill-status unclosed">Unclosed</span>
-        <span class="age notice">38 d</span>
-        <div>
-          <div class="item-title">No-show · "BP follow-up"</div>
-          <div class="item-meta">appt_id a-18877 · 31 Mar 2026 · not rebooked</div>
-        </div>
-        <div>
-          <div class="pname">Anita Mehta · 47F</div>
-          <div class="pname-id">P-00813 · T2DM, HTN</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status unclosed">Unclosed</span>
+        <span class="pill-status open">New</span>
         <span class="age">12 d</span>
         <div>
-          <div class="item-title">No-show · "thyroid recheck"</div>
-          <div class="item-meta">appt_id a-19204 · 26 Apr 2026 · not rebooked</div>
+          <div class="item-title">Endocrinology consult note · Dr. Reddy</div>
+          <div class="item-meta">note_id n-71203 · 26 Apr · "consider GLP-1 if HbA1c remains &gt; 7"</div>
         </div>
         <div>
-          <div class="pname">Priya Desai · 49F</div>
-          <div class="pname-id">P-00350 · T2DM, HTN</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status signal">Signal</span>
-        <span class="age">110 d</span>
-        <div>
-          <div class="item-title">Atorvastatin 20 mg · no in-hospital fill</div>
-          <div class="item-meta">rx_id rx-72918 · 30-day supply, last fill 18 Jan 2026</div>
-        </div>
-        <div>
-          <div class="pname">Lakshmi Pandey · 64F</div>
-          <div class="pname-id">P-00482 · T2DM, neuropathy</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status signal">Signal</span>
-        <span class="age">88 d</span>
-        <div>
-          <div class="item-title">Metformin 1g BD · no in-hospital fill</div>
-          <div class="item-meta">rx_id rx-73022 · last fill 9 Feb 2026</div>
-        </div>
-        <div>
-          <div class="pname">Suresh Iyer · 62M</div>
-          <div class="pname-id">P-00219 · T2DM, post-MI</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status signal">Signal</span>
-        <span class="age">32 d</span>
-        <div>
-          <div class="item-title">Amlodipine 5 mg · no in-hospital fill</div>
-          <div class="item-meta">rx_id rx-74112 · last fill 6 Apr 2026</div>
-        </div>
-        <div>
-          <div class="pname">Anita Mehta · 47F</div>
-          <div class="pname-id">P-00813 · T2DM, HTN</div>
+          <div class="pname">Consult done; recommendation unread</div>
+          <div class="pname-id">no GenMed acknowledgement on file</div>
         </div>
         <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
       </div>
 
       <div class="queue-foot">
-        Source: <code>Zydus operational config v2</code> · signed by Dr. A. Pandey (GenMed lead) · 2026-04-15<br/>
-        Thresholds: lab &gt; 7 d → <code>OPEN</code> · referral &gt; 30 d → <code>STALE</code> · no-show + not rebooked → <code>UNCLOSED</code> · Rx no in-hospital fill &gt; 90 d → <code>SIGNAL</code> (with disclosure)
-        <pre class="queue-trace">MATCH (d:Doctor {email: "anjali.pandey@zydus.in"})-[:ORDERED|REFERRED|BOOKED|PRESCRIBED]->(c:Chain)
-WHERE NOT (c)-[:CLOSED_BY]->()
-WITH c, duration.between(c.opened_at, datetime()).days AS age_days
-RETURN c.type, c.id, c.patient_id, age_days
-ORDER BY c.type, age_days DESC<span class="out">→ 11 chains across 8 patients · 17:38 IST · 91 ms</span></pre>
+        Sources: hospital order log · referral log · pharmacy log · cross-department notes · all linked by <code>visit_id v-30188</code> + <code>patient_id P-00482</code>.
+        <pre class="queue-trace">MATCH (p:Patient {id: "P-00482"})-[:HAD_VISIT]->(v:Visit {id: "v-30188"})
+OPTIONAL MATCH (v)-[:RESULTED_IN]->(plan:PlanItem)
+OPTIONAL MATCH (p)-[:SUBJECT_OF]->(e:Event)
+WHERE e.created_at &gt;= v.date AND e.specialty &lt;&gt; v.specialty
+RETURN plan.type, plan.id, plan.status, e.type, e.specialty
+ORDER BY plan.id, e.created_at DESC<span class="out">→ 5 plan items + 2 cross-team deltas · 178 ms</span></pre>
       </div>
     </div>
   </div>
@@ -463,16 +408,16 @@ ORDER BY c.type, age_days DESC<span class="out">→ 11 chains across 8 patients 
 <!-- ═══════════ SAME PATIENT, DIFFERENT HOSPITAL ═══════════ -->
 <section>
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>Same chain · different hospital</div>
-    <h2 class="h-section">Same loop. Different hospital. Different threshold.</h2>
-    <p class="narrow">There is no clinical guideline that says "a fasting glucose is stale at 7 days". That is a workflow choice the hospital makes — based on its OPD volume, its lab turnaround, its referral patterns. Two hospitals can each be correct and pick different numbers.</p>
-    <p class="narrow">Velora's job is to apply <em>this</em> hospital's signed-off config and surface the loops that breach it. Same code at Medanta and Mayo. Different thresholds.</p>
+    <div class="eyebrow"><span class="pip"></span>Same recap · different hospital</div>
+    <h2 class="h-section">Same plan items. Different hospital. Different staleness thresholds.</h2>
+    <p class="narrow">There is no clinical guideline that says "a fasting glucose is stale at 7 days." That is a workflow choice the hospital makes — based on OPD volume, lab turnaround, referral patterns. Two hospitals can each be correct and pick different numbers.</p>
+    <p class="narrow">Velora's job is to apply <em>this</em> hospital's signed-off config and label each plan item against it. Same code at Medanta and Mayo. Different windows.</p>
 
     <div class="same-pt-banner">
-      <span class="lbl">Same loop</span>
+      <span class="lbl">Same plan item</span>
       <span><span class="strong">Lab order</span> · fasting glucose · ordered 22 Feb · no result on file</span>
       <span class="muted">|</span>
-      <span>Same Velora codebase. Same engine. Two hospitals. Different loop-closure rules win.</span>
+      <span>Same Velora codebase. Same engine. Two hospitals. Different staleness rules win.</span>
     </div>
 
     <div class="config-grid">
@@ -535,12 +480,12 @@ ORDER BY c.type, age_days DESC<span class="out">→ 11 chains across 8 patients 
 
 <footer class="site-footer">
   <div class="wrap">
-    Velora · My open loops · the doctor's own queue across every patient they've touched
+    Velora · Visit recap · the per-returning-patient retrospective surface
     <div class="links">
       <a href="velora-intent-mdt.html">MDT brief</a> ·
       <a href="velora-intent-why-flagged.html">Why flagged today</a> ·
       <a href="velora-intent-active-meds.html">Active meds &amp; safety</a> ·
-      <a href="velora-intent-open-loops.html">My open loops</a>
+      <a href="velora-intent-open-loops.html">Visit recap</a>
     </div>
     <div style="margin-top:8px; color:var(--slate-400); font-size:11.5px;">© Zyvelor Labs · 2026 · zyvelorlabs@tatvacare.in</div>
   </div>
