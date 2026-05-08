@@ -728,12 +728,12 @@
     </a>
     <div class="links">
       <a href="#story">The story</a>
-      <a href="#v0">V0</a>
-      <a href="velora-intent-mdt.html">Patient brief</a>
+      <a href="#intents">Four intents</a>
+      <a href="velora-intent-mdt.html">MDT brief</a>
       <a href="velora-guidelines.html">Guidelines</a>
     </div>
     <div class="right">
-      <a class="btn btn-primary" href="velora-intent-mdt.html">See the patient brief
+      <a class="btn btn-primary" href="velora-intent-mdt.html">See MDT in action
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
@@ -750,7 +750,7 @@
     <h1>
       Velora reads what no <span class="accent">single doctor</span> can read in time.
     </h1>
-    <p class="lede">A clinical intelligence layer over the hospital's complete data — clinical, billing, lab, pharmacy, imaging — that stitches departments and surfaces what matters before the patient walks in. Two surfaces, one Knowledge Graph, every claim cited.</p>
+    <p class="lede">A clinical intelligence layer over the hospital's complete data — clinical, billing, lab, pharmacy, imaging — that stitches departments and surfaces what matters before the patient walks in. Four intents, one Knowledge Graph, every claim cited.</p>
   </div>
 </section>
 
@@ -790,26 +790,81 @@
   </div>
 </section>
 
-<!-- ════════════════ V0 · TWO SURFACES ════════════════ -->
-<section id="v0" class="tinted">
+<!-- ════════════════ THE FOUR INTENTS ════════════════ -->
+<section id="intents" class="tinted">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Velora V0 · what ships at Zydus, day 60</div>
-      <h2>Two surfaces. Both for patients who are in front of you today.</h2>
-      <p>V0 doesn't run a population scan and email you a list of patients you might be missing — Indian OPD doesn't have the recall infrastructure to act on that. V0 surfaces what your <em>scheduled and admitted</em> patients bring to the room, before they walk in. Five minutes a morning, then click any name for the full cross-specialty story.</p>
+      <div class="eyebrow">The four intents · what Velora does for a doctor</div>
+      <h2>One platform. Four jobs every multi-specialty doctor has, every day.</h2>
+      <p>MDT is the anchor — the cross-specialty deep-dive when a patient walks in. The other three orbit it: the morning flag-list of who's coming today, the safety check at the prescribe click, and the doctor's own queue of unfinished items. Same engine. Same citations. Each tuned to a different moment.</p>
     </div>
 
     <aside id="why-four" style="max-width: 720px; margin: 0 0 32px; padding: 18px 22px; background: var(--indigo-50); border-left: 3px solid var(--indigo-500); border-radius: 8px;">
-      <div style="font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--indigo-600); margin: 0 0 6px;">Why only patients in front of you?</div>
+      <div style="font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--indigo-600); margin: 0 0 6px;">Clinically defensible in Indian OPD</div>
       <p style="font-size: 14.5px; line-height: 1.55; color: var(--slate-700); margin: 0;">
-        Indian OPD has no nurse-led recall, no panel-management infrastructure. A "list of diabetics with no HbA1c in 6 months" is a list the doctor cannot act on — those patients aren't coming. V0 ships only the moments where the doctor <em>can</em> act: the OPD slot opening at 09:20, the patient on round in bed 14. Population queries become V2, when the hospital has admin staff to run on them.
+        Every flag in V0 is anchored to <em>an event that already exists</em> in the hospital's records — an admission, a referral that was sent, a critical lab that was drawn, a prescription that was written. No "find the patients you might be missing" framing — those don't fit Indian OPD without recall infrastructure. The four intents below all act on patients who are already in the system.
       </p>
     </aside>
+
+    <div class="bento">
+      <a href="velora-intent-mdt.html" class="intent-card c-mdt" style="grid-column: span 2;">
+        <div>
+          <div class="num">01 · Anchor intent</div>
+          <h3>MDT brief — read across the silos when you open a patient</h3>
+          <p>Cross-specialty stitched dossier. What each team has said, what's pending across them, the patient's journey across visits, with each clinical claim cited to the guideline body the hospital chose. Stack 1 facts. Stack 2 guideline-anchored panels. The deep view, before consultation.</p>
+        </div>
+        <span class="open">Open the MDT walkthrough
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+      <a href="velora-intent-why-flagged.html" class="intent-card c-flags">
+        <div>
+          <div class="num">02 · Today's panel</div>
+          <h3>Why flagged today — what's waiting on your morning list</h3>
+          <p>For each patient on today's OPD or round, the structured events that fired since their last contact — admission, unreviewed critical lab, threshold breach, polypharmacy. Each event already exists in the records.</p>
+        </div>
+        <span class="open">Open
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+      <a href="velora-intent-active-meds.html" class="intent-card c-meds">
+        <div>
+          <div class="num">03 · At the prescribe click</div>
+          <h3>Active meds &amp; safety — don't write blind</h3>
+          <p>Active meds, allergies, recent labs, DDI flags from the hospital's chosen source. Each card cites a Lexicomp / formulary / ADA rule. The doctor accepts or overrides; nothing is auto-stopped.</p>
+        </div>
+        <span class="open">Open
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+      <a href="velora-intent-open-loops.html" class="intent-card c-loops">
+        <div>
+          <div class="num">04 · End of shift</div>
+          <h3>My open loops — clean up your own loose ends</h3>
+          <p>Of the patients you've touched, what didn't close: labs unresulted, referrals never landed, follow-ups not booked, prescriptions never filled. The doctor's own queue, sorted by age.</p>
+        </div>
+        <span class="open">Open
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+      <a href="velora-guidelines.html" class="bento-cta">
+        <div>
+          <div class="num">+</div>
+          <h3>Clinical Guidelines library</h3>
+          <p>Every rule cites a guideline body. The library of who's used per specialty, configurable per hospital — ICMR, KDIGO, ESC, NICE, ADA, WHO HEARTS.</p>
+        </div>
+        <span class="open">Browse the catalogue
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <p style="margin-top: 36px; font-size: 13.5px; color: var(--slate-500); max-width: 720px;">A live look at intent #2 — the morning flag-list — is below. It's the surface that fronts every clinic day.</p>
 
     <div class="briefer">
       <div class="briefer-head">
         <div>
-          <div class="label">Surface 1 · Today's brief</div>
+          <div class="label">Intent #2 · Why flagged today — live demo</div>
           <div class="title">Dr. A. Pandey · GenMed · Wed 8 May 2026</div>
           <div class="sub">18 OPD slots · 4 admitted · 6 patients flagged</div>
         </div>
@@ -897,17 +952,17 @@
 
     <div class="brief-teaser">
       <div>
-        <div class="label">Surface 2 · Patient brief</div>
-        <h3>Click any name → the full cross-specialty story.</h3>
-        <p>One screen per patient. Cross-specialty timeline (Stack 1 facts), guideline-anchored panels (Stack 2 with citations), trajectory of key metrics if 3+ readings exist, active meds with prescriber attribution, open clinical signals. The same engine the team has already built — now positioned as the drill-down from Surface 1, not a separate intent.</p>
+        <div class="label">Click any flagged name → Intent #1 · MDT brief</div>
+        <h3>From the morning list to the deep cross-specialty view.</h3>
+        <p>The morning list above is intent #2. Click any patient's name and you're in intent #1 — the MDT brief. Cross-specialty timeline (Stack 1 facts), guideline-anchored panels (Stack 2 with citations), trajectory of key metrics if 3+ readings exist, active meds with prescriber attribution. Same engine; deeper view.</p>
       </div>
-      <a class="open-cta" href="velora-intent-mdt.html">See the patient brief
+      <a class="open-cta" href="velora-intent-mdt.html">See the MDT brief
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
 
     <p class="v0-foot">
-      Same Knowledge Graph powers both surfaces. Every flag and every panel cites a guideline body or a hospital config row — never an LLM judgment. <a href="velora-guidelines.html" style="color: var(--indigo-600); border-bottom: 1px dotted;">Browse the guideline library →</a>
+      Same Knowledge Graph powers all four intents. Every flag and every panel cites a guideline body or a hospital config row — never an LLM judgment. <a href="velora-guidelines.html" style="color: var(--indigo-600); border-bottom: 1px dotted;">Browse the guideline library →</a>
     </p>
   </div>
 </section>
@@ -1042,22 +1097,22 @@
   <div class="wrap">
     <div class="closing">
       <div>
-        <h2>Ready to see the V0 land at Zydus?</h2>
-        <p>60 days · 5–10 doctors · one department (start with General Medicine — the broadest cross-specialty exposure). Two surfaces against the hospital's real data: the morning briefer and the patient brief. The day-60 success bar is one clean line — a Zydus doctor opened a brief and acted on it.</p>
+        <h2>Ready to see the four intents land at Zydus?</h2>
+        <p>60-day pilot · 5–10 doctors · one department (start with General Medicine — the broadest cross-specialty exposure). All four intents against the hospital's real data: MDT brief, Why flagged today, Active meds &amp; safety, My open loops. The day-60 success bar is one line — a Zydus doctor opened an intent and acted on it.</p>
         <div class="ctas">
-          <a class="btn btn-primary btn-lg" href="velora-intent-mdt.html">See the patient brief
+          <a class="btn btn-primary btn-lg" href="velora-intent-mdt.html">Start with the MDT walkthrough
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <a class="btn btn-ghost btn-lg" href="#v0">Replay the V0</a>
+          <a class="btn btn-ghost btn-lg" href="#intents">See all four intents</a>
         </div>
       </div>
       <div class="closing-side">
         <h4>What ships at day 60</h4>
         <ul>
-          <li>· OMOP-style ETL across EMR + lab + pharmacy at Zydus</li>
-          <li>· Memgraph KG with cross-specialty traversals</li>
-          <li>· Today's brief — annotated OPD + admitted lists</li>
-          <li>· Patient brief — Stack 1 facts + Stack 2 guideline panels</li>
+          <li>· MDT brief — Stack 1 facts + Stack 2 guideline panels with patient journey</li>
+          <li>· Why flagged today — annotated OPD + admitted list with severity-tier flags</li>
+          <li>· Active meds &amp; safety — DDI, allergy, target, duplicate at the prescribe view</li>
+          <li>· My open loops — doctor's queue across labs · referrals · follow-ups · Rx</li>
           <li>· 3 starter rule sets (KDIGO PD · ESC AF · ICMR T2DM)</li>
           <li>· Trace on every claim · doctor verifies before acting</li>
         </ul>
@@ -1083,15 +1138,11 @@
         <p style="font-size:12px; color: var(--slate-400); margin: 0;">By Zyvelor Labs · zyvelorlabs@tatvacare.in</p>
       </div>
       <div class="col">
-        <h5>V0 surfaces</h5>
-        <a href="velora-intent-mdt.html">Patient brief — drill-down</a>
-        <a href="#v0">Today's brief — morning view</a>
-      </div>
-      <div class="col">
-        <h5>Reference (V1+)</h5>
-        <a href="velora-intent-why-flagged.html">Care gaps · population</a>
-        <a href="velora-intent-active-meds.html">Safety check · at prescribe</a>
-        <a href="velora-intent-open-loops.html">My open loops · queue</a>
+        <h5>Four intents</h5>
+        <a href="velora-intent-mdt.html">MDT brief — anchor</a>
+        <a href="velora-intent-why-flagged.html">Why flagged today</a>
+        <a href="velora-intent-active-meds.html">Active meds &amp; safety</a>
+        <a href="velora-intent-open-loops.html">My open loops</a>
       </div>
       <div class="col">
         <h5>Specs</h5>
