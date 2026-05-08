@@ -4,7 +4,7 @@
 >
 > *A librarian, not a clinician. It cites; it does not interpret.*
 
-This repository is the **V0 design package** — the homepage, the five intent deep-dives, the Clinical Guidelines catalogue, the chat-UI mockup, and the underlying specs. Open `velora-home.html` in a browser to start.
+This repository is the **V0 design package** — the homepage, the five intent deep-dives, the Clinical Guidelines catalogue, the chat-UI mockup, and the underlying specs. Open `index.html` in a browser to start.
 
 ---
 
@@ -12,16 +12,16 @@ This repository is the **V0 design package** — the homepage, the five intent d
 
 ```bash
 # Just open the home page in any modern browser
-open velora-home.html        # macOS
-xdg-open velora-home.html    # Linux
-start velora-home.html       # Windows
+open index.html        # macOS
+xdg-open index.html    # Linux
+start index.html       # Windows
 ```
 
 Or serve the folder over HTTP if you want clean inter-page navigation:
 
 ```bash
 python3 -m http.server 8080
-# then visit http://localhost:8080/velora-home.html
+# then visit http://localhost:8080/index.html
 ```
 
 No build step, no dependencies — every HTML file is self-contained. Fonts load from Google Fonts CDN; everything else is inline.
@@ -34,7 +34,7 @@ No build step, no dependencies — every HTML file is self-contained. Fonts load
 
 | File | What it is |
 |---|---|
-| [`velora-home.html`](./velora-home.html) | **Homepage.** Hero, story (3 patient archetypes), V0 cut, five intents, Intent × Patient matrix, link to Clinical Guidelines. |
+| [`index.html`](./index.html) | **Homepage.** Hero, story (3 patient archetypes), V0 cut, five intents, Intent × Patient matrix, link to Clinical Guidelines. |
 | [`velora-intent-mdt.html`](./velora-intent-mdt.html) | **Intent ① — MDT brief.** Cross-team view with Ravi Shankar's case + Patient Journey timeline + drawer mock + same-patient/different-hospital config. |
 | [`velora-intent-open-loops.html`](./velora-intent-open-loops.html) | **Intent ② — Open loops.** Lakshmi Pandey's 4 unclosed chains. |
 | [`velora-intent-active-meds.html`](./velora-intent-active-meds.html) | **Intent ③ — Active meds &amp; safety.** Suresh Iyer's NSAID-on-apixaban case. |
@@ -114,7 +114,7 @@ Every body in the catalogue includes:
 
 ```
 Zyvelor/
-├── velora-home.html                      ← start here
+├── index.html                      ← start here
 ├── velora-intent-mdt.html
 ├── velora-intent-open-loops.html
 ├── velora-intent-active-meds.html

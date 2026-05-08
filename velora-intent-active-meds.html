@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Velora Active Meds &amp; Safety · Don't write blind</title>
+<title>Velora Safety check · V1+ reference design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -105,30 +105,27 @@
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <a class="topnav-brand" href="velora-home.html"><span class="dot"></span>Velora · Home</a>
+    <a class="topnav-brand" href="index.html"><span class="dot"></span>Velora · Home</a>
     <div class="topnav-links">
-      <a href="velora-intent-mdt.html">MDT</a>
-      <a href="velora-intent-open-loops.html">Open loops</a>
-      <a class="active" href="velora-intent-active-meds.html">Active meds</a>
-      <a href="velora-intent-trends.html">Trends</a>
-      <a href="velora-intent-why-flagged.html">Why flagged today</a>
+      <a href="index.html">Home</a>
+      <a href="velora-intent-mdt.html">Patient brief</a>
+      <a href="velora-guidelines.html">Guidelines</a>
     </div>
   </div>
 </nav>
 
+<div style="background: var(--amber-100); border-bottom: 1px solid #EDD6A0; padding: 10px 0; font-family: var(--sans);">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; gap: 14px; font-size: 12.5px; color: #7B4A12; flex-wrap: wrap;">
+    <span style="font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; font-size: 10.5px; padding: 3px 8px; background: #EDD6A0; border-radius: 4px;">V1+ reference</span>
+    <span>This page is reference design for a V1+ surface — <em>not</em> part of the 60-day Zydus pilot. Inline DDI/allergy at the prescribe click needs a Chrome-extension hook into the host EMR; that's the V1 work.</span>
+    <a href="index.html" style="margin-left: auto; color: #7B4A12; font-weight: 700; white-space: nowrap; text-decoration: underline;">See V0 →</a>
+  </div>
+</div>
+
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>Velora · Active meds &amp; safety</div>
+    <div class="eyebrow"><span class="pip"></span>Velora · Safety check <span style="font-weight:500;color:var(--slate-500);text-transform:none;letter-spacing:0;">· V1+ reference</span></div>
     <h1 class="h-display">Don't write blind.</h1>
-    <p class="lede">Before you prescribe, before you order, before you refer — the patient already has things on board. Some written by you. Most written by other specialties. All of them already in the hospital's records.</p>
-    <p>Multi-specialty hospitals are where prescribing risk lives. Cardiology starts an anticoagulant; two weeks later, GenMed sees the patient for joint pain and reaches for an NSAID. Both clinicians read their own column of the record. Velora reads across.</p>
-    <p class="tagline"><em>It is a librarian, not a pharmacist.</em> It surfaces what's there; it does not approve doses.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#case">Start with the case
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a class="btn btn-ghost" href="#how">Skip to how it works</a>
-    </div>
   </div>
 </section>
 
@@ -275,77 +272,6 @@
   </div>
 </section>
 
-<section id="how">
-  <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>The product</div>
-    <h2 class="h-section">The hospital records the meds. Velora reads across them.</h2>
-    <p class="narrow">Velora pulls the active med list, allergy entries, and recent labs across all departments at the moment the doctor opens a chart, runs the configured DDI rules, and surfaces the cards on its own surface — before the prescribe action.</p>
-
-    <div class="product-flow">
-      <div class="pbox">
-        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></span>
-        <h4>Hospital data</h4>
-        <p>active meds · allergies<br/>recent labs · orders</p>
-      </div>
-      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="pbox">
-        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
-        <h4>Safety rule engine</h4>
-        <p>DDI · allergy · duplicate order<br/>guideline anchors per class</p>
-      </div>
-      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="pbox">
-        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></span>
-        <h4>Velora drawer</h4>
-        <p>med list · DDI flags · allergy<br/>each cited to source rule</p>
-      </div>
-    </div>
-    <p style="margin-top: 18px;"><span class="strong">Single ETL contract with the HIS team. Velora ships its own surface. No new clinical workflow imposed; doctors keep what they already use.</span></p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>How the drawer is structured</div>
-    <h2 class="h-section">Two stacks. Two epistemic levels. Visually separated.</h2>
-    <p class="narrow">For Active meds, Stack 1 is the chart's own truth — what's on board, who wrote it, when. Stack 2 is the rule-based commentary — DDI, allergy match, duplicate, guideline anchor — each cited to a named source. They live in different containers so the doctor never confuses "what is" with "what a rule says about it".</p>
-
-    <div class="two-stacks">
-      <div class="stk s1">
-        <div class="stk-head">
-          <span class="l"><span class="num">Stack 1</span> Hospital records</span>
-          <span class="r">Fact</span>
-        </div>
-        <h3>Active medications, allergies, and recent labs — verbatim from the hospital's records. <span class="no-ai">No AI authoring.</span></h3>
-        <p class="desc">Click any med or allergy to open its source entry in the hospital's records.</p>
-        <ul>
-          <li>Active meds — drug, dose, prescriber, specialty, start date</li>
-          <li>Allergies — structured allergy field entries only, with date verified</li>
-          <li>Recent labs (last 30 days) — values verbatim, with reference ranges</li>
-          <li>Recent same-class orders — for duplicate detection</li>
-        </ul>
-        <div class="defence"><b>Defence:</b> every row traces to a single drug_exposure / allergy / measurement id. Click → source. Reproducible.</div>
-      </div>
-      <div class="stk s2">
-        <div class="stk-head">
-          <span class="l"><span class="num">Stack 2</span> AI Interpretation · informational only</span>
-          <span class="r">Suggested</span>
-        </div>
-        <h3>Rule-based safety overlays, each cited. <span class="no-ai">No clinical claim authoring.</span></h3>
-        <p class="desc">Sources used: hospital pharmacy formulary, Lexicomp class rules, ADA / ICMR / NICE guidelines (per class).</p>
-        <ul>
-          <li>DDI flags — drug pair → interaction class → cited rule id</li>
-          <li>Allergy match — about-to-prescribe vs allergy entry → exact / class</li>
-          <li>Guideline-anchored status (e.g., statin in DM, ACEi in CKD)</li>
-          <li>Duplicate-order hint — same-class lab in last 30 days</li>
-        </ul>
-        <div class="defence"><b>Defence:</b> each card cites its rule id (Lexicomp), allergy field, or guideline section. Velora does not approve doses or recommend substitutes.</div>
-      </div>
-    </div>
-    <p class="two-stacks-foot">Stack 1 is always above Stack 2. A doctor with 5 seconds reads only Stack 1. A doctor with 15 seconds reads both.</p>
-  </div>
-</section>
-
 <section>
   <div class="wrap">
     <div class="eyebrow"><span class="pip"></span>Same patient · different hospital</div>
@@ -420,11 +346,9 @@
   <div class="wrap">
     Velora · Active meds &amp; safety · before you prescribe
     <div class="links">
-      <a href="velora-intent-mdt.html">MDT</a> ·
-      <a href="velora-intent-open-loops.html">Open loops</a> ·
-      <a href="velora-intent-active-meds.html">Active meds</a> ·
-      <a href="velora-intent-trends.html">Trends</a> ·
-      <a href="velora-intent-why-flagged.html">Why flagged today</a>
+      <a href="index.html">Home</a> ·
+      <a href="velora-intent-mdt.html">Patient brief</a> ·
+      <a href="velora-guidelines.html">Guidelines</a>
     </div>
     <div style="margin-top:8px; color:var(--slate-400); font-size:11.5px;">© Zyvelor Labs · 2026 · zyvelorlabs@tatvacare.in</div>
   </div>

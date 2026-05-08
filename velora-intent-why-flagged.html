@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Velora Why flagged today · Here's what didn't make it to your morning round</title>
+<title>Velora Care gaps · Find the patients you might be missing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -105,270 +105,239 @@
   .hosp-foot{margin-top:12px;padding-top:10px;border-top:1px dashed var(--slate-200);font-size:12.5px;color:var(--slate-600);line-height:1.55;} .hosp-foot .strong{color:var(--ink);font-weight:600;}
   .site-footer{padding:36px 0;border-top:1px solid var(--slate-200);color:var(--slate-500);font-size:12.5px;text-align:center;} .site-footer .links{margin-top:8px;} .site-footer .links a{color:var(--slate-600);margin:0 8px;}
   .narrow{max-width:760px;}
+
+  /* ── Care gaps · population list primitive ───────────────── */
+  .gap-panel { background: var(--panel); border: 1px solid var(--slate-200); border-radius: 18px; box-shadow: 0 26px 60px -34px rgba(15,15,26,0.35); margin-top: 36px; overflow: hidden; }
+  .gap-panel-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--slate-100); gap: 12px; flex-wrap: wrap; }
+  .gap-panel-head .left .label { font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--indigo-500); margin-bottom: 4px; }
+  .gap-panel-head .left .title { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .gap-panel-head .left .sub { font-size: 11.5px; color: var(--slate-500); margin-top: 2px; font-family: var(--mono); }
+  .gap-panel-head .right { font-family: var(--mono); font-size: 11px; color: var(--slate-500); }
+  .gap-tabs { display: flex; gap: 6px; padding: 12px 20px; background: var(--bg-elev); border-bottom: 1px solid var(--slate-100); flex-wrap: wrap; }
+  .gap-tab { padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; color: var(--slate-600); background: white; border: 1px solid var(--slate-200); }
+  .gap-tab.active { background: var(--ink); color: white; border-color: var(--ink); font-weight: 600; }
+  .gap-tab .count { font-family: var(--mono); margin-left: 6px; opacity: 0.7; }
+  .gap-list-head { display: grid; grid-template-columns: minmax(180px,2fr) 1.2fr 1fr 110px; gap: 16px; padding: 10px 20px 8px; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); border-bottom: 1px solid var(--slate-100); }
+  .gap-row { display: grid; grid-template-columns: minmax(180px,2fr) 1.2fr 1fr 110px; gap: 16px; padding: 12px 20px; border-bottom: 1px solid var(--slate-100); align-items: center; font-size: 13px; }
+  .gap-row:last-of-type { border-bottom: 0; }
+  .gap-row .pname { font-weight: 600; color: var(--ink); }
+  .gap-row .pmeta { font-size: 11.5px; color: var(--slate-500); margin-top: 1px; font-family: var(--mono); }
+  .gap-row .last { font-family: var(--mono); font-size: 12px; color: var(--slate-700); }
+  .gap-row .age { font-family: var(--mono); font-size: 13px; color: var(--rose-700); font-weight: 600; }
+  .gap-row .age.warn { color: var(--amber-700); }
+  .gap-row .open-link { font-size: 11.5px; color: var(--indigo-500); font-family: var(--mono); text-align: right; }
+  .gap-foot { padding: 14px 20px; background: var(--bg-elev); border-top: 1px solid var(--slate-100); font-size: 11.5px; color: var(--slate-600); line-height: 1.6; }
+  .gap-foot code { background: white; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--slate-200); font-family: var(--mono); font-size: 11px; color: var(--ink-2); }
+  .gap-trace { margin-top: 14px; padding: 12px 14px; background: var(--ink); color: #BCCCFF; border-radius: 10px; font-family: var(--mono); font-size: 11.5px; line-height: 1.55; white-space: pre-wrap; overflow-x: auto; }
+  .gap-trace .out { color: #7DE7B6; display: block; margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.15); }
 </style>
 </head>
 <body>
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <a class="topnav-brand" href="velora-home.html"><span class="dot"></span>Velora · Home</a>
+    <a class="topnav-brand" href="index.html"><span class="dot"></span>Velora · Home</a>
     <div class="topnav-links">
-      <a href="velora-intent-mdt.html">MDT</a>
-      <a href="velora-intent-open-loops.html">Open loops</a>
-      <a href="velora-intent-active-meds.html">Active meds</a>
-      <a href="velora-intent-trends.html">Trends</a>
-      <a class="active" href="velora-intent-why-flagged.html">Why flagged today</a>
+      <a href="index.html">Home</a>
+      <a href="velora-intent-mdt.html">Patient brief</a>
+      <a href="velora-guidelines.html">Guidelines</a>
     </div>
   </div>
 </nav>
 
+<div style="background: var(--amber-100); border-bottom: 1px solid #EDD6A0; padding: 10px 0; font-family: var(--sans);">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; gap: 14px; font-size: 12.5px; color: #7B4A12; flex-wrap: wrap;">
+    <span style="font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; font-size: 10.5px; padding: 3px 8px; background: #EDD6A0; border-radius: 4px;">V1+ reference</span>
+    <span>This page is reference design for a V1+ surface — <em>not</em> part of the 60-day Zydus pilot. V0 ships only today's brief + the patient brief; population scanning needs admin staff Indian OPD doesn't have.</span>
+    <a href="index.html" style="margin-left: auto; color: #7B4A12; font-weight: 700; white-space: nowrap; text-decoration: underline;">See V0 →</a>
+  </div>
+</div>
+
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>Velora · Why flagged today</div>
-    <h1 class="h-display">Here's what didn't make it<br/>to your morning round.</h1>
-    <p class="lede">A patient on today's OPD list isn't just an appointment. They are an admission you might have missed, a critical lab that never made it back to a note, a vital reading drifting outside the threshold someone signed off on.</p>
-    <p>The schedule sees them as a 09:20 slot. Velora sees the four structured events that fired since the last clinical contact — and surfaces them, cited, before the patient walks in.</p>
-    <p class="tagline"><em>It is a librarian, not a triage system.</em> It surfaces structured signals; it does not prioritise.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#case">Start with the case
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a class="btn btn-ghost" href="#how">Skip to how it works</a>
-    </div>
+    <div class="eyebrow"><span class="pip"></span>Velora · Care gaps <span style="font-weight:500;color:var(--slate-500);text-transform:none;letter-spacing:0;">· V1+ reference</span></div>
+    <h1 class="h-display">Find the patients<br/>you might be missing.</h1>
   </div>
 </section>
 
 <section id="case">
   <div class="wrap">
     <div class="eyebrow"><span class="pip"></span>The case</div>
-    <h2 class="h-section">Ramesh Kumar, 58, on today's 09:20 slot</h2>
-    <p>Ramesh is on Dr. Mehta's schedule like every other patient. <span class="strong">Four structured events have fired about him since his last clinical contact — three of which have not been read by anyone yet.</span> The schedule does not show that. The chart does not surface it on open. Velora does, before the patient sits down.</p>
+    <h2 class="h-section">Dr. Anjali Pandey · GenMed · Wednesday morning</h2>
+    <p>Dr. Pandey runs an active panel of <span class="strong">142 patients</span> at the General Medicine OPD. Her morning starts at 07:50 with a coffee and a glance at the day's schedule — 18 OPD slots, 4 admissions to round on. <span class="strong">23 of her 142 patients are flagged this morning</span> for one of three care-gap queries the hospital signed off on. None of those 23 are on today's schedule. They are the patients she is not about to see.</p>
 
     <div class="case-silos">
       <div class="silo">
-        <div class="silo-head"><span class="dot"></span>Inpatient (Cardiology)</div>
-        <div class="silo-sub">Recent admission:</div>
+        <div class="silo-head"><span class="dot"></span>HbA1c gap</div>
+        <div class="silo-sub">Diabetics with no HbA1c in 6 months:</div>
         <ul>
-          <li>Admitted <code>21 Apr</code> · AKI on CKD</li>
-          <li>Discharged <code>26 Apr</code> · summary on file</li>
-          <li>This is his first OPD since</li>
+          <li><span class="strong">12 patients</span></li>
+          <li>Source: ICMR T2DM glycaemic monitoring</li>
+          <li>Oldest gap: <code>11 months</code></li>
         </ul>
       </div>
       <div class="silo">
-        <div class="silo-head"><span class="dot"></span>Lab (Pathology)</div>
-        <div class="silo-sub">Critical-flagged:</div>
+        <div class="silo-head"><span class="dot"></span>Discharge follow-up</div>
+        <div class="silo-sub">Discharged in last 30 days · no follow-up booked:</div>
         <ul>
-          <li>K+ <code>5.9 mmol/L</code> · 22 Apr</li>
-          <li>Critical tier · ref ceiling 5.0</li>
-          <li>No subsequent clinical note attached</li>
+          <li><span class="strong">4 patients</span></li>
+          <li>Source: hospital operational config</li>
+          <li>Oldest gap: <code>22 days</code></li>
         </ul>
       </div>
       <div class="silo">
-        <div class="silo-head"><span class="dot"></span>Last OPD vital (Cardiology)</div>
-        <div class="silo-sub">Threshold breach:</div>
+        <div class="silo-head"><span class="dot"></span>BP gap</div>
+        <div class="silo-sub">Hypertensives · no BP reading in 90 days:</div>
         <ul>
-          <li>SBP <code>156</code> · DBP <code>96</code> · 24 Apr</li>
-          <li>Above WHO HEARTS threshold (&lt;140/90)</li>
-          <li>5 chronic meds, oldest 18 months</li>
+          <li><span class="strong">7 patients</span></li>
+          <li>Source: hospital operational config</li>
+          <li>Oldest gap: <code>146 days</code></li>
         </ul>
       </div>
     </div>
 
-    <p style="margin-top: 28px;"><span class="strong">Each event is a structured row in some part of the hospital's records.</span> No one of them, alone, justifies a phone call before clinic. Together, they are the morning brief Dr. Mehta would write for himself if he had time. Velora writes it.</p>
+    <p style="margin-top: 28px;"><span class="strong">Population queries, not patient drawers.</span> The gap surface answers a different question from the chart: not "what's on this patient" but "who am I missing?" Three pre-validated queries, signed off by the GenMed lead before going live, run overnight against the hospital's complete data. By 07:48, the patients are listed.</p>
 
     <blockquote class="pull-quote">
-      "K+ 5.9 from 22 Apr was never reviewed. The patient is post-AKI, post-discharge, on five chronic meds. The OPD slot that opens at 09:20 is not a routine follow-up; it is the first chance to act on a result that fired five days ago."
-      <span class="attrib">— Velora morning brief, 8 May 2026 · 07:48</span>
+      "I was about to start clinic. The 12 diabetics with no HbA1c in 6 months took ten seconds to read. Two of them were due back this month anyway — I just told my staff to add an HbA1c order to their next visit. That's a Velora insight acted on, before I sat down."
+      <span class="attrib">— Dr. Pandey · pilot week 3 · 8 May 2026</span>
     </blockquote>
   </div>
 </section>
 
 <section id="drawer">
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>How the drawer presents this case</div>
-    <h2 class="h-section">Watch Velora read Ramesh's morning.</h2>
-    <p class="narrow">Stack 1 surfaces the four structured events — admission, critical lab, vital threshold breach, polypharmacy count — each as a verbatim row from the hospital's records with severity tier and source id. Stack 2 layers the rule that fired: which signed-off threshold each event breached, and which guideline body or hospital config that threshold came from. Severity is rule-based, never LLM-classified.</p>
+    <div class="eyebrow"><span class="pip"></span>How the gap surface looks</div>
+    <h2 class="h-section">23 patients flagged this morning. Three queries. One panel.</h2>
+    <p class="narrow">Care gaps is a <em>population</em> surface, not a patient drawer. The doctor opens it once a day and sees a list. Each gap query is a deterministic Cypher signed off by the clinical lead before pilot launch — no LLM judgment in the row, only in the optional ranking. Click any patient to open their MDT brief; the trace at the bottom shows the query that produced this list.</p>
 
-    <div class="drawer-grid">
-      <div class="drawer-mock">
-        <div class="drawer-mock-head">
-          <div class="left">
-            <div class="label">Velora drawer · Why flagged today</div>
-            <div class="title">Ramesh Kumar · 58M · OPD 09:20</div>
-            <div class="sub">Viewer: Dr. Anand Mehta · General medicine</div>
-          </div>
-          <span class="play"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</span>
+    <div class="gap-panel">
+      <div class="gap-panel-head">
+        <div class="left">
+          <div class="label">Velora · Care gaps</div>
+          <div class="title">Dr. A. Pandey's panel · 142 active patients</div>
+          <div class="sub">Wed 8 May 2026 · refreshed 06:14 IST · 47 ms</div>
         </div>
-
-        <div class="stack-label">
-          <span class="l"><span class="num">Stack 1 ·</span> Hospital records</span>
-          <span class="r fact">Factual · cited</span>
-        </div>
-        <div class="stack-1">
-          <div class="fact-card">
-            <div class="h"><span class="sev-dot crit"></span>Admission event · 21 Apr 2026 <span class="age">· 17 days ago</span></div>
-            <div class="body">Cardiology IPD · attending Dr. Pillai · diagnosis "AKI on CKD"</div>
-            <div class="meta">Discharged 26 Apr · discharge_summary_id = ds-44219</div>
-          </div>
-          <div class="fact-card">
-            <div class="h"><span class="sev-dot crit"></span>Lab result · 22 Apr 2026 <span class="age">· unreviewed</span></div>
-            <div class="body">Serum K+ <span class="v">5.9 mmol/L</span> · ref 3.5–5.0 · critical-flagged at the lab</div>
-            <div class="meta">Ordered by Dr. Pillai · result_id = r-88172 · no subsequent note</div>
-          </div>
-          <div class="fact-card">
-            <div class="h"><span class="sev-dot warn"></span>Vital reading · 24 Apr 2026 <span class="age">· 14 days ago</span></div>
-            <div class="body">SBP <span class="v">156</span> · DBP <span class="v">96</span> · resting</div>
-            <div class="meta">Recorded at Cardiology OPD · vital_id = v-30217</div>
-          </div>
-          <div class="fact-card">
-            <div class="h"><span class="sev-dot warn"></span>Polypharmacy count · current</div>
-            <div class="body">5 active chronic medications · oldest start 18 months · all &gt; 90 days</div>
-            <div class="meta">From Drug Exposure · grouped by drug_class</div>
-          </div>
-        </div>
-
-        <div class="stack-label">
-          <span class="l"><span class="num">Stack 2 ·</span> AI Interpretation</span>
-          <span class="r suggested">Threshold rule · informational only</span>
-        </div>
-        <div class="stack-2">
-          <div class="ai-card">
-            <div class="h"><span class="plus">+</span>AI suggested · Hospital lab reference range</div>
-            <div class="title">Critical-tier breach · K+</div>
-            <table>
-              <tr><td class="lbl">Result</td><td class="val">5.9 mmol/L</td><td class="tgt">ref ceiling 5.0</td></tr>
-              <tr><td class="lbl">Severity tier</td><td class="val">critical</td><td class="tgt"><span class="warn">structured rule ⚠</span></td></tr>
-              <tr><td class="lbl">Status</td><td class="val">unreviewed</td><td class="tgt">no clinical note attached</td></tr>
-            </table>
-            <div class="src">Hospital lab ref range · signed 2026-01-12 by Dr. Reddy (Pathology lead)</div>
-          </div>
-          <div class="ai-card">
-            <div class="h"><span class="plus">+</span>AI suggested · WHO HEARTS 2023</div>
-            <div class="title">BP threshold breach</div>
-            <table>
-              <tr><td class="lbl">SBP</td><td class="val">156</td><td class="tgt">target ceiling <span class="warn">&lt; 140 ⚠</span></td></tr>
-              <tr><td class="lbl">DBP</td><td class="val">96</td><td class="tgt">target ceiling <span class="warn">&lt; 90 ⚠</span></td></tr>
-              <tr><td class="lbl">Severity tier</td><td class="val">warning</td><td class="tgt">single reading vs threshold</td></tr>
-            </table>
-            <div class="src">WHO HEARTS 2023 §SBP/DBP threshold · target body chosen in hospital.yaml</div>
-          </div>
-          <div class="ai-card">
-            <div class="h"><span class="plus">+</span>AI suggested · NICE NG56</div>
-            <div class="title">Polypharmacy review trigger</div>
-            <table>
-              <tr><td class="lbl">Count</td><td class="val">5 chronic meds</td><td class="tgt">trigger ≥ 5 for ≥ 90 d</td></tr>
-              <tr><td class="lbl">Oldest start</td><td class="val">18 mo</td><td class="tgt">criterion met</td></tr>
-              <tr><td class="lbl">Severity tier</td><td class="val">warning</td><td class="tgt">medication-review trigger</td></tr>
-            </table>
-            <div class="src">NICE NG56 §1.2 (medication review trigger) · count from Drug Exposure</div>
-          </div>
-          <div class="ai-card">
-            <div class="h"><span class="plus">+</span>AI suggested · Hospital operational config</div>
-            <div class="title">Recent admission marker</div>
-            <table>
-              <tr><td class="lbl">Admitted</td><td class="val">21 Apr</td><td class="tgt">17 days ago</td></tr>
-              <tr><td class="lbl">Window</td><td class="val">≤ 30 d</td><td class="tgt"><span class="warn">in window ⚠</span></td></tr>
-              <tr><td class="lbl">Severity tier</td><td class="val">critical</td><td class="tgt">first OPD post-discharge</td></tr>
-            </table>
-            <div class="src">Hospital operational config · admission.window_days = 30 · signed</div>
-          </div>
-        </div>
+        <div class="right">23 flagged · 3 queries</div>
       </div>
 
-      <aside class="drawer-explain">
-        <div class="eyebrow"><span class="pip"></span>What you're watching</div>
-        <p>Stack 1 is the four structured events, each tagged with severity (critical / warning / neutral) drawn from the rule that fired — never from an LLM classifier.</p>
-        <p>Stack 2 names the rule for each event and cites its source: the hospital's lab reference range (signed by Pathology lead), WHO HEARTS for BP, NICE NG56 for polypharmacy, the hospital's operational admission window for the post-discharge marker.</p>
-        <div class="footer-note"><span class="strong" style="color:var(--ink)">Defence:</span> severity tiers are structured-rule output. The LLM may not classify a flag as critical. Velora surfaces a fact and the rule it breached; the doctor decides the action.</div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<section id="how">
-  <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>The product</div>
-    <h2 class="h-section">The schedule shows the slot. Velora shows the events that fired.</h2>
-    <p class="narrow">Velora runs five detectors per patient on the morning panel — admission in window, unreviewed critical lab, threshold breach on a recorded vital, polypharmacy count, missed follow-up. Each detector is a deterministic Cypher; each fires only against a structured event with a stable id. Velora's surface renders the union, severity-sorted, with the rule that fired cited per row.</p>
-
-    <div class="product-flow">
-      <div class="pbox">
-        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></span>
-        <h4>Hospital data</h4>
-        <p>admissions · labs · vitals<br/>orders · appointments</p>
+      <div class="gap-tabs">
+        <span class="gap-tab active">HbA1c gap <span class="count">12</span></span>
+        <span class="gap-tab">Discharge follow-up <span class="count">4</span></span>
+        <span class="gap-tab">BP gap <span class="count">7</span></span>
       </div>
-      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="pbox">
-        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4"/><path d="M4 4h13l-2 4 2 4H4"/></svg></span>
-        <h4>Threshold engine</h4>
-        <p>5 deterministic detectors<br/>signed-off thresholds</p>
+
+      <div class="gap-list-head">
+        <span>Patient</span>
+        <span>Last HbA1c</span>
+        <span>Gap</span>
+        <span style="text-align:right;">Action</span>
       </div>
-      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="pbox">
-        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
-        <h4>Velora drawer</h4>
-        <p>severity-sorted flags<br/>each cited to its rule</p>
+
+      <div class="gap-row">
+        <div>
+          <div class="pname">Lakshmi Pandey</div>
+          <div class="pmeta">P-00482 · 64F · T2DM, neuropathy</div>
+        </div>
+        <div class="last">7.2 % · 12 Mar 2025</div>
+        <div class="age">14 months</div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="gap-row">
+        <div>
+          <div class="pname">Suresh Iyer</div>
+          <div class="pmeta">P-00219 · 62M · T2DM, post-MI</div>
+        </div>
+        <div class="last">7.5 % · 28 Mar 2025</div>
+        <div class="age">13 months</div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="gap-row">
+        <div>
+          <div class="pname">Anita Mehta</div>
+          <div class="pmeta">P-00813 · 47F · T2DM since 2018</div>
+        </div>
+        <div class="last">8.1 % · 04 Apr 2025</div>
+        <div class="age">13 months</div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="gap-row">
+        <div>
+          <div class="pname">Ramesh Kumar</div>
+          <div class="pmeta">P-00671 · 58M · T2DM, CKD stage 3</div>
+        </div>
+        <div class="last">7.0 % · 18 Apr 2025</div>
+        <div class="age warn">12 months</div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="gap-row">
+        <div>
+          <div class="pname">Kavitha Subramanian</div>
+          <div class="pmeta">P-00904 · 53F · T2DM, hypothyroidism</div>
+        </div>
+        <div class="last">6.8 % · 02 Jun 2025</div>
+        <div class="age warn">11 months</div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="gap-row">
+        <div>
+          <div class="pname">Mohammed Faisal</div>
+          <div class="pmeta">P-01122 · 61M · T2DM, NAFLD</div>
+        </div>
+        <div class="last">7.9 % · 19 Jul 2025</div>
+        <div class="age warn">10 months</div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="gap-row">
+        <div>
+          <div class="pname">Priya Desai</div>
+          <div class="pmeta">P-00350 · 49F · T2DM, HTN</div>
+        </div>
+        <div class="last">6.5 % · 14 Aug 2025</div>
+        <div class="age warn">9 months</div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="gap-row">
+        <div>
+          <div class="pname">+ 5 more diabetic patients</div>
+          <div class="pmeta">8 to 6 months since last HbA1c</div>
+        </div>
+        <div class="last">—</div>
+        <div class="age">—</div>
+        <a class="open-link" href="#">View all 12 →</a>
+      </div>
+
+      <div class="gap-foot">
+        Source: <code>ICMR T2DM glycaemic monitoring</code> · signed off by Dr. A. Pandey (GenMed lead) · 2026-04-12
+        <pre class="gap-trace">MATCH (p:Patient)-[:HAS_CONDITION]->(d:Disease {name: "Type 2 Diabetes"})
+WHERE p.assigned_doctor = "anjali.pandey@zydus.in"
+AND NOT (p)-[:HAD_MEASUREMENT
+  {name: "HbA1c", within: "6 months"}]-()
+RETURN p.patient_id, p.name, p.last_hba1c_value, p.last_hba1c_date
+ORDER BY p.last_hba1c_date ASC<span class="out">→ 12 patients returned · 06:14 IST · 47 ms</span></pre>
       </div>
     </div>
-    <p style="margin-top: 18px;"><span class="strong">Single ETL contract with the HIS team. Velora ships its own surface. No new clinical workflow imposed; doctors keep what they already use.</span></p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>How the drawer is structured</div>
-    <h2 class="h-section">Two stacks. Two epistemic levels. Visually separated.</h2>
-    <p class="narrow">For Why-flagged-today, Stack 1 is the structured event itself — admission, lab, vital, count. Stack 2 is the rule that fired — the threshold, the window, the count criterion — each cited to a guideline body or a signed hospital config. Severity tiers are computed from rules, never from a classifier.</p>
-
-    <div class="two-stacks">
-      <div class="stk s1">
-        <div class="stk-head">
-          <span class="l"><span class="num">Stack 1</span> Hospital records</span>
-          <span class="r">Fact</span>
-        </div>
-        <h3>Structured events with severity tier from rules. <span class="no-ai">No AI authoring.</span></h3>
-        <p class="desc">Click any flag to open the source admission, lab, vital, or chart row in the hospital's records.</p>
-        <ul>
-          <li>Admission events in the configured window (default 30 days)</li>
-          <li>Critical-flagged labs unreviewed (no subsequent note)</li>
-          <li>Vital readings exceeding signed thresholds</li>
-          <li>Polypharmacy count exceeding NICE NG56 trigger</li>
-          <li>Missed follow-ups in the configured window</li>
-        </ul>
-        <div class="defence"><b>Defence:</b> every flag traces to a structured event id (admission_id, result_id, vital_id, appointment_id). Click → source. Reproducible.</div>
-      </div>
-      <div class="stk s2">
-        <div class="stk-head">
-          <span class="l"><span class="num">Stack 2</span> AI Interpretation · informational only</span>
-          <span class="r">Suggested</span>
-        </div>
-        <h3>Threshold rule cited per flag. <span class="no-ai">Severity is rule-based, never LLM-classified.</span></h3>
-        <p class="desc">Each rule is either a guideline body section or a signed hospital config row. The card names which.</p>
-        <ul>
-          <li>Lab thresholds — hospital lab reference range, signed by Pathology lead</li>
-          <li>BP thresholds — WHO HEARTS · ICMR HTN · AHA (per hospital config)</li>
-          <li>Polypharmacy trigger — NICE NG56 · ADA · ICMR (per hospital config)</li>
-          <li>Admission window — hospital operational config (signed)</li>
-          <li>Follow-up window — hospital operational config (signed)</li>
-        </ul>
-        <div class="defence"><b>Defence:</b> Velora does not call a flag critical. The lab's signed reference range does. Velora only renders the comparison and cites the rule.</div>
-      </div>
-    </div>
-    <p class="two-stacks-foot">Stack 1 is always above Stack 2. A doctor with 5 seconds reads only Stack 1. A doctor with 15 seconds reads both.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>Same event · different hospital</div>
-    <h2 class="h-section">Same event. Different hospital. Different threshold wins.</h2>
-    <p class="narrow">A K+ of 5.9 might be tier-warning at one hospital and tier-critical at another, depending on the lab's signed reference range. An admission in the last 30 days might or might not flag depending on the hospital's operational window. Velora's job is to apply <em>this</em> hospital's signed thresholds and cite which rule fired.</p>
+    <div class="eyebrow"><span class="pip"></span>Same gap · different hospital</div>
+    <h2 class="h-section">Same gap. Different hospital. Different threshold wins.</h2>
+    <p class="narrow">"Diabetic with no HbA1c in 6 months" is one hospital's gap. Another hospital uses 4 months because its diabetic-care protocol is tighter. "Discharge with no follow-up in 30 days" is operational config — different hospitals choose different windows. Velora's job is to run <em>this</em> hospital's signed gap thresholds and cite which rule fired.</p>
 
     <div class="same-pt-banner">
-      <span class="lbl">Same event</span>
-      <span><span class="strong">K+ 5.9 mmol/L</span> · 22 Apr · post-discharge · unreviewed</span>
+      <span class="lbl">Same gap</span>
+      <span><span class="strong">Diabetics with no HbA1c in N months</span> · structured query · doctor-panel-scoped</span>
       <span class="muted">|</span>
-      <span>Same Velora codebase. Same engine. Two hospitals. Different threshold rules win.</span>
+      <span>Same Velora codebase. Same engine. Two hospitals. Different gap windows win.</span>
     </div>
 
     <div class="config-grid">
@@ -387,7 +356,7 @@
         <div class="rule-row"><div class="l"><div class="meta">admission.window_days</div><div class="gd">30 days</div></div><span class="r"></span></div>
         <div class="rule-row"><div class="l"><div class="meta">followup.window_days</div><div class="gd">30 days</div></div><span class="r"></span></div>
         <div class="rule-row"><div class="l"><div class="meta">severity.tiers</div><div class="gd">3 (crit · warn · neutral)</div></div><span class="r"></span></div>
-        <div class="hosp-foot"><span class="strong">Ramesh's K+ tagged critical · BP tagged warning</span> · admission flag fires (day 17 of 30).</div>
+        <div class="hosp-foot"><span class="strong">Lakshmi flags · 14 mo since HbA1c &gt; ICMR's 6-month window</span>. Discharge follow-up window 30 d, BP gap 90 d.</div>
       </div>
 
       <div class="hosp-card center">
@@ -431,13 +400,11 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    Velora · Why flagged today · the morning brief Velora writes
+    Velora · Care gaps · the population surface that finds the patients you'd miss
     <div class="links">
-      <a href="velora-intent-mdt.html">MDT</a> ·
-      <a href="velora-intent-open-loops.html">Open loops</a> ·
-      <a href="velora-intent-active-meds.html">Active meds</a> ·
-      <a href="velora-intent-trends.html">Trends</a> ·
-      <a href="velora-intent-why-flagged.html">Why flagged today</a>
+      <a href="index.html">Home</a> ·
+      <a href="velora-intent-mdt.html">Patient brief</a> ·
+      <a href="velora-guidelines.html">Guidelines</a>
     </div>
     <div style="margin-top:8px; color:var(--slate-400); font-size:11.5px;">© Zyvelor Labs · 2026 · zyvelorlabs@tatvacare.in</div>
   </div>

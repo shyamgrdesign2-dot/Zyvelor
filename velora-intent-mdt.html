@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Velora MDT · The Cross-Specialty Intelligence Layer</title>
+<title>Velora · Patient brief — the cross-specialty story before the patient walks in</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -11,8 +11,7 @@
   /* ──────────────────────────────────────────────────────────────────────
      Velora intent landing-page system — shared visual language
      Used by: velora-intent-mdt.html · velora-intent-open-loops.html ·
-     velora-intent-active-meds.html · velora-intent-trends.html ·
-     velora-intent-why-flagged.html
+     velora-intent-active-meds.html · velora-intent-why-flagged.html
      ────────────────────────────────────────────────────────────────────── */
   :root {
     --bg: #F4F1EA;
@@ -801,16 +800,14 @@
 <!-- ════════════════ TOP NAV ════════════════ -->
 <nav class="topnav" aria-label="Velora intent navigation">
   <div class="topnav-inner">
-    <a class="topnav-brand" href="velora-home.html">
+    <a class="topnav-brand" href="index.html">
       <span class="dot"></span>
       Velora · Home
     </a>
     <div class="topnav-links">
-      <a class="active" href="velora-intent-mdt.html">MDT</a>
-      <a href="velora-intent-open-loops.html">Open loops</a>
-      <a href="velora-intent-active-meds.html">Active meds</a>
-      <a href="velora-intent-trends.html">Trends</a>
-      <a href="velora-intent-why-flagged.html">Why flagged today</a>
+      <a href="index.html">Home</a>
+      <a class="active" href="velora-intent-mdt.html">Patient brief</a>
+      <a href="velora-guidelines.html">Guidelines</a>
     </div>
   </div>
 </nav>
@@ -818,17 +815,8 @@
 <!-- ════════════════ HERO ════════════════ -->
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>Velora · MDT brief</div>
-    <h1 class="h-display">Your hospital already knew.</h1>
-    <p class="lede">The data to prevent the second admission was already in the hospital's records after the first. No single doctor could read all of it at the same time.</p>
-    <p>Velora is a clinical intelligence layer that reads <em>across</em> departmental records and surfaces what the next doctor needs to know — as a single, standalone surface.</p>
-    <p class="tagline"><em>It is a librarian, not a clinician.</em> It cites; it does not interpret.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#case">Start with the case
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a class="btn btn-ghost" href="#how">Skip to how it works</a>
-    </div>
+    <div class="eyebrow"><span class="pip"></span>Velora V0 · Patient brief</div>
+    <h1 class="h-display">The cross-specialty story,<br/>before the patient walks in.</h1>
   </div>
 </section>
 
@@ -1302,90 +1290,6 @@
   </div>
 </section>
 
-<!-- ════════════════ THE PRODUCT ════════════════ -->
-<section id="how">
-  <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>The product</div>
-    <h2 class="h-section">The hospital's data is a filing cabinet. Velora reads it.</h2>
-    <p class="narrow">Hospitals already invest in clinical, billing, lab, and pharmacy systems. Velora doesn't replace any of them. It is a clinical intelligence layer that reads <em>across</em> the hospital's complete data and surfaces only what needs cross-specialty attention — through its own surface.</p>
-
-    <div class="product-flow">
-      <div class="pbox">
-        <span class="ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
-        </span>
-        <h4>Hospital data</h4>
-        <p>notes · labs · imaging<br/>prescriptions · billing</p>
-      </div>
-      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="pbox">
-        <span class="ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="13" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="19" r="2.2"/><line x1="7.5" y1="7.5" x2="10.5" y2="11.5"/><line x1="16.5" y1="7.5" x2="13.5" y2="11.5"/><line x1="7.5" y1="17.5" x2="10.5" y2="14.5"/><line x1="16.5" y1="17.5" x2="13.5" y2="14.5"/></svg>
-        </span>
-        <h4>Velora knowledge graph</h4>
-        <p>cross-department<br/>relationships</p>
-      </div>
-      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="pbox">
-        <span class="ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg>
-        </span>
-        <h4>Velora drawer</h4>
-        <p>3–5 cards, 10-second read<br/>cited and verifiable</p>
-      </div>
-    </div>
-
-    <p style="margin-top: 18px;"><span class="strong">Single ETL contract with the HIS team. Velora ships its own surface. No new clinical workflow imposed; doctors keep what they already use.</span></p>
-  </div>
-</section>
-
-<!-- ════════════════ TWO STACKS EXPLANATION ════════════════ -->
-<section>
-  <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>How the drawer is structured</div>
-    <h2 class="h-section">Two stacks. Two epistemic levels. Visually separated.</h2>
-    <p class="narrow">The drawer never mixes hospital fact with AI inference. They live in different visual containers, each with its own framing.</p>
-
-    <div class="two-stacks">
-      <!-- Stack 1 -->
-      <div class="stk s1">
-        <div class="stk-head">
-          <span class="l"><span class="num">Stack 1</span> Hospital records</span>
-          <span class="r">Fact</span>
-        </div>
-        <h3>Cross-specialty data already in the hospital's records, attributed and verifiable. <span class="no-ai">No AI authoring.</span></h3>
-        <p class="desc">Click any card to open the source note in the hospital's records.</p>
-        <ul>
-          <li>Notes from other departments — title, doctor, date, citation count</li>
-          <li>Lab results — grouped by clinical panel (Renal, Cardiac, Diabetes)</li>
-          <li>PACS findings — radiologist or cardiologist's read, verbatim</li>
-          <li>Plans on record — verbatim quotes from other clinicians' notes</li>
-        </ul>
-        <div class="defence"><b>Defence:</b> every line traces to a single query against the hospital's records. Click → open source. Reproducible.</div>
-      </div>
-
-      <!-- Stack 2 -->
-      <div class="stk s2">
-        <div class="stk-head">
-          <span class="l"><span class="num">Stack 2</span> AI Interpretation · informational only</span>
-          <span class="r">Suggested</span>
-        </div>
-        <h3>Curated clinical groupings from <span class="no-ai">published guidelines</span> (KDIGO, ESC, ICMR, ISN-India), applied to this patient's data. AI picks <em>which guideline panels apply</em>; AI does not author clinical claims.</h3>
-        <ul>
-          <li>PD adequacy panel (KDIGO 2006 / ISN-India 2020)</li>
-          <li>Anaemia in CKD panel (KDIGO 2012)</li>
-          <li>AF anticoagulation status (ESC 2024)</li>
-          <li>Resistant HTN panel (ESC/ESH 2023)</li>
-          <li>Diabetes glycaemic control (ICMR 2018)</li>
-        </ul>
-        <div class="defence"><b>Defence:</b> the clinical authority is the guideline body, not Velora. Every card cites its source guideline section.</div>
-      </div>
-    </div>
-
-    <p class="two-stacks-foot">Stack 1 is always above Stack 2. A doctor with 5 seconds reads only Stack 1. A doctor with 15 seconds reads both.</p>
-  </div>
-</section>
-
 <!-- ════════════════ SAME PATIENT, DIFFERENT HOSPITAL ════════════════ -->
 <section>
   <div class="wrap">
@@ -1486,13 +1390,11 @@
 <!-- ════════════════ FOOTER ════════════════ -->
 <footer class="site-footer">
   <div class="wrap">
-    Velora · MDT brief · the cross-specialty intelligence layer
+    Velora V0 · Patient brief · the cross-specialty drill-down from today's morning briefer
     <div class="links">
-      <a href="velora-intent-mdt.html">MDT</a> ·
-      <a href="velora-intent-open-loops.html">Open loops</a> ·
-      <a href="velora-intent-active-meds.html">Active meds</a> ·
-      <a href="velora-intent-trends.html">Trends</a> ·
-      <a href="velora-intent-why-flagged.html">Why flagged today</a>
+      <a href="index.html">Home</a> ·
+      <a href="velora-intent-mdt.html">Patient brief</a> ·
+      <a href="velora-guidelines.html">Guidelines</a>
     </div>
     <div style="margin-top:8px; color:var(--slate-400); font-size:11.5px;">© Zyvelor Labs · 2026 · zyvelorlabs@tatvacare.in</div>
   </div>

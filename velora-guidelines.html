@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  /* Inherits visual language from velora-home.html — same tokens. */
+  /* Inherits visual language from index.html — same tokens. */
   :root {
     --bg: #FFFFFF;
     --bg-soft: #FAFAFC;
@@ -462,7 +462,7 @@
 <!-- ════════════════ NAV ════════════════ -->
 <nav class="top">
   <div class="inner">
-    <a class="brand" href="velora-home.html">
+    <a class="brand" href="index.html">
       <span class="mark">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
           <path d="M12 2L13.7 8.7L20.5 11L13.7 13.3L12 20L10.3 13.3L3.5 11L10.3 8.7L12 2Z" fill="white"/>
@@ -471,14 +471,14 @@
       <span class="v">Velora</span>
     </a>
     <div class="links">
-      <a href="velora-home.html">Home</a>
-      <a href="velora-home.html#story">Story</a>
-      <a href="velora-home.html#intents">Intents</a>
-      <a href="velora-home.html#matrix">Matrix</a>
+      <a href="index.html">Home</a>
+      <a href="index.html#story">Story</a>
+      <a href="index.html#v0">V0</a>
+      <a href="velora-intent-mdt.html">Patient brief</a>
       <a class="active" href="velora-guidelines.html">Clinical Guidelines</a>
     </div>
     <div class="right">
-      <a class="btn btn-primary" href="velora-home.html">Back to home
+      <a class="btn btn-primary" href="index.html">Back to home
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </a>
     </div>
@@ -488,12 +488,12 @@
 <!-- ════════════════ SUB-NAV ════════════════ -->
 <div class="subnav" role="navigation" aria-label="Quick intent links">
   <div class="subnav-inner">
-    <span class="subnav-label">Intents</span>
-    <a href="velora-intent-mdt.html"><span class="dot"></span>MDT</a>
-    <a class="c-loops" href="velora-intent-open-loops.html"><span class="dot"></span>Open loops</a>
-    <a class="c-meds" href="velora-intent-active-meds.html"><span class="dot"></span>Active meds</a>
-    <a class="c-trends" href="velora-intent-trends.html"><span class="dot"></span>Trends</a>
-    <a class="c-flags" href="velora-intent-why-flagged.html"><span class="dot"></span>Why flagged today</a>
+    <span class="subnav-label">V0 surfaces</span>
+    <a href="velora-intent-mdt.html"><span class="dot"></span>Patient brief</a>
+    <span class="subnav-label" style="margin-left: 18px;">V1+ reference</span>
+    <a class="c-trends" href="velora-intent-why-flagged.html"><span class="dot"></span>Care gaps</a>
+    <a class="c-meds" href="velora-intent-active-meds.html"><span class="dot"></span>Safety check</a>
+    <a class="c-loops" href="velora-intent-open-loops.html"><span class="dot"></span>My open loops</a>
   </div>
 </div>
 
@@ -2395,12 +2395,11 @@
         <p style="font-size:12px; color: var(--slate-400); margin: 0;">By Zyvelor Labs · zyvelorlabs@tatvacare.in</p>
       </div>
       <div class="col">
-        <h5>Five intents</h5>
-        <a href="velora-intent-mdt.html">MDT brief</a>
-        <a href="velora-intent-open-loops.html">Open loops</a>
-        <a href="velora-intent-active-meds.html">Active meds &amp; safety</a>
-        <a href="velora-intent-trends.html">Trends across visits</a>
-        <a href="velora-intent-why-flagged.html">Why flagged today</a>
+        <h5>Velora pages</h5>
+        <a href="velora-intent-mdt.html">Patient brief — V0</a>
+        <a href="velora-intent-why-flagged.html">Care gaps · V1+</a>
+        <a href="velora-intent-active-meds.html">Safety check · V1+</a>
+        <a href="velora-intent-open-loops.html">My open loops · V1+</a>
       </div>
       <div class="col">
         <h5>Specs</h5>
@@ -2410,9 +2409,9 @@
       </div>
       <div class="col">
         <h5>Home</h5>
-        <a href="velora-home.html">Velora home</a>
-        <a href="velora-home.html#story">The story</a>
-        <a href="velora-home.html#matrix">Intent × Patient matrix</a>
+        <a href="index.html">Velora home</a>
+        <a href="index.html#story">The story</a>
+        <a href="index.html#matrix">Intent × Patient matrix</a>
       </div>
     </div>
     <div class="credits">
