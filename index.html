@@ -729,6 +729,7 @@
     <div class="links">
       <a href="#story">The story</a>
       <a href="#intents">Four intents</a>
+      <a href="#matrix">Matrix</a>
       <a href="velora-intent-mdt.html">MDT brief</a>
       <a href="velora-guidelines.html">Guidelines</a>
     </div>
@@ -862,6 +863,120 @@
     <p class="v0-foot" style="margin-top: 36px;">
       Same Knowledge Graph powers all four intents. Every flag and every panel cites a guideline body or a hospital config row — never an LLM judgment. <a href="velora-guidelines.html" style="color: var(--indigo-600); border-bottom: 1px dotted;">Browse the guideline library →</a>
     </p>
+  </div>
+</section>
+
+
+<!-- ════════════════ INTENT × PATIENT MATRIX ════════════════ -->
+<section id="matrix" class="tinted">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Intent × Patient · how each intent behaves per archetype</div>
+      <h2>Four intents. Three patients. Twelve answers.</h2>
+      <p>The doctor asks in plain language. The agent maps the question to one of the four intents and surfaces the answer for the patient in front of them — accounting for what the hospital actually knows about that patient. Cells describe what the agent returns, not what gets asked. Click any intent name to open its full case page.</p>
+    </div>
+
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Intent</th>
+            <th style="width: 26%;">Returning to this doctor <span class="small">Patient archetype 1</span></th>
+            <th style="width: 26%;">New to you · known to hospital <span class="small">Patient archetype 2</span></th>
+            <th style="width: 26%;">First visit to the hospital <span class="small">Patient archetype 3</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1: MDT brief -->
+          <tr>
+            <td>
+              <a class="intent-name" href="velora-intent-mdt.html">
+                ① MDT brief
+                <span class="arrow">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </a>
+              <div class="intent-blurb">Cross-specialty stitched dossier. What each team has said, what's pending across them, with citations.</div>
+            </td>
+            <td>
+              <div class="surfaces"><span class="label">Surfaces</span>events from other specialties since your last note · attributed by provider · cross-team conflicts flagged.</div>
+            </td>
+            <td>
+              <div class="surfaces"><span class="label">Surfaces</span>full multi-specialty timeline · per-team assessments · pending handoffs · last MDT if documented.</div>
+            </td>
+            <td>
+              <p class="none">No prior record. OCR'd referral docs (if uploaded) appear in Stack 1, tagged <em>external · unverified</em>.</p>
+            </td>
+          </tr>
+
+          <!-- Row 2: Care Gaps -->
+          <tr>
+            <td>
+              <a class="intent-name" href="velora-intent-why-flagged.html">
+                ② Care Gaps
+                <span class="arrow">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </a>
+              <div class="intent-blurb">Expected next step missing. Discharge → no follow-up · lab returned → no note · referral sent → no destination visit.</div>
+            </td>
+            <td>
+              <div class="surfaces"><span class="label">Surfaces</span>your own loose threads — discharges with no follow-up booked, labs you ordered returned unread, referrals you sent without a destination visit.</div>
+            </td>
+            <td>
+              <div class="surfaces"><span class="label">Surfaces</span>cross-team gaps left open — referrals another dept sent that didn't land, labs they ordered unread, drug-target mismatches on their scripts.</div>
+            </td>
+            <td>
+              <p class="none">Empty state — no events to anchor a gap to. Care Gaps doesn't fire on first-time patients.</p>
+            </td>
+          </tr>
+
+          <!-- Row 3: Medication Red Flags -->
+          <tr>
+            <td>
+              <a class="intent-name" href="velora-intent-active-meds.html">
+                ③ Medication Red Flags
+                <span class="arrow">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </a>
+              <div class="intent-blurb">DDI · allergy · drug-target · polypharmacy. Each card cites a Lexicomp / formulary / ICMR rule.</div>
+            </td>
+            <td>
+              <div class="surfaces"><span class="label">Surfaces</span>DDI vs full active list (your scripts + others') · allergies on file · drug-target check on your prescribing (e.g., HbA1c &gt; 8 on metformin).</div>
+            </td>
+            <td>
+              <div class="surfaces"><span class="label">Surfaces</span>5+ active meds with prescriber per drug · cross-team DDI · cited rule per flag (Lexicomp / formulary / ADA / ICMR).</div>
+            </td>
+            <td>
+              <p class="none">No meds, allergies, or labs on file. OCR'd external Rx/labs (if uploaded) in Stack 1, tagged <em>external · unverified</em>.</p>
+            </td>
+          </tr>
+
+          <!-- Row 4: Visit recap -->
+          <tr>
+            <td>
+              <a class="intent-name" href="velora-intent-open-loops.html">
+                ④ Visit recap
+                <span class="arrow">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </a>
+              <div class="intent-blurb">Last visit's plan vs status today. Which orders came back, which referrals landed, what's changed since.</div>
+            </td>
+            <td>
+              <div class="surfaces"><span class="label">Surfaces</span>last visit's plan items (yours) · status of each — closed, stale, missed · cross-team activity since that visit.</div>
+            </td>
+            <td>
+              <div class="surfaces"><span class="label">Surfaces</span>last visit's plan (with another doctor) · status of each item today · what's changed across teams since that encounter.</div>
+            </td>
+            <td>
+              <p class="none">No last visit to recap. The agent points to MDT brief instead, which renders an empty-state cross-specialty view.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
