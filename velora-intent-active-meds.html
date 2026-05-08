@@ -99,6 +99,46 @@
   .site-footer{padding:36px 0;border-top:1px solid var(--slate-200);color:var(--slate-500);font-size:12.5px;text-align:center;} .site-footer .links{margin-top:8px;} .site-footer .links a{color:var(--slate-600);margin:0 8px;}
   .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:var(--bg-elev);color:var(--slate-700);}
   .narrow{max-width:760px;}
+
+  /* ── Medication Red Flags · at-prescribe scorecard primitive ─────────── */
+  .scorecard { background: var(--panel); border: 1px solid var(--slate-200); border-radius: 18px; box-shadow: 0 26px 60px -34px rgba(15,15,26,0.35); margin-top: 36px; overflow: hidden; }
+  .scorecard-head { padding: 18px 22px; border-bottom: 1px solid var(--slate-100); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; }
+  .scorecard-head .label { font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--indigo-500); margin-bottom: 4px; }
+  .scorecard-head .title { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .scorecard-head .sub { font-size: 11.5px; color: var(--slate-500); margin-top: 2px; font-family: var(--mono); }
+  .scorecard-head .verdict { font-family: var(--mono); font-size: 11px; padding: 6px 12px; border-radius: 999px; background: var(--rose-100); color: #8E2330; font-weight: 700; letter-spacing: 0.4px; }
+  .action-bar { padding: 18px 22px; background: var(--bg-elev); border-bottom: 1px solid var(--slate-100); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .action-bar .arrow { color: var(--slate-400); font-size: 18px; font-family: var(--mono); }
+  .action-bar .action-label { font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--slate-500); }
+  .action-bar .action-rx { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--ink); padding: 6px 12px; background: white; border: 1px solid var(--slate-300); border-radius: 8px; }
+  .action-bar .action-prescriber { font-size: 12px; color: var(--slate-600); }
+
+  .checks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 22px; }
+  @media (max-width: 720px) { .checks-grid { grid-template-columns: 1fr; } }
+  .check-card { border-radius: 12px; padding: 16px 18px; border: 1.5px solid; display: flex; flex-direction: column; gap: 10px; }
+  .check-card.fail { border-color: var(--rose-700); background: var(--rose-100); }
+  .check-card.warn { border-color: #D69E2E; background: #FBF5E5; }
+  .check-card.pass { border-color: var(--emerald-600); background: var(--emerald-100); }
+  .check-card.notice { border-color: var(--slate-300); background: var(--bg-elev); }
+  .check-card .check-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .check-card .check-name { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink); }
+  .check-card .verdict-pill { font-family: var(--mono); font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; letter-spacing: 0.4px; text-transform: uppercase; }
+  .check-card.fail .verdict-pill { background: var(--rose-700); color: white; }
+  .check-card.warn .verdict-pill { background: #B7791F; color: white; }
+  .check-card.pass .verdict-pill { background: var(--emerald-600); color: white; }
+  .check-card.notice .verdict-pill { background: var(--slate-500); color: white; }
+  .check-card .check-body { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+  .check-card .check-detail { font-size: 12.5px; color: var(--slate-700); line-height: 1.55; }
+  .check-card .check-detail .v { font-family: var(--mono); color: var(--ink); }
+  .check-card .check-cite { padding-top: 8px; border-top: 1px dashed rgba(0,0,0,0.12); font-family: var(--mono); font-size: 10.5px; color: var(--slate-700); letter-spacing: 0.2px; }
+
+  .scorecard-foot { padding: 16px 22px; background: var(--bg-elev); border-top: 1px solid var(--slate-100); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .scorecard-foot .note { font-size: 11.5px; color: var(--slate-600); font-family: var(--mono); max-width: 480px; line-height: 1.55; }
+  .scorecard-foot .actions { display: inline-flex; gap: 8px; }
+  .scorecard-foot .act-btn { font-size: 12.5px; font-weight: 600; padding: 8px 14px; border-radius: 8px; border: 1px solid; cursor: default; }
+  .act-btn.act-cancel { background: white; border-color: var(--slate-300); color: var(--ink); }
+  .act-btn.act-modify { background: white; border-color: var(--slate-300); color: var(--ink); }
+  .act-btn.act-override { background: var(--ink); border-color: var(--ink); color: white; }
 </style>
 </head>
 <body>
@@ -169,98 +209,87 @@
 
 <section id="drawer">
   <div class="wrap">
-    <div class="eyebrow"><span class="pip"></span>How the drawer presents this case</div>
-    <h2 class="h-section">Watch Velora read Suresh's medication picture.</h2>
-    <p class="narrow">Stack 1 lays out the full active med list, the allergy entries, and the recent labs — verbatim from the hospital's records, with prescribing specialty and start date on each row. Stack 2 layers the rule-based interpretation: drug-drug interactions from the hospital's chosen DDI source, allergy matches, and a same-class lab "don't re-order" hint. Each rule cites its source.</p>
+    <div class="eyebrow"><span class="pip"></span>How the at-prescribe scorecard looks</div>
+    <h2 class="h-section">Five checks at the prescribe click. One verdict per check. Each card cites a rule.</h2>
+    <p class="narrow">Medication Red Flags is <em>not</em> a stitched cross-team drawer. It's a <strong>scorecard</strong> that fires the moment the doctor types a prescription. Five rule checks run in parallel against the patient's full active list, allergy log, recent labs, and prescribing history. Each check returns one verdict — <code>fail</code>, <code>warn</code>, <code>pass</code>, or <code>notice</code> — and cites the source that decided it. The shape is deliberately different from MDT: chips, not a narrative.</p>
 
-    <div class="drawer-grid">
-      <div class="drawer-mock">
-        <div class="drawer-mock-head">
-          <div class="left">
-            <div class="label">Velora drawer · Medication Red Flags</div>
-            <div class="title">Suresh Iyer · 62M · post-MI · joint pain</div>
-            <div class="sub">Viewer: Dr. Anand Mehta · General medicine</div>
-          </div>
-          <span class="play"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</span>
+    <div class="scorecard">
+      <div class="scorecard-head">
+        <div>
+          <div class="label">Velora · Medication Red Flags</div>
+          <div class="title">Suresh Iyer · 62M · post-MI · CKD stage 2 · T2DM</div>
+          <div class="sub">5 checks · 1 fail · 1 warn · 1 pass · 1 notice · ran 11:08 · 38 ms</div>
         </div>
+        <span class="verdict">do-not-prescribe</span>
+      </div>
 
-        <div class="stack-label">
-          <span class="l"><span class="num">Stack 1 ·</span> Hospital records</span>
-          <span class="r fact">Factual · cited</span>
-        </div>
-        <div class="stack-1">
-          <div class="fact-card">
-            <div class="h">Active medications · 5</div>
-            <div class="body">
-              <div><span class="v">Apixaban 5 mg BD</span> · started 24 Apr · <span class="meta" style="color:var(--slate-500);">Cardiology · Dr. Pillai</span></div>
-              <div>Bisoprolol 5 mg OD · 24 Apr · Cardiology · Dr. Pillai</div>
-              <div>Atorvastatin 80 mg HS · 12 Apr · Cardiology · Dr. Pillai</div>
-              <div>Metformin 1 g BD · 03 Mar 2024 · Endocrinology · Dr. Reddy</div>
-              <div>Empagliflozin 10 mg OD · 18 Aug 2025 · Endocrinology · Dr. Reddy</div>
-            </div>
+      <div class="action-bar">
+        <span class="action-label">Doctor about to prescribe</span>
+        <span class="action-arrow">›</span>
+        <span class="action-rx">Ibuprofen 400 mg TDS · 5 d</span>
+        <span class="action-prescriber">Dr. Anand Mehta · General medicine · GenMed OPD</span>
+      </div>
+
+      <div class="checks-grid">
+        <div class="check-card fail">
+          <div class="check-head">
+            <span class="check-name">Drug-drug interaction</span>
+            <span class="verdict-pill">Fail</span>
           </div>
-          <div class="fact-card">
-            <div class="h">Allergies on file · 1</div>
-            <div class="body"><span class="v">Ibuprofen — rash, 2018</span> · verified by pharmacy</div>
-            <div class="meta">Source: Allergy entry · chart structured field</div>
-          </div>
-          <div class="fact-card">
-            <div class="h">Recent labs · last 30 days</div>
-            <div class="body">Lipid panel · 26 Apr · LDL 88 mg/dL · HDL 42 · TG 156<br/>HbA1c · 12 Mar · 7.2 %</div>
-            <div class="meta">Ordered by: Dr. Pillai · Cardiology</div>
-          </div>
+          <div class="check-body">NSAID + apixaban → major bleed risk in post-MI window.</div>
+          <div class="check-detail">Apixaban 5 mg BD active since 24 Apr (Cardiology). Class-C Lexicomp interaction with the proposed NSAID; severity escalates inside the post-MI 30-day window.</div>
+          <div class="check-cite">Lexicomp lex-12873 · Class C · post-MI escalation rule (hospital config)</div>
         </div>
 
-        <div class="stack-label">
-          <span class="l"><span class="num">Stack 2 ·</span> AI Interpretation</span>
-          <span class="r suggested">Informational only</span>
+        <div class="check-card fail">
+          <div class="check-head">
+            <span class="check-name">Allergy match</span>
+            <span class="verdict-pill">Fail</span>
+          </div>
+          <div class="check-body">Exact-ingredient allergy on file: Ibuprofen.</div>
+          <div class="check-detail">Allergy entry recorded 2018 — reaction "rash" — verified by pharmacy. Match type: exact active ingredient. Reconcile before prescribing.</div>
+          <div class="check-cite">Allergy entry · structured chart field · verified 2018 by pharmacy</div>
         </div>
-        <div class="stack-2">
-          <div class="ai-card">
-            <div class="h"><span class="plus">+</span>AI suggested · Lexicomp · DDI flag</div>
-            <div class="title">NSAIDs + apixaban → bleed risk · class C</div>
-            <table>
-              <tr><td class="lbl">About to prescribe</td><td class="val">Ibuprofen 400 mg TDS</td><td class="tgt"></td></tr>
-              <tr><td class="lbl">Active anticoagulant</td><td class="val">Apixaban 5 mg BD</td><td class="tgt">Cardio · 24 Apr</td></tr>
-              <tr><td class="lbl">Interaction class</td><td class="val">C</td><td class="tgt"><span class="warn">Use with caution / avoid ⚠</span></td></tr>
-            </table>
-            <div class="src">Lexicomp · Class C interaction · ID lex-12873</div>
+
+        <div class="check-card pass">
+          <div class="check-head">
+            <span class="check-name">Drug-target check · LDL</span>
+            <span class="verdict-pill">Pass</span>
           </div>
-          <div class="ai-card">
-            <div class="h"><span class="plus">+</span>AI suggested · Allergy match</div>
-            <div class="title">Patient has documented ibuprofen reaction</div>
-            <table>
-              <tr><td class="lbl">About to prescribe</td><td class="val">Ibuprofen 400 mg TDS</td><td class="tgt"></td></tr>
-              <tr><td class="lbl">Allergy on file</td><td class="val">Ibuprofen</td><td class="tgt">rash, 2018</td></tr>
-              <tr><td class="lbl">Match strictness</td><td class="val">Exact (active ingredient)</td><td class="tgt"><span class="warn">Reconcile before prescribe ⚠</span></td></tr>
-            </table>
-            <div class="src">Allergy reconciliation · exact-ingredient match</div>
+          <div class="check-body">Atorvastatin 80 mg HS · LDL 88 mg/dL · at target.</div>
+          <div class="check-detail">Max-intensity statin active. Last LDL within 30 d. ADA 2024 target for DM patient: &lt; 100 mg/dL. No change indicated.</div>
+          <div class="check-cite">ADA 2024 §10.3 · lipid management in DM</div>
+        </div>
+
+        <div class="check-card warn">
+          <div class="check-head">
+            <span class="check-name">Polypharmacy</span>
+            <span class="verdict-pill">Warn</span>
           </div>
-          <div class="ai-card">
-            <div class="h"><span class="plus">+</span>AI suggested · ADA 2024</div>
-            <div class="title">Statin status in DM · at-target</div>
-            <table>
-              <tr><td class="lbl">Active statin</td><td class="val">Atorvastatin 80 mg HS</td><td class="tgt">max-intensity</td></tr>
-              <tr><td class="lbl">Last LDL</td><td class="val">88 mg/dL</td><td class="tgt">target &lt;100 (DM) ✓</td></tr>
-              <tr><td class="lbl">Status</td><td class="val">at target</td><td class="tgt">no change indicated</td></tr>
-            </table>
-            <div class="src">ADA 2024 §10.3 (lipid management in DM)</div>
+          <div class="check-body">5 chronic meds · review-trigger met.</div>
+          <div class="check-detail">Active list: apixaban · bisoprolol · atorvastatin · metformin · empagliflozin. NICE NG56 trigger ≥ 5 chronic meds for ≥ 90 days. Adding ibuprofen would make 6.</div>
+          <div class="check-cite">NICE NG56 §1.2 · medication review trigger</div>
+        </div>
+
+        <div class="check-card notice">
+          <div class="check-head">
+            <span class="check-name">Duplicate-order hint</span>
+            <span class="verdict-pill">Notice</span>
           </div>
-          <div class="ai-card">
-            <div class="h"><span class="plus">+</span>AI suggested · duplicate-order check</div>
-            <div class="title">Lipid panel done 8 days ago</div>
-            <p style="margin:0;font-size:12.5px;color:var(--slate-700);line-height:1.55;">A lipid panel was ordered on <span class="strong">26 Apr</span> by Cardiology and is still on file. If you are about to re-order, the existing result is reusable.</p>
-            <div class="src">Duplicate-order rule · same panel within 30 days</div>
-          </div>
+          <div class="check-body">Lipid panel done 8 days ago — reusable.</div>
+          <div class="check-detail">If you were about to re-order labs as part of this visit: lipid panel from 26 Apr (Cardiology) is on file. ICMR allows 30-day reuse for stable patients.</div>
+          <div class="check-cite">Hospital duplicate-order rule · 30-day reuse window</div>
         </div>
       </div>
 
-      <aside class="drawer-explain">
-        <div class="eyebrow"><span class="pip"></span>What you're watching</div>
-        <p>Stack 1 is the full medication and allergy picture, attributed to the prescribing specialty and start date. The doctor reads it like a chart — verbatim, no interpretation.</p>
-        <p>Stack 2 layers four rule-based checks: a DDI flag (Lexicomp), an allergy match (chart entry), a guideline-anchored statin status (ADA), and a duplicate-order hint. <span class="strong">Each rule cites its source.</span></p>
-        <div class="footer-note"><span class="strong" style="color:var(--ink)">Defence:</span> Velora does not approve a dose, recommend a substitute, or stop a prescription. It surfaces structured rules from sources the hospital signed off on. The doctor decides.</div>
-      </aside>
+      <div class="scorecard-foot">
+        <div class="note">Velora does not stop a prescription, approve a dose, or recommend a substitute. It surfaces five structured checks. The doctor decides — accept, modify, or override with reason.</div>
+        <div class="actions">
+          <span class="act-btn act-cancel">Cancel Rx</span>
+          <span class="act-btn act-modify">Modify</span>
+          <span class="act-btn act-override">Override with reason</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

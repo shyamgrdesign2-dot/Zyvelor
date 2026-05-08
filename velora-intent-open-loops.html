@@ -197,6 +197,54 @@
   .queue-foot code { background: white; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--slate-200); font-family: var(--mono); font-size: 11px; color: var(--ink-2); }
   .queue-trace { margin-top: 14px; padding: 12px 14px; background: var(--ink); color: #BCCCFF; border-radius: 10px; font-family: var(--mono); font-size: 11.5px; line-height: 1.55; white-space: pre-wrap; overflow-x: auto; }
   .queue-trace .out { color: #7DE7B6; display: block; margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.15); }
+
+  /* ── Visit recap · plan-vs-status diff primitive ───────────────── */
+  .recap-card { background: var(--panel); border: 1px solid var(--slate-200); border-radius: 18px; box-shadow: 0 26px 60px -34px rgba(15,15,26,0.35); margin-top: 36px; overflow: hidden; }
+  .recap-head { padding: 18px 22px; border-bottom: 1px solid var(--slate-100); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  .recap-head .label { font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--indigo-500); margin-bottom: 4px; }
+  .recap-head .title { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .recap-head .sub { font-size: 11.5px; color: var(--slate-500); margin-top: 2px; font-family: var(--mono); }
+  .recap-summary { font-family: var(--mono); font-size: 11px; color: var(--slate-500); }
+
+  .timeline-axis { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 16px; align-items: center; padding: 16px 22px 12px; border-bottom: 1px solid var(--slate-100); background: var(--bg-elev); }
+  .axis-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.6px; color: var(--slate-700); text-transform: uppercase; }
+  .axis-label.then { color: var(--slate-600); }
+  .axis-label.now { color: var(--ink); text-align: right; }
+  .axis-label .date { display: block; font-size: 10px; color: var(--slate-500); font-weight: 500; margin-top: 2px; text-transform: none; letter-spacing: 0.2px; }
+  .axis-arrow { font-family: var(--mono); font-size: 16px; color: var(--slate-400); text-align: center; }
+
+  .diff-row { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 16px; padding: 16px 22px; border-bottom: 1px solid var(--slate-100); align-items: stretch; }
+  .diff-row:last-of-type { border-bottom: 0; }
+  .diff-row .planned, .diff-row .actual { padding: 12px 14px; border-radius: 10px; background: var(--bg-elev); border: 1px solid var(--slate-200); }
+  .diff-row .planned .pl-label, .diff-row .actual .ac-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); margin-bottom: 6px; }
+  .diff-row .planned .pl-title { font-size: 13.5px; color: var(--ink); font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
+  .diff-row .planned .pl-detail { font-size: 11.5px; color: var(--slate-600); font-family: var(--mono); line-height: 1.5; }
+  .diff-row .actual .ac-title { font-size: 13.5px; color: var(--ink); font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
+  .diff-row .actual .ac-detail { font-size: 11.5px; color: var(--slate-600); font-family: var(--mono); line-height: 1.5; }
+  .diff-arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 4px 0; }
+  .diff-arrow .arrow-line { font-family: var(--mono); font-size: 22px; line-height: 1; }
+  .diff-arrow .age-pill { font-family: var(--mono); font-size: 10px; color: var(--slate-500); padding: 3px 8px; background: white; border: 1px solid var(--slate-200); border-radius: 999px; white-space: nowrap; }
+  .diff-arrow .outcome { font-size: 9.5px; font-weight: 800; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; color: white; }
+  .diff-arrow.closed .arrow-line { color: var(--emerald-600); }
+  .diff-arrow.closed .outcome { background: var(--emerald-600); }
+  .diff-arrow.stale .arrow-line { color: var(--rose-700); }
+  .diff-arrow.stale .outcome { background: var(--rose-700); }
+  .diff-arrow.pending .arrow-line { color: #B7791F; }
+  .diff-arrow.pending .outcome { background: #B7791F; }
+  .diff-arrow.missed .arrow-line { color: #8a4a14; }
+  .diff-arrow.missed .outcome { background: #8a4a14; }
+  .diff-arrow.signal .arrow-line { color: var(--slate-500); }
+  .diff-arrow.signal .outcome { background: var(--slate-500); }
+  .diff-row.section-divider { background: var(--bg-elev); padding: 10px 22px; display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--slate-500); border-top: 1px solid var(--slate-100); border-bottom: 1px solid var(--slate-100); }
+  @media (max-width: 720px) {
+    .diff-row { grid-template-columns: 1fr; }
+    .diff-arrow { flex-direction: row; justify-content: flex-start; }
+    .timeline-axis { grid-template-columns: 1fr; gap: 8px; }
+    .axis-label.now { text-align: left; }
+    .axis-arrow { display: none; }
+  }
+  .recap-foot { padding: 14px 22px; background: var(--bg-elev); border-top: 1px solid var(--slate-100); font-size: 11.5px; color: var(--slate-600); line-height: 1.6; }
+  .recap-foot code { background: white; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--slate-200); font-family: var(--mono); font-size: 11px; color: var(--ink-2); }
 </style>
 </head>
 <body>
@@ -278,128 +326,162 @@
     <h2 class="h-section">Lakshmi's last visit was 6 weeks ago. Here's where each plan item ended up.</h2>
     <p class="narrow">Visit recap is a <em>per-returning-patient</em> surface. The last clinical contact's plan, side-by-side with the status of every order, referral, follow-up, and prescription that came out of it. Plus what other departments have done with her in the gap. The thirty-second pre-read for a follow-up slot.</p>
 
-    <div class="queue-panel">
-      <div class="queue-head">
-        <div class="left">
+    <div class="recap-card">
+      <div class="recap-head">
+        <div>
           <div class="label">Velora · Visit recap</div>
           <div class="title">Lakshmi Pandey · 64F · T2DM, neuropathy</div>
-          <div class="sub">Last visit: 12 Mar 2026 · Dr. A. Pandey · GenMed · returning today 10:20</div>
+          <div class="sub">Last visit 12 Mar · returning today 8 May · 57-day gap</div>
         </div>
-        <div class="right">
-          <span class="stat-pill urgent">2 stale</span>
-          <span class="stat-pill notice">3 unclosed</span>
+        <div>
+          <div class="label" style="text-align: right;">Outcome summary</div>
+          <div class="recap-summary">5 plan items · 0 closed · 1 stale · 2 pending · 1 missed · 1 no-fill</div>
         </div>
       </div>
 
-      <div class="queue-section-head">
-        <span>Last visit's plan · status today</span>
-        <span class="count">5 items · 0 fully closed</span>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status open">Result in</span>
-        <span class="age">7.2 %</span>
-        <div>
-          <div class="item-title">HbA1c ordered 12 Mar · returned 15 Mar</div>
-          <div class="item-meta">result_id r-89400 · above ICMR target (7.0)</div>
-        </div>
-        <div>
-          <div class="pname">No follow-up note attached to result</div>
-          <div class="pname-id">awaiting clinical review</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status stale">Stale</span>
-        <span class="age warn">85 d</span>
-        <div>
-          <div class="item-title">Cardiology referral · "atypical chest pain w/u"</div>
-          <div class="item-meta">referral_id r-22018 · sent 12 Feb · no destination visit</div>
-        </div>
-        <div>
-          <div class="pname">Cardiology hasn't seen her</div>
-          <div class="pname-id">threshold &gt; 30 d</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status open">Pending</span>
-        <span class="age warn">75 d</span>
-        <div>
-          <div class="item-title">Fasting glucose ordered 22 Feb</div>
-          <div class="item-meta">order_id l-44712 · no result_id linked</div>
-        </div>
-        <div>
-          <div class="pname">Lab order open</div>
-          <div class="pname-id">may have been done elsewhere</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status signal">No fill</span>
-        <span class="age">110 d</span>
-        <div>
-          <div class="item-title">Atorvastatin 20 mg · 30-day supply</div>
-          <div class="item-meta">rx_id rx-72918 · last in-hospital fill 18 Jan · no fill since</div>
-        </div>
-        <div>
-          <div class="pname">Verify outside-hospital fills verbally</div>
-          <div class="pname-id">in-hospital pharmacy data only</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status unclosed">No-show</span>
-        <span class="age warn">60 d</span>
-        <div>
-          <div class="item-title">Follow-up booked 10 Mar · "HbA1c &amp; medication review"</div>
-          <div class="item-meta">appt_id a-18402 · status no-show · not rebooked</div>
-        </div>
-        <div>
-          <div class="pname">Today is the next contact</div>
-          <div class="pname-id">no rebook on file</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      <div class="timeline-axis">
+        <span class="axis-label then">12 Mar 2026 · Plan items<span class="date">at last GenMed visit</span></span>
+        <span class="axis-arrow">→ 57 d →</span>
+        <span class="axis-label now">8 May 2026 · Status today<span class="date">at today's OPD slot</span></span>
       </div>
 
-      <div class="queue-section-head">
-        <span>Cross-team activity since last visit</span>
-        <span class="count">2 events from other specialties</span>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status open">New</span>
-        <span class="age">28 d</span>
-        <div>
-          <div class="item-title">Cardiology Stress Test referral · auto-scheduled</div>
-          <div class="item-meta">referral_id r-22341 · 10 Apr · awaiting visit</div>
+      <div class="diff-row">
+        <div class="planned">
+          <div class="pl-label">Plan</div>
+          <div class="pl-title">Order HbA1c</div>
+          <div class="pl-detail">target 7.0 (ICMR) · order_id l-44610</div>
         </div>
-        <div>
-          <div class="pname">Different from Dr. Pandey's referral</div>
-          <div class="pname-id">auto-scheduled by GenMed-Cardio queue</div>
+        <div class="diff-arrow pending">
+          <span class="age-pill">3 d</span>
+          <span class="arrow-line">→</span>
+          <span class="outcome">Result in</span>
         </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
-      </div>
-      <div class="queue-row">
-        <span class="pill-status open">New</span>
-        <span class="age">12 d</span>
-        <div>
-          <div class="item-title">Endocrinology consult note · Dr. Reddy</div>
-          <div class="item-meta">note_id n-71203 · 26 Apr · "consider GLP-1 if HbA1c remains &gt; 7"</div>
+        <div class="actual">
+          <div class="ac-label">Status today</div>
+          <div class="ac-title">Returned 7.2% · above target</div>
+          <div class="ac-detail">result_id r-89400 · no clinical note attached</div>
         </div>
-        <div>
-          <div class="pname">Consult done; recommendation unread</div>
-          <div class="pname-id">no GenMed acknowledgement on file</div>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
       </div>
 
-      <div class="queue-foot">
-        Sources: hospital order log · referral log · pharmacy log · cross-department notes · all linked by <code>visit_id v-30188</code> + <code>patient_id P-00482</code>.
-        <pre class="queue-trace">MATCH (p:Patient {id: "P-00482"})-[:HAD_VISIT]->(v:Visit {id: "v-30188"})
+      <div class="diff-row">
+        <div class="planned">
+          <div class="pl-label">Plan</div>
+          <div class="pl-title">Refer to Cardiology · "atypical chest pain w/u"</div>
+          <div class="pl-detail">referral_id r-22018 · sent same day</div>
+        </div>
+        <div class="diff-arrow stale">
+          <span class="age-pill">85 d</span>
+          <span class="arrow-line">→</span>
+          <span class="outcome">Stale</span>
+        </div>
+        <div class="actual">
+          <div class="ac-label">Status today</div>
+          <div class="ac-title">No destination visit recorded</div>
+          <div class="ac-detail">Cardiology hasn't seen her · threshold &gt; 30 d</div>
+        </div>
+      </div>
+
+      <div class="diff-row">
+        <div class="planned">
+          <div class="pl-label">Plan</div>
+          <div class="pl-title">Order fasting glucose</div>
+          <div class="pl-detail">order_id l-44712 · placed 22 Feb (later in plan)</div>
+        </div>
+        <div class="diff-arrow pending">
+          <span class="age-pill">75 d</span>
+          <span class="arrow-line">→</span>
+          <span class="outcome">Pending</span>
+        </div>
+        <div class="actual">
+          <div class="ac-label">Status today</div>
+          <div class="ac-title">No result_id linked</div>
+          <div class="ac-detail">may have been done elsewhere — verify verbally</div>
+        </div>
+      </div>
+
+      <div class="diff-row">
+        <div class="planned">
+          <div class="pl-label">Plan</div>
+          <div class="pl-title">Atorvastatin 20 mg · 30-day supply</div>
+          <div class="pl-detail">rx_id rx-72918 · prescribed 12 Mar</div>
+        </div>
+        <div class="diff-arrow signal">
+          <span class="age-pill">110 d</span>
+          <span class="arrow-line">→</span>
+          <span class="outcome">No fill</span>
+        </div>
+        <div class="actual">
+          <div class="ac-label">Status today</div>
+          <div class="ac-title">Last in-hospital fill 18 Jan</div>
+          <div class="ac-detail">in-hospital pharmacy data only · verify verbally</div>
+        </div>
+      </div>
+
+      <div class="diff-row">
+        <div class="planned">
+          <div class="pl-label">Plan</div>
+          <div class="pl-title">Follow-up booked 10 Mar</div>
+          <div class="pl-detail">appt_id a-18402 · "HbA1c &amp; medication review"</div>
+        </div>
+        <div class="diff-arrow missed">
+          <span class="age-pill">60 d</span>
+          <span class="arrow-line">→</span>
+          <span class="outcome">No-show</span>
+        </div>
+        <div class="actual">
+          <div class="ac-label">Status today</div>
+          <div class="ac-title">Today is the next contact</div>
+          <div class="ac-detail">no rebook on file between then and now</div>
+        </div>
+      </div>
+
+      <div class="diff-row section-divider">Cross-team activity since last visit · 2 events</div>
+
+      <div class="diff-row">
+        <div class="planned">
+          <div class="pl-label">Cross-team event</div>
+          <div class="pl-title">Cardiology · auto-scheduled stress test</div>
+          <div class="pl-detail">referral_id r-22341 · 10 Apr · GenMed-Cardio queue</div>
+        </div>
+        <div class="diff-arrow pending">
+          <span class="age-pill">28 d</span>
+          <span class="arrow-line">→</span>
+          <span class="outcome">Awaiting</span>
+        </div>
+        <div class="actual">
+          <div class="ac-label">Status today</div>
+          <div class="ac-title">Awaiting visit</div>
+          <div class="ac-detail">different from Dr. Pandey's stale referral</div>
+        </div>
+      </div>
+
+      <div class="diff-row">
+        <div class="planned">
+          <div class="pl-label">Cross-team event</div>
+          <div class="pl-title">Endocrinology consult note · Dr. Reddy</div>
+          <div class="pl-detail">note_id n-71203 · 26 Apr · "consider GLP-1 if HbA1c &gt; 7"</div>
+        </div>
+        <div class="diff-arrow pending">
+          <span class="age-pill">12 d</span>
+          <span class="arrow-line">→</span>
+          <span class="outcome">Unread</span>
+        </div>
+        <div class="actual">
+          <div class="ac-label">Status today</div>
+          <div class="ac-title">Recommendation unread by GenMed</div>
+          <div class="ac-detail">no GenMed acknowledgement on file</div>
+        </div>
+      </div>
+
+      <div class="recap-foot">
+        Sources: hospital order log · referral log · pharmacy log · cross-department notes · linked by <code>visit_id v-30188</code> + <code>patient_id P-00482</code>. Outcomes (closed/stale/pending/missed/signal) computed against the hospital's signed thresholds.
+        <pre class="queue-trace" style="margin-top: 14px;">MATCH (p:Patient {id: "P-00482"})-[:HAD_VISIT]->(v:Visit {id: "v-30188"})
 OPTIONAL MATCH (v)-[:RESULTED_IN]->(plan:PlanItem)
-OPTIONAL MATCH (p)-[:SUBJECT_OF]->(e:Event)
-WHERE e.created_at &gt;= v.date AND e.specialty &lt;&gt; v.specialty
-RETURN plan.type, plan.id, plan.status, e.type, e.specialty
-ORDER BY plan.id, e.created_at DESC<span class="out">→ 5 plan items + 2 cross-team deltas · 178 ms</span></pre>
+OPTIONAL MATCH (plan)-[:CLOSED_BY]->(close:Event)
+OPTIONAL MATCH (p)-[:SUBJECT_OF]->(other:Event)
+WHERE other.created_at &gt;= v.date AND other.specialty &lt;&gt; v.specialty
+RETURN plan, close, other
+ORDER BY plan.id, other.created_at DESC<span class="out">→ 5 plan items + 2 cross-team deltas · 178 ms</span></pre>
       </div>
     </div>
   </div>
