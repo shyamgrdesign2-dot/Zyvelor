@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Velora — Clinical Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  /* ──────────────────────────────────────────────────────────────
+     Velora Chat View (V0) — full-screen standalone
+     Re-proportions Dr.Agent's sidebar visual language for a hero surface.
+     ────────────────────────────────────────────────────────────── */
+  :root {
+    --tp-slate-900: #1F1F25;
+    --tp-slate-800: #2F2F38;
+    --tp-slate-700: #454551;
+    --tp-slate-600: #5C5C68;
+    --tp-slate-500: #717179;
+    --tp-slate-400: #A2A2A8;
+    --tp-slate-300: #C8C8CD;
+    --tp-slate-200: #E2E2E6;
+    --tp-slate-100: #EFEFF1;
+    --tp-slate-50:  #F7F7F8;
+
+    --velora-navy: #0F4C75;
+    --velora-teal: #1B9CB3;
+
+    --ai-pink:  #E38BBE;
+    --ai-mauve: #B06CE0;
+    --ai-violet:#8B5CF6;
+    --ai-indigo:#6B5FE0;
+    --ai-blue:  #4B4AD5;
+    --ai-cyan:  #4FACFE;
+
+    --grad-card-from: #BE6DCF;
+    --grad-card-to:   #5351BD;
+
+    --tone-warning-fg: #B45309;
+    --tone-warning-bg: #FEF3C7;
+    --tone-critical-fg:#9F1239;
+    --tone-critical-bg:#FFE4E6;
+    --tone-ok-fg:      #047857;
+    --tone-ok-bg:      #D1FAE5;
+    --tone-info-fg:    #1E40AF;
+    --tone-info-bg:    #DBEAFE;
+
+    --shadow-card: 0 4px 18px -8px rgba(15,23,42,0.18);
+    --shadow-glass: inset 0 1px 0 rgba(255,255,255,0.85),
+                    inset 0 0 0 1px rgba(15,23,42,0.06),
+                    0 4px 12px -4px rgba(15,23,42,0.10);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    color: var(--tp-slate-700);
+    background: #FAFBFC;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+  }
+
+  /* ───── App shell ───── */
+  .app {
+    position: relative;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #FAFBFC;
+  }
+
+  /* ───── Animated AI wash (matches Dr.Agent) ───── */
+  @property --da-wash-angle {
+    syntax: '<angle>'; initial-value: 0deg; inherits: false;
+  }
+  .ai-wash {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none;
+    opacity: 0.10;
+    background: conic-gradient(
+      from var(--da-wash-angle) at 50% 50%,
+      var(--ai-pink) 0deg,
+      var(--ai-mauve) 55deg,
+      var(--ai-violet) 115deg,
+      var(--ai-indigo) 180deg,
+      var(--ai-blue) 235deg,
+      var(--ai-cyan) 295deg,
+      var(--ai-pink) 360deg
+    );
+    filter: blur(120px);
+    animation: washRotate 28s linear infinite;
+    will-change: --da-wash-angle;
+  }
+  @keyframes washRotate {
+    from { --da-wash-angle: 0deg; }
+    to   { --da-wash-angle: 360deg; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ai-wash { animation: none; }
+  }
+
+  /* ───── Header bar ───── */
+  .topbar {
+    position: relative; z-index: 30;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 28px;
+    flex-shrink: 0;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 14px 6px 8px;
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 100%),
+      linear-gradient(135deg, rgba(213,101,234,0.10) 0%, rgba(103,58,172,0.08) 55%, rgba(75,74,213,0.08) 100%);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow: var(--shadow-glass);
+  }
+  .brand-spark {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    background:
+      radial-gradient(circle at 30% 30%, var(--ai-pink) 0%, var(--ai-mauve) 40%, var(--ai-indigo) 80%, var(--ai-blue) 100%);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+  }
+  .brand-spark svg { animation: sparkRotate 18s linear infinite; }
+  @keyframes sparkRotate {
+    from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+  }
+  .brand-name {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 19px; font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--velora-navy);
+    line-height: 1;
+  }
+  .brand-meta {
+    font-size: 10px; font-weight: 600;
+    color: var(--velora-teal);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-left: -2px;
+  }
+
+  .doctor-strip {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 12px 6px 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-glass);
+    cursor: pointer;
+  }
+  .doctor-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4FACFE, #0F4C75);
+    color: white; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+  }
+  .doctor-name {
+    font-size: 13px; font-weight: 600; color: var(--tp-slate-700);
+    line-height: 1.1;
+  }
+  .doctor-dept {
+    font-size: 10.5px; font-weight: 500; color: var(--tp-slate-500);
+    line-height: 1.1; margin-top: 1px; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ───── Main scrollable canvas ───── */
+  .canvas {
+    flex: 1; min-height: 0;
+    position: relative; z-index: 10;
+    overflow-y: auto;
+    padding: 4px 32px 240px 32px;
+  }
+  .canvas-inner {
+    max-width: 980px; margin: 0 auto;
+  }
+  .canvas::-webkit-scrollbar { width: 6px; }
+  .canvas::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.10); border-radius: 6px; }
+
+  /* ───── Patient context strip ───── */
+  .patient-strip {
+    position: relative;
+    margin-top: 8px;
+    padding: 18px 22px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.70);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.85);
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 18px;
+    align-items: center;
+  }
+  .patient-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FED7AA, #F97316);
+    color: white;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .patient-info-l1 {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  }
+  .patient-name {
+    font-size: 19px; font-weight: 600; color: var(--tp-slate-800);
+    line-height: 1.2; margin: 0;
+  }
+  .patient-meta {
+    font-size: 13px; color: var(--tp-slate-500); font-weight: 500;
+  }
+  .patient-meta strong { color: var(--tp-slate-700); font-weight: 600; }
+  .patient-info-l2 {
+    margin-top: 6px;
+    font-size: 12.5px; color: var(--tp-slate-500);
+    line-height: 1.5;
+  }
+  .patient-info-l2 strong { color: var(--tp-slate-700); font-weight: 600; }
+
+  /* Type badge — the "this is a Type 2 patient" callout */
+  .type-badge {
+    display: inline-flex; flex-direction: column; align-items: flex-end;
+    gap: 4px;
+  }
+  .type-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 11px 6px 9px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(190,109,207,0.12), rgba(83,81,189,0.10));
+    border: 1px solid rgba(139,92,246,0.25);
+    color: #5351BD;
+    font-size: 11.5px; font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+  .type-pill::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--ai-mauve), var(--ai-blue));
+  }
+  .type-detail {
+    font-size: 10.5px; color: var(--tp-slate-400);
+    text-transform: uppercase; letter-spacing: 0.6px;
+    text-align: right;
+  }
+
+  /* ───── Welcome hero ───── */
+  .welcome {
+    margin-top: 56px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+  }
+  .welcome-spark {
+    width: 64px; height: 64px;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 32px -10px rgba(139,92,246,0.50);
+    margin-bottom: 18px;
+  }
+  .welcome-spark::before {
+    content: ""; position: absolute; inset: 0;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      var(--ai-pink), var(--ai-mauve), var(--ai-violet),
+      var(--ai-indigo), var(--ai-blue), var(--ai-cyan), var(--ai-pink)
+    );
+    animation: washRotate 16s linear infinite;
+  }
+  .welcome-spark svg {
+    position: relative; z-index: 1;
+    width: 36px; height: 36px;
+    color: white;
+    animation: sparkRotate 16s linear infinite;
+  }
+
+  .welcome-greeting {
+    font-size: 30px; font-weight: 600; color: var(--tp-slate-800);
+    margin: 0; line-height: 1.2;
+    letter-spacing: -0.4px;
+  }
+  .welcome-sub {
+    font-size: 15px; color: var(--tp-slate-500);
+    margin: 10px 0 0; max-width: 620px; line-height: 1.55;
+  }
+  .welcome-sub b { color: var(--tp-slate-700); font-weight: 600; }
+
+  /* ───── 4 CTA cards (2 × 2 grid, larger than Dr.Agent's sidebar version) ───── */
+  .ctas {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 880px;
+  }
+  .cta {
+    position: relative;
+    padding: 22px 22px 22px 22px;
+    border-radius: 18px;
+    text-align: left;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(255,255,255,0.95);
+    box-shadow: 0 4px 18px -10px rgba(15,23,42,0.10);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: flex-start;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .cta::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(139,92,246,0.08), transparent 50%),
+      radial-gradient(circle at 0% 100%, rgba(79,172,254,0.06), transparent 50%);
+    pointer-events: none;
+  }
+  .cta:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 12px 32px -12px rgba(83,81,189,0.18);
+  }
+  .cta:active { transform: translateY(0) scale(0.99); }
+
+  .cta-icon {
+    position: relative; z-index: 1;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3)),
+                linear-gradient(135deg, rgba(190,109,207,0.18), rgba(83,81,189,0.18));
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--grad-card-to);
+  }
+  .cta-icon svg {
+    width: 22px; height: 22px;
+    fill: url(#iconGrad);
+  }
+  .cta-body { position: relative; z-index: 1; min-width: 0; }
+  .cta-title {
+    font-size: 15px; font-weight: 600; color: var(--tp-slate-800);
+    line-height: 1.3; margin: 0 0 6px;
+    letter-spacing: -0.1px;
+  }
+  .cta-sub {
+    font-size: 12.5px; color: var(--tp-slate-500); font-weight: 400;
+    line-height: 1.5; margin: 0;
+  }
+  .cta-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 10px;
+    font-size: 10.5px; font-weight: 600;
+    color: var(--tp-slate-400);
+    text-transform: uppercase; letter-spacing: 0.6px;
+  }
+  .cta-tag::before {
+    content: ""; width: 4px; height: 4px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--ai-mauve), var(--ai-blue));
+  }
+
+  /* Secondary chips below the cards */
+  .secondary-chips {
+    margin-top: 28px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  }
+  .chip {
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(15,23,42,0.06);
+    font-size: 12.5px; font-weight: 500;
+    color: var(--tp-slate-600);
+    cursor: pointer;
+    transition: all 140ms ease;
+  }
+  .chip:hover {
+    background: rgba(255,255,255,0.95);
+    color: var(--tp-slate-800);
+    border-color: rgba(139,92,246,0.30);
+  }
+  .chip-icon {
+    color: var(--ai-violet); margin-right: 5px; font-size: 13px;
+    vertical-align: -1px;
+  }
+
+  /* ───── Bottom chat input (sticky) ───── */
+  .composer-wrap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    z-index: 40;
+    padding: 18px 28px 22px;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(250,251,252,0.95) 60%, rgba(250,251,252,0));
+  }
+  .composer {
+    pointer-events: auto;
+    max-width: 880px; margin: 0 auto;
+    background: white;
+    border: 1px solid rgba(15,23,42,0.08);
+    border-radius: 22px;
+    padding: 12px 14px 12px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    box-shadow: 0 12px 36px -16px rgba(15,23,42,0.20),
+                0 2px 6px -3px rgba(15,23,42,0.08);
+  }
+  .composer-spark {
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, var(--ai-mauve), var(--ai-blue));
+    display: inline-flex; align-items: center; justify-content: center;
+    color: white; flex-shrink: 0;
+  }
+  .composer-input {
+    border: none; outline: none;
+    font-size: 14.5px; font-family: inherit; color: var(--tp-slate-800);
+    background: transparent; padding: 8px 0;
+    width: 100%;
+  }
+  .composer-input::placeholder { color: var(--tp-slate-400); }
+  .composer-actions { display: flex; align-items: center; gap: 6px; }
+  .composer-btn {
+    width: 36px; height: 36px;
+    border: none; background: transparent;
+    border-radius: 10px;
+    color: var(--tp-slate-500);
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .composer-btn:hover { background: var(--tp-slate-50); color: var(--tp-slate-700); }
+  .composer-send {
+    background: linear-gradient(135deg, var(--ai-mauve), var(--ai-blue));
+    color: white;
+    box-shadow: 0 4px 14px -4px rgba(83,81,189,0.40);
+  }
+  .composer-send:hover { background: linear-gradient(135deg, var(--ai-mauve), var(--ai-indigo)); color: white; }
+
+  /* ───── Footnote under composer ───── */
+  .composer-foot {
+    text-align: center;
+    font-size: 11px; color: var(--tp-slate-400);
+    margin-top: 8px;
+    pointer-events: auto;
+  }
+  .composer-foot b { color: var(--tp-slate-500); font-weight: 600; }
+
+  /* ───── Switch-to-answered-state toggle ───── */
+  .state-toggle {
+    position: absolute;
+    top: 18px; right: 28px;
+    z-index: 50;
+    display: none; /* hidden in this static mock; kept for future */
+  }
+
+  /* Type-2 highlighted callout strip */
+  .insight-callout {
+    margin-top: 14px;
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 16px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(255,228,230,0.55), rgba(254,243,199,0.55));
+    border: 1px solid rgba(180,83,9,0.20);
+    font-size: 12.5px;
+    color: #92400E;
+  }
+  .insight-callout-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #B45309;
+    flex-shrink: 0;
+  }
+  .insight-callout b { font-weight: 600; }
+
+  /* Hide scroll on mobile body — handled by canvas */
+</style>
+</head>
+<body>
+
+<!-- Linear gradient used for all CTA card icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BE6DCF"/>
+      <stop offset="100%" stop-color="#5351BD"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="app">
+  <div class="ai-wash" aria-hidden="true"></div>
+
+  <!-- ───── Top bar ───── -->
+  <div class="topbar">
+    <div class="brand" title="Velora — Clinical Intelligence">
+      <span class="brand-spark" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L13.6 8.5 L20 10 L13.6 11.5 L12 18 L10.4 11.5 L4 10 L10.4 8.5 Z" fill="white"/>
+          <circle cx="19" cy="5" r="1.6" fill="white" opacity="0.85"/>
+          <circle cx="5" cy="18" r="1.2" fill="white" opacity="0.7"/>
+        </svg>
+      </span>
+      <div style="display:flex;flex-direction:column;line-height:1;">
+        <span class="brand-name">Velora</span>
+        <span class="brand-meta">Clinical Intelligence</span>
+      </div>
+    </div>
+
+    <div class="doctor-strip" title="Signed in as Dr. Aravind Mehta">
+      <div class="doctor-avatar">AM</div>
+      <div>
+        <div class="doctor-name">Dr. Aravind Mehta</div>
+        <div class="doctor-dept">Zydus · General Medicine</div>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="color:var(--tp-slate-400);margin-left:2px;">
+        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ───── Scrollable canvas ───── -->
+  <div class="canvas">
+    <div class="canvas-inner">
+
+      <!-- Patient context strip (Type 2 — the killer demo case) -->
+      <div class="patient-strip">
+        <div class="patient-avatar">RK</div>
+        <div>
+          <div class="patient-info-l1">
+            <h2 class="patient-name">Ramesh Kumar</h2>
+            <span class="patient-meta">M · 58y · MRN <strong>ZH-204871</strong> · Visit <strong>OPD-GM-2026-04481</strong></span>
+          </div>
+          <div class="patient-info-l2">
+            Active diagnoses: <strong>T2DM</strong> · <strong>Hypertension</strong> · <strong>CKD Stage 3</strong>
+            &nbsp;·&nbsp; On <strong>5 chronic meds</strong> from 3 specialties &nbsp;·&nbsp; Allergies: <strong>Sulfa drugs</strong>
+          </div>
+        </div>
+        <div class="type-badge">
+          <span class="type-pill">First time with you</span>
+          <span class="type-detail">7 prior visits · 3 specialties</span>
+        </div>
+      </div>
+
+      <!-- One-line live insight callout — the "wow this is non-routine" signal -->
+      <div class="insight-callout">
+        <span class="insight-callout-dot"></span>
+        <span><b>Heads up:</b> Cardiology started apixaban 12 days ago. Open lab from 21 Apr (eGFR) hasn’t been reviewed.</span>
+      </div>
+
+      <!-- ───── Welcome hero ───── -->
+      <div class="welcome">
+        <div class="welcome-spark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 2 L13.6 8.5 L20 10 L13.6 11.5 L12 18 L10.4 11.5 L4 10 L10.4 8.5 Z" fill="currentColor"/>
+            <circle cx="19" cy="5" r="1.6" fill="currentColor" opacity="0.85"/>
+            <circle cx="5" cy="18" r="1.2" fill="currentColor" opacity="0.7"/>
+          </svg>
+        </div>
+        <h1 class="welcome-greeting">Good morning, Dr. Mehta.</h1>
+        <p class="welcome-sub">
+          You haven’t seen <b>Ramesh</b> before, but Zydus has — across <b>Cardiology, Endocrinology, and Nephrology</b>.
+          Pick a starting point or ask anything below.
+        </p>
+
+        <!-- ───── 4 BIG CTA cards ───── -->
+        <div class="ctas" role="list">
+
+          <!-- 1. Cross-departmental view -->
+          <button class="cta" role="listitem" data-msg="Show me what Cardiology, Endocrinology, and Nephrology have done for Ramesh">
+            <span class="cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18M7 5v14M17 5v14"/></svg>
+            </span>
+            <div class="cta-body">
+              <h3 class="cta-title">Bring me up to speed across departments</h3>
+              <p class="cta-sub">Stitched view of what Cardiology, Endo and Nephro have already done — visits, decisions, current plans.</p>
+              <span class="cta-tag">Hospital history</span>
+            </div>
+          </button>
+
+          <!-- 2. Active + open loops -->
+          <button class="cta" role="listitem" data-msg="What is Ramesh currently on, and what's pending or open right now?">
+            <span class="cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" fill="none" stroke="url(#iconGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="cta-body">
+              <h3 class="cta-title">What’s currently active and what’s pending?</h3>
+              <p class="cta-sub">Active medications across all specialties · open lab orders · pending consults that haven’t closed.</p>
+              <span class="cta-tag">Open loops</span>
+            </div>
+          </button>
+
+          <!-- 3. Recent labs & admissions -->
+          <button class="cta" role="listitem" data-msg="Show recent labs and admissions for Ramesh in the last 90 days">
+            <span class="cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 17l4-4 4 4 6-6 4 4M3 21h18" fill="none" stroke="url(#iconGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="cta-body">
+              <h3 class="cta-title">Recent labs &amp; admissions</h3>
+              <p class="cta-sub">Last 90 days at Zydus — lab values out of range, imaging done, admissions and procedures.</p>
+              <span class="cta-tag">Recent activity</span>
+            </div>
+          </button>
+
+          <!-- 4. Pre-action safety -->
+          <button class="cta" role="listitem" data-msg="What should I be cautious about before prescribing or ordering for Ramesh?">
+            <span class="cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z" fill="none" stroke="url(#iconGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="url(#iconGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="cta-body">
+              <h3 class="cta-title">Anything I should be cautious about?</h3>
+              <p class="cta-sub">Allergies on file, drug-drug interactions across current meds, repeat-order alerts, contraindications.</p>
+              <span class="cta-tag">Pre-action safety</span>
+            </div>
+          </button>
+
+        </div>
+
+        <!-- Secondary lighter chips — for the more curious doctor -->
+        <div class="secondary-chips">
+          <button class="chip"><span class="chip-icon">＋</span>60-second clinical brief</button>
+          <button class="chip"><span class="chip-icon">＋</span>Why was the patient last admitted?</button>
+          <button class="chip"><span class="chip-icon">＋</span>Any documented advance directives?</button>
+          <button class="chip"><span class="chip-icon">＋</span>Show me cross-team plan disagreements</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───── Composer (chat input) ───── -->
+  <div class="composer-wrap">
+    <div class="composer">
+      <span class="composer-spark" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L13.6 8.5 L20 10 L13.6 11.5 L12 18 L10.4 11.5 L4 10 L10.4 8.5 Z" fill="white"/>
+        </svg>
+      </span>
+      <input class="composer-input" type="text" placeholder="Ask anything about Ramesh — labs, prior consults, allergies, drug interactions…" />
+      <div class="composer-actions">
+        <button class="composer-btn" title="Attach a document" aria-label="Attach">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M21 12.5l-9.2 9.2a5 5 0 0 1-7-7l9.2-9.2a3.5 3.5 0 0 1 5 5l-9.2 9.2a2 2 0 0 1-3-3l8.5-8.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="composer-btn" title="Speak" aria-label="Voice input">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="9" y="3" width="6" height="12" rx="3" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="composer-btn composer-send" title="Send" aria-label="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="composer-foot">
+      Velora reads only what Zydus has recorded for this patient. <b>Show Cypher</b> available on every answer.
+    </div>
+  </div>
+</div>
+
+<script>
+  // CTA cards: pre-fill the composer when clicked, so the user can preview the prompt.
+  document.querySelectorAll('.cta').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const msg = btn.getAttribute('data-msg') || '';
+      const input = document.querySelector('.composer-input');
+      if (input) {
+        input.value = msg;
+        input.focus();
+      }
+    });
+  });
+  document.querySelectorAll('.chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = document.querySelector('.composer-input');
+      if (input) {
+        input.value = btn.textContent.trim().replace(/^＋\s*/, '');
+        input.focus();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

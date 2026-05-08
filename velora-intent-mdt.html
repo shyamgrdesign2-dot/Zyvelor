@@ -1,0 +1,1502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Velora MDT · The Cross-Specialty Intelligence Layer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ──────────────────────────────────────────────────────────────────────
+     Velora intent landing-page system — shared visual language
+     Used by: velora-intent-mdt.html · velora-intent-open-loops.html ·
+     velora-intent-active-meds.html · velora-intent-trends.html ·
+     velora-intent-why-flagged.html
+     ────────────────────────────────────────────────────────────────────── */
+  :root {
+    --bg: #F4F1EA;
+    --bg-elev: #FAF8F3;
+    --panel: #FFFFFF;
+    --ink: #0F0F1A;
+    --ink-2: #1A1A2C;
+    --slate-900: #1F2030;
+    --slate-700: #3A3A4C;
+    --slate-600: #54546A;
+    --slate-500: #717185;
+    --slate-400: #9A9AAA;
+    --slate-300: #C2C2CD;
+    --slate-200: #E2E0D8;
+    --slate-100: #ECEAE2;
+
+    --indigo-700: #3735A8;
+    --indigo-600: #4742C6;
+    --indigo-500: #5B5BD6;
+    --indigo-400: #7C7CE5;
+    --indigo-100: #E6E6F8;
+    --indigo-50:  #F0F0FB;
+
+    --emerald-600: #0E8A6F;
+    --emerald-500: #10A37F;
+    --emerald-100: #DCF3EC;
+
+    --amber-700: #B7791F;
+    --amber-500: #D69E2E;
+    --amber-100: #FAEFD3;
+
+    --rose-700: #B33037;
+    --rose-500: #D14B52;
+    --rose-100: #FBE5E7;
+
+    --serif: 'Source Serif 4', 'Source Serif Pro', 'Tinos', Georgia, serif;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── Layout ───────────────────────────────────────────────────────── */
+  .wrap {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section { padding: 96px 0; border-top: 1px solid var(--slate-200); }
+  section:first-of-type { border-top: 0; }
+
+  /* ── Top nav strip ────────────────────────────────────────────────── */
+  .topnav {
+    position: sticky; top: 0; z-index: 30;
+    background: rgba(244,241,234,0.86);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .topnav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .topnav-brand {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .topnav-brand .dot {
+    width: 7px; height: 7px; border-radius: 999px;
+    background: var(--indigo-500);
+    box-shadow: 0 0 0 3px var(--indigo-100);
+  }
+  .topnav-links { display: inline-flex; gap: 22px; }
+  .topnav-links a {
+    font-size: 13px;
+    color: var(--slate-500);
+    transition: color .12s ease;
+  }
+  .topnav-links a:hover { color: var(--ink); }
+  .topnav-links a.active {
+    color: var(--indigo-600);
+    font-weight: 600;
+  }
+
+  /* ── Eyebrows + headlines ─────────────────────────────────────────── */
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--indigo-500);
+    margin-bottom: 16px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .eyebrow .pip {
+    width: 6px; height: 6px; border-radius: 999px; background: var(--indigo-500);
+  }
+
+  h1.h-display {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 1.04;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+  h2.h-section {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -0.4px;
+    color: var(--ink);
+    margin: 0 0 20px;
+  }
+  h3.h-card {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0 0 12px;
+    letter-spacing: -0.2px;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--slate-700);
+    max-width: 720px;
+    margin: 0 0 24px;
+  }
+  p { color: var(--slate-700); font-size: 16px; line-height: 1.65; margin: 0 0 16px; max-width: 760px; }
+  .muted { color: var(--slate-500); }
+  .strong { color: var(--ink); font-weight: 600; }
+
+  /* ── CTAs ─────────────────────────────────────────────────────────── */
+  .cta-row { display: inline-flex; gap: 10px; margin-top: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--indigo-600);
+    color: white;
+    box-shadow: 0 8px 18px -8px rgba(71,66,198,0.45);
+  }
+  .btn-primary:hover { transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--slate-300);
+  }
+  .btn-ghost:hover { background: var(--bg-elev); }
+
+  /* ── HERO ─────────────────────────────────────────────────────────── */
+  .hero {
+    padding: 88px 0 80px;
+    border-top: 0;
+  }
+  .hero .lede { margin-bottom: 28px; }
+  .tagline {
+    font-family: var(--sans);
+    font-size: 16px;
+    color: var(--ink);
+    font-weight: 600;
+    margin: 0 0 28px;
+  }
+  .tagline em {
+    font-style: normal;
+    color: var(--indigo-600);
+  }
+
+  /* ── THE CASE — three silos ───────────────────────────────────────── */
+  .case-silos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+  }
+  @media (max-width: 820px) { .case-silos { grid-template-columns: 1fr; } }
+  .silo {
+    background: var(--panel);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 18px 18px 20px;
+  }
+  .silo-head {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--rose-700);
+    margin-bottom: 10px;
+  }
+  .silo-head .dot {
+    width: 7px; height: 7px; border-radius: 999px; background: var(--rose-500);
+  }
+  .silo-sub {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--slate-600);
+    margin-bottom: 8px;
+  }
+  .silo ul { list-style: none; padding: 0; margin: 0; }
+  .silo li {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--slate-700);
+    padding: 5px 0;
+  }
+  .silo li code {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+
+  /* ── Pull quote ───────────────────────────────────────────────────── */
+  .pull-quote {
+    margin: 40px 0 0;
+    padding: 22px 24px;
+    border-left: 3px solid var(--indigo-500);
+    background: var(--indigo-50);
+    border-radius: 10px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 840px;
+  }
+  .pull-quote .attrib {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--slate-500);
+    letter-spacing: 0.2px;
+  }
+
+  /* ── DRAWER MOCK — phone frame + right column explanation ─────────── */
+  .drawer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    gap: 36px;
+    margin-top: 36px;
+    align-items: start;
+  }
+  @media (max-width: 880px) { .drawer-grid { grid-template-columns: 1fr; } }
+
+  .drawer-mock {
+    background: var(--panel);
+    border: 1px solid var(--slate-200);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 26px 60px -34px rgba(15,15,26,0.35);
+  }
+  .drawer-mock-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 8px 14px;
+    border-bottom: 1px solid var(--slate-100);
+    margin-bottom: 12px;
+  }
+  .drawer-mock-head .left .label {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--indigo-500);
+    margin-bottom: 4px;
+  }
+  .drawer-mock-head .left .title {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .drawer-mock-head .left .sub {
+    font-size: 11.5px;
+    color: var(--slate-500);
+    margin-top: 1px;
+  }
+  .drawer-mock-head .play {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: white;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.4px;
+  }
+
+  /* Stack labels */
+  .stack-label {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 14px 0 8px;
+  }
+  .stack-label .l {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--slate-700);
+  }
+  .stack-label .l .num { color: var(--slate-400); margin-right: 6px; }
+  .stack-label .r {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .stack-label .r.fact { background: var(--emerald-100); color: var(--emerald-600); }
+  .stack-label .r.suggested { background: var(--indigo-100); color: var(--indigo-600); }
+
+  /* Stack 1 cards — solid */
+  .stack-1 {
+    background: var(--bg-elev);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .fact-card {
+    background: white;
+    border: 1px solid var(--slate-200);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin: 10px 0;
+  }
+  .fact-card .h {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--slate-500);
+    margin-bottom: 4px;
+  }
+  .fact-card .h .pid { color: var(--indigo-500); }
+  .fact-card .body {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  .fact-card .meta {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: var(--slate-500);
+    font-family: var(--mono);
+  }
+  .fact-card .badge-fact {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: var(--emerald-100);
+    color: var(--emerald-600);
+    font-size: 9.5px; font-weight: 700;
+    letter-spacing: 0.6px;
+  }
+  .stack-1 .v {
+    font-family: var(--mono);
+    font-weight: 600;
+    color: var(--rose-700);
+  }
+
+  /* Stack 2 — dashed indigo cards */
+  .stack-2 {
+    background: var(--indigo-50);
+    border: 1.5px dashed var(--indigo-400);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .ai-card {
+    background: white;
+    border: 1.5px dashed var(--indigo-400);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 10px 0;
+  }
+  .ai-card .h {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--indigo-600);
+    margin-bottom: 4px;
+  }
+  .ai-card .h .plus { font-size: 13px; color: var(--indigo-500); font-weight: 800; }
+  .ai-card .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .ai-card table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .ai-card td {
+    padding: 4px 0;
+    color: var(--slate-700);
+    vertical-align: top;
+  }
+  .ai-card td.lbl { color: var(--slate-500); width: 38%; }
+  .ai-card td.val { font-family: var(--mono); color: var(--ink); font-weight: 600; }
+  .ai-card td.tgt { color: var(--slate-500); }
+  .ai-card td .warn { color: var(--rose-700); font-weight: 600; }
+  .ai-card .src {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--slate-200);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--indigo-500);
+    letter-spacing: 0.2px;
+  }
+
+  /* Right column explanation */
+  .drawer-explain {
+    border-left: 1px solid var(--slate-200);
+    padding-left: 28px;
+  }
+  .drawer-explain .eyebrow { color: var(--ink); }
+  .drawer-explain h4 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .drawer-explain p { font-size: 14.5px; line-height: 1.6; color: var(--slate-700); }
+  .drawer-explain .footer-note {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--slate-200);
+    font-size: 12.5px;
+    color: var(--slate-500);
+  }
+
+  /* ── PRODUCT FLOW (3 boxes) ───────────────────────────────────────── */
+  .product-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 18px;
+    align-items: stretch;
+    margin: 32px 0 16px;
+  }
+  @media (max-width: 820px) {
+    .product-flow { grid-template-columns: 1fr; }
+    .product-flow .arrow { display: none; }
+  }
+  .pbox {
+    background: var(--panel);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 22px 18px;
+    text-align: center;
+  }
+  .pbox .ico {
+    width: 36px; height: 36px;
+    margin: 0 auto 12px;
+    border-radius: 8px;
+    background: var(--bg-elev);
+    border: 1px solid var(--slate-200);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .pbox .ico svg { color: var(--slate-700); }
+  .pbox h4 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .pbox p {
+    font-size: 12px;
+    color: var(--slate-500);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .product-flow .arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--slate-400);
+  }
+
+  /* ── TWO-STACKS EXPLANATION ───────────────────────────────────────── */
+  .two-stacks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 28px;
+  }
+  @media (max-width: 820px) { .two-stacks { grid-template-columns: 1fr; } }
+  .stk {
+    border-radius: 14px;
+    padding: 22px;
+    background: var(--panel);
+    border: 1px solid var(--slate-200);
+  }
+  .stk.s2 {
+    background: var(--indigo-50);
+    border: 1.5px dashed var(--indigo-400);
+  }
+  .stk-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .stk-head .l {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--slate-700);
+  }
+  .stk-head .l .num { color: var(--slate-400); margin-right: 6px; }
+  .stk-head .r {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .stk.s1 .stk-head .r { background: var(--emerald-100); color: var(--emerald-600); }
+  .stk.s2 .stk-head .r { background: var(--indigo-100); color: var(--indigo-600); }
+  .stk h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .stk .desc {
+    font-size: 14px;
+    color: var(--slate-700);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .stk .no-ai {
+    font-weight: 700; color: var(--ink);
+  }
+  .stk ul { padding-left: 18px; margin: 8px 0 12px; }
+  .stk li { font-size: 13.5px; color: var(--slate-700); margin: 5px 0; line-height: 1.5; }
+  .stk .defence {
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: var(--bg-elev);
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--slate-700);
+    line-height: 1.55;
+  }
+  .stk.s2 .defence { background: white; }
+  .stk .defence b { color: var(--ink); }
+
+  .two-stacks-foot {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--slate-500);
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  /* ── HOSPITAL CONFIG GRID (3 cols) ────────────────────────────────── */
+  .same-pt-banner {
+    margin: 24px 0 6px;
+    padding: 14px 18px;
+    background: var(--panel);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 18px;
+    font-size: 13px;
+    color: var(--slate-600);
+  }
+  .same-pt-banner .lbl {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--indigo-50);
+    color: var(--indigo-600);
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border: 1px solid var(--indigo-100);
+  }
+  .same-pt-banner .strong { color: var(--ink); font-weight: 600; }
+
+  .config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 16px;
+    align-items: start;
+  }
+  @media (max-width: 980px) { .config-grid { grid-template-columns: 1fr; } }
+
+  .hosp-card {
+    background: var(--panel);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .hosp-card.center {
+    background: var(--bg-elev);
+    border-color: var(--indigo-100);
+  }
+  .hosp-card-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .hosp-card-head .h-l .eyebrow-mini {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--slate-500);
+    margin-bottom: 3px;
+  }
+  .hosp-card-head .h-l .name {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .hosp-card-head .h-r {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--bg-elev);
+    color: var(--slate-600);
+    border: 1px solid var(--slate-200);
+  }
+  .hosp-card-head .h-r.india { background: var(--amber-100); color: var(--amber-700); border-color: transparent; }
+  .hosp-card-head .h-r.us { background: var(--indigo-50); color: var(--indigo-600); border-color: transparent; }
+
+  .hosp-section-title {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--slate-500);
+    margin: 12px 0 8px;
+  }
+
+  .rule-row {
+    position: relative;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    border-radius: 10px;
+    background: var(--bg-elev);
+    border: 1px solid var(--slate-100);
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 10px;
+  }
+  .rule-row .l {
+    flex: 1;
+  }
+  .rule-row .r {
+    width: 10px; height: 10px; flex-shrink: 0;
+    border-radius: 999px;
+    margin-top: 4px;
+    background: var(--indigo-500);
+    box-shadow: 0 0 0 2px var(--indigo-100);
+  }
+  .hosp-card.center .rule-row .r { background: transparent; box-shadow: none; }
+  .hosp-card-head .h-r.us ~ * .rule-row .r { background: var(--indigo-300); }
+  .rule-row .meta {
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    color: var(--slate-500);
+    margin-bottom: 1px;
+  }
+  .rule-row .gd {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .core-rule {
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid var(--slate-200);
+  }
+  .core-rule .key {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--indigo-600);
+    margin-bottom: 4px;
+  }
+  .core-rule .tags {
+    display: inline-flex; flex-wrap: wrap; gap: 4px;
+  }
+  .tag {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--bg-elev);
+    color: var(--slate-700);
+    border: 1px solid var(--slate-200);
+  }
+
+  .hosp-foot {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--slate-200);
+    font-size: 12.5px;
+    color: var(--slate-600);
+    line-height: 1.55;
+  }
+  .hosp-foot .strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Footer ───────────────────────────────────────────────────────── */
+  .site-footer {
+    padding: 36px 0;
+    border-top: 1px solid var(--slate-200);
+    color: var(--slate-500);
+    font-size: 12.5px;
+    text-align: center;
+  }
+  .site-footer .links { margin-top: 8px; }
+  .site-footer .links a { color: var(--slate-600); margin: 0 8px; }
+
+  /* ── Tiny utilities ──────────────────────────────────────────────── */
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--bg-elev);
+    color: var(--slate-700);
+  }
+  hr.thin { border: 0; border-top: 1px dashed var(--slate-200); margin: 24px 0; }
+  .narrow { max-width: 760px; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ TOP NAV ════════════════ -->
+<nav class="topnav" aria-label="Velora intent navigation">
+  <div class="topnav-inner">
+    <a class="topnav-brand" href="velora-home.html">
+      <span class="dot"></span>
+      Velora · Home
+    </a>
+    <div class="topnav-links">
+      <a class="active" href="velora-intent-mdt.html">MDT</a>
+      <a href="velora-intent-open-loops.html">Open loops</a>
+      <a href="velora-intent-active-meds.html">Active meds</a>
+      <a href="velora-intent-trends.html">Trends</a>
+      <a href="velora-intent-why-flagged.html">Why flagged today</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="pip"></span>Velora · MDT brief</div>
+    <h1 class="h-display">Your hospital already knew.</h1>
+    <p class="lede">The data to prevent the second admission was already in the hospital's records after the first. No single doctor could read all of it at the same time.</p>
+    <p>Velora is a clinical intelligence layer that reads <em>across</em> departmental records and surfaces what the next doctor needs to know — as a single, standalone surface.</p>
+    <p class="tagline"><em>It is a librarian, not a clinician.</em> It cites; it does not interpret.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#case">Start with the case
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#how">Skip to how it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ THE CASE ════════════════ -->
+<section id="case">
+  <div class="wrap">
+    <div class="eyebrow"><span class="pip"></span>The case</div>
+    <h2 class="h-section">Ravi Shankar Iyengar, 58, CKD on PD</h2>
+    <p>Six encounters across three departments in 80 days. <span class="strong">Each chart was clinically complete on its own.</span> The pattern that mattered — KT/V dropping, BNP rising, AF emerging — was the kind of pattern only visible when all three records sit in front of the same person at the same time. The hospital's existing tools did not make that possible inside a 15-minute OPD slot.</p>
+
+    <div class="case-silos">
+      <div class="silo">
+        <div class="silo-head"><span class="dot"></span>Nephrology</div>
+        <div class="silo-sub">On file in Nephrology's chart:</div>
+        <ul>
+          <li>KT/V trend: 1.38 → 1.62 → <span class="strong">1.21</span></li>
+          <li>PD prescription intensified to 4 exchanges/day</li>
+          <li>Anaemia of CKD managed (Hb 8.4 g/dL)</li>
+        </ul>
+      </div>
+      <div class="silo">
+        <div class="silo-head"><span class="dot"></span>Cardiology</div>
+        <div class="silo-sub">On file in Cardiology's chart:</div>
+        <ul>
+          <li>Holter: 3 nocturnal AF episodes</li>
+          <li>Apixaban initiated (CKD-adjusted dose)</li>
+          <li>Echo: EF 38%, LV hypertrophy</li>
+        </ul>
+      </div>
+      <div class="silo">
+        <div class="silo-head"><span class="dot"></span>General Medicine</div>
+        <div class="silo-sub">On file in General Medicine's chart:</div>
+        <ul>
+          <li>ABPM: non-dipper pattern</li>
+          <li>BP 174/100 on 4 antihypertensives</li>
+          <li>Grade III hypertensive retinopathy</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="margin-top: 28px;"><span class="strong">Each chart was clinically complete.</span> The cross-specialty correlation only emerged when all three records were viewed together — which the hospital's existing tools did not enable in time.</p>
+
+    <blockquote class="pull-quote">
+      "Pattern is clear and recurrent. Dialysis inadequacy is the root cause of both admissions. This correlation is not visible within any single departmental record and requires cross-encounter data synthesis to establish."
+      <span class="attrib">— Pathologist's impression, March 2026</span>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ════════════════ PATIENT JOURNEY ════════════════ -->
+<section id="journey">
+  <div class="wrap">
+    <div class="eyebrow"><span class="pip"></span>The patient journey</div>
+    <h2 class="h-section">Ravi's 14 months. Six encounters. Three specialties.</h2>
+    <p class="narrow">The events that brought him to today's MDT review, the present state Velora can read in seconds, and what guideline bodies say to expect at this point in the trajectory. Past and present are <span class="strong">facts</span>; the next-step section is <span class="strong">observational</span> — Velora cites what guidelines indicate at this state, never what to do.</p>
+
+    <style>
+      /* Patient journey timeline — past · present · next steps */
+      .journey-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1.4fr;
+        gap: 18px;
+        margin-top: 36px;
+        align-items: stretch;
+      }
+      @media (max-width: 920px) { .journey-grid { grid-template-columns: 1fr; } }
+
+      .j-col {
+        background: var(--panel);
+        border: 1px solid var(--slate-200);
+        border-radius: 16px;
+        padding: 22px;
+        position: relative;
+      }
+      .j-col.present {
+        background: var(--ink);
+        color: white;
+        border-color: transparent;
+      }
+      .j-col.next {
+        background: var(--indigo-50);
+        border: 1.5px dashed var(--indigo-400);
+      }
+      .j-head {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 14px;
+      }
+      .j-head .lbl {
+        font-family: var(--sans);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--slate-500);
+      }
+      .j-col.present .j-head .lbl { color: rgba(255,255,255,0.55); }
+      .j-col.next .j-head .lbl { color: var(--indigo-600); }
+      .j-head .pill {
+        font-size: 10px; font-weight: 700;
+        letter-spacing: 0.6px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: var(--bg-elev);
+        color: var(--slate-600);
+        text-transform: uppercase;
+      }
+      .j-col.present .j-head .pill { background: rgba(255,255,255,0.12); color: white; }
+      .j-col.next .j-head .pill { background: var(--indigo-100); color: var(--indigo-600); }
+
+      .j-title {
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--ink);
+        margin: 0 0 6px;
+        letter-spacing: -0.2px;
+      }
+      .j-col.present .j-title { color: white; }
+      .j-sub {
+        font-size: 13px;
+        color: var(--slate-500);
+        margin-bottom: 16px;
+      }
+      .j-col.present .j-sub { color: rgba(255,255,255,0.6); }
+
+      /* Past timeline */
+      .timeline {
+        position: relative;
+        padding-left: 22px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 6px; top: 4px; bottom: 4px;
+        width: 2px;
+        background: var(--slate-200);
+      }
+      .t-event {
+        position: relative;
+        margin-bottom: 14px;
+        padding-bottom: 0;
+      }
+      .t-event:last-child { margin-bottom: 0; }
+      .t-event::before {
+        content: "";
+        position: absolute;
+        left: -22px; top: 5px;
+        width: 10px; height: 10px;
+        border-radius: 999px;
+        background: white;
+        border: 2px solid var(--slate-400);
+      }
+      .t-event.dept-nephro::before { border-color: var(--rose-500); background: var(--rose-100); }
+      .t-event.dept-cardio::before { border-color: var(--indigo-500); background: var(--indigo-100); }
+      .t-event.dept-genmed::before { border-color: var(--emerald-500); background: var(--emerald-100); }
+      .t-event.event-admission::before { border-color: var(--rose-500); background: var(--rose-500); }
+      .t-event.event-now::before { border-color: var(--indigo-600); background: var(--indigo-600); box-shadow: 0 0 0 4px var(--indigo-100); }
+
+      .t-event .when {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--slate-500);
+        letter-spacing: 0.2px;
+        margin-bottom: 2px;
+      }
+      .t-event .what {
+        font-size: 13px;
+        color: var(--ink);
+        line-height: 1.5;
+      }
+      .t-event .what .dept {
+        display: inline-block;
+        padding: 1px 7px;
+        margin-right: 6px;
+        border-radius: 5px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        background: var(--bg-elev);
+        color: var(--slate-600);
+      }
+      .t-event.dept-nephro .what .dept { background: var(--rose-100); color: var(--rose-700); }
+      .t-event.dept-cardio .what .dept { background: var(--indigo-100); color: var(--indigo-600); }
+      .t-event.dept-genmed .what .dept { background: var(--emerald-100); color: var(--emerald-600); }
+      .t-event.event-admission .what .dept { background: var(--rose-500); color: white; }
+
+      /* Present column */
+      .present-stat {
+        font-size: 14px;
+        line-height: 1.6;
+        padding: 8px 0;
+        border-bottom: 1px dashed rgba(255,255,255,0.12);
+      }
+      .present-stat:last-child { border-bottom: 0; }
+      .present-stat .l { color: rgba(255,255,255,0.6); font-size: 11.5px; letter-spacing: 0.6px; text-transform: uppercase; font-weight: 600; margin-bottom: 2px; }
+      .present-stat .v { font-family: var(--mono); color: white; font-weight: 600; }
+      .present-stat .v.warn { color: #FFA8B0; }
+
+      /* Next step cards */
+      .next-card {
+        background: white;
+        border: 1.5px dashed var(--indigo-400);
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+      }
+      .next-card:last-child { margin-bottom: 0; }
+      .next-card .h {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 10.5px; font-weight: 700;
+        letter-spacing: 1px; text-transform: uppercase;
+        color: var(--indigo-600);
+        margin-bottom: 3px;
+      }
+      .next-card .h .plus { color: var(--indigo-500); font-weight: 800; }
+      .next-card .body {
+        font-size: 13px;
+        color: var(--ink);
+        line-height: 1.5;
+        margin-bottom: 6px;
+      }
+      .next-card .src {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--indigo-500);
+        letter-spacing: 0.2px;
+        padding-top: 6px;
+        border-top: 1px dashed var(--slate-200);
+      }
+      .j-defence {
+        margin-top: 14px;
+        padding: 10px 12px;
+        background: white;
+        border-radius: 8px;
+        font-size: 12px;
+        color: var(--slate-700);
+        line-height: 1.5;
+      }
+      .j-defence b { color: var(--ink); }
+    </style>
+
+    <div class="journey-grid">
+
+      <!-- PAST -->
+      <div class="j-col">
+        <div class="j-head">
+          <span class="lbl">Past</span>
+          <span class="pill">Mar 2025 → Mar 2026</span>
+        </div>
+        <h3 class="j-title">14 months. 6 encounters.</h3>
+        <p class="j-sub">Verbatim from the hospital's records · each event has a stable id · click any → source</p>
+
+        <div class="timeline">
+          <div class="t-event dept-nephro">
+            <div class="when">Mar 2025</div>
+            <div class="what"><span class="dept">Nephro</span>Initial nephrology consult · CKD-4 confirmed (eGFR 22)</div>
+          </div>
+          <div class="t-event dept-nephro">
+            <div class="when">Apr 2025</div>
+            <div class="what"><span class="dept">Nephro</span>Started on conservative management · Hb 10.2, K 4.8</div>
+          </div>
+          <div class="t-event event-admission dept-nephro">
+            <div class="when">Jul 2025</div>
+            <div class="what"><span class="dept">Admit</span>First admission · hyperkalemia · K+ 6.4</div>
+          </div>
+          <div class="t-event dept-nephro">
+            <div class="when">Sep 2025</div>
+            <div class="what"><span class="dept">Nephro</span>PD initiated · KT/V 1.38 · 4 exchanges/day</div>
+          </div>
+          <div class="t-event dept-nephro">
+            <div class="when">Nov 2025</div>
+            <div class="what"><span class="dept">Nephro</span>PD adjustment · KT/V improved to 1.62</div>
+          </div>
+          <div class="t-event dept-cardio">
+            <div class="when">Dec 2025</div>
+            <div class="what"><span class="dept">Cardio</span>Holter ordered · palpitations w/u</div>
+          </div>
+          <div class="t-event dept-cardio">
+            <div class="when">Jan 2026</div>
+            <div class="what"><span class="dept">Cardio</span>AF diagnosed · apixaban 2.5 mg BD started (CKD dose)</div>
+          </div>
+          <div class="t-event dept-nephro">
+            <div class="when">Feb 2026</div>
+            <div class="what"><span class="dept">Nephro</span>KT/V dropped to 1.21 · below ISN-India target</div>
+          </div>
+          <div class="t-event event-admission dept-genmed">
+            <div class="when">Feb 2026</div>
+            <div class="what"><span class="dept">Admit</span>Second admission · fluid overload · 6-day stay</div>
+          </div>
+          <div class="t-event event-now">
+            <div class="when">Mar 2026 · today</div>
+            <div class="what"><span class="dept" style="background:var(--ink);color:white;">MDT</span>First MDT review · Dr. Krishnan (Nephro)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRESENT -->
+      <div class="j-col present">
+        <div class="j-head">
+          <span class="lbl">Present</span>
+          <span class="pill">As of today</span>
+        </div>
+        <h3 class="j-title">Where Ravi stands now.</h3>
+        <p class="j-sub">Computed from latest values · all in last 30 days · cited rule per row</p>
+
+        <div class="present-stat">
+          <div class="l">PD adequacy (KT/V weekly)</div>
+          <div class="v warn">1.21 · below ISN-India 2020 target ≥ 1.7</div>
+        </div>
+        <div class="present-stat">
+          <div class="l">Anaemia (Haemoglobin)</div>
+          <div class="v warn">7.8 g/dL · below KDIGO target 10–11</div>
+        </div>
+        <div class="present-stat">
+          <div class="l">Cardiac function (Echo EF)</div>
+          <div class="v warn">38 % · HFrEF range</div>
+        </div>
+        <div class="present-stat">
+          <div class="l">AF anticoagulation</div>
+          <div class="v">Apixaban 2.5 mg BD · CKD-adjusted</div>
+        </div>
+        <div class="present-stat">
+          <div class="l">BP control</div>
+          <div class="v warn">172/98 ABPM daytime · 4 antihypertensives</div>
+        </div>
+        <div class="present-stat">
+          <div class="l">Active medications</div>
+          <div class="v">11 across 3 specialties</div>
+        </div>
+        <div class="present-stat">
+          <div class="l">Open loops</div>
+          <div class="v warn">Cardio→Endo referral never completed · 1 lab unreviewed</div>
+        </div>
+      </div>
+
+      <!-- NEXT STEPS (guideline-informed, observational) -->
+      <div class="j-col next">
+        <div class="j-head">
+          <span class="lbl">Next steps · per guideline</span>
+          <span class="pill">Informational only</span>
+        </div>
+        <h3 class="j-title">What guidelines say at this state.</h3>
+        <p class="j-sub">Velora cites what guideline bodies recommend reviewing at this trajectory. It does not predict, prescribe, or advise.</p>
+
+        <div class="next-card">
+          <div class="h"><span class="plus">+</span>ISN-India 2020 · PD adequacy</div>
+          <div class="body">Patients with KT/V &lt; 1.7 sustained should be reviewed for prescription intensification, residual function reassessment, or modality discussion.</div>
+          <div class="src">ISN-India PD §4.2 · §5.1 (review triggers)</div>
+        </div>
+        <div class="next-card">
+          <div class="h"><span class="plus">+</span>KDIGO 2012 · Anaemia in CKD</div>
+          <div class="body">Hb &lt; 10 g/dL on PD warrants ESA review and iron-status workup before further escalation.</div>
+          <div class="src">KDIGO Anaemia 2012 §3.2 · §3.4</div>
+        </div>
+        <div class="next-card">
+          <div class="h"><span class="plus">+</span>ESC/ESH 2023 · Resistant HTN</div>
+          <div class="body">≥ 4 antihypertensives with persistent ABPM elevation: secondary causes review (renal artery stenosis, primary aldosteronism, OSA).</div>
+          <div class="src">ESC/ESH 2023 §9.1 · §9.4 (resistant HTN workup)</div>
+        </div>
+        <div class="next-card">
+          <div class="h"><span class="plus">+</span>ESC 2024 · AF anticoagulation</div>
+          <div class="body">CHA₂DS₂-VASc ≥ 2 with CKD eGFR &lt; 15 — apixaban remains preferred DOAC; bleed risk should be re-scored at each MDT.</div>
+          <div class="src">ESC 2024 AF §6.3 · §10.2</div>
+        </div>
+
+        <div class="j-defence">
+          <b>Defence:</b> the next-step cards cite which guideline section flags a review trigger at Ravi's current state. Velora does not say "do X." It says "guideline body Y says to review Z when KT/V &lt; 1.7." The clinical decision stays with Dr. Krishnan and the MDT.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ DRAWER MOCK ════════════════ -->
+<section id="drawer">
+  <div class="wrap">
+    <div class="eyebrow"><span class="pip"></span>How the drawer presents this case</div>
+    <h2 class="h-section">Watch Velora read Ravi Shankar's case.</h2>
+    <p class="narrow">Below is a live mock of the Velora drawer rendering Ravi Shankar's case for Dr. Krishnan (Nephrology). The top container is <em>Stack 1</em> — facts pulled from other specialties inside the hospital's own records. Below it, separated and dashed, is <em>Stack 2</em> — guideline-anchored synthesis the AI suggests, always cited, always informational.</p>
+
+    <div class="drawer-grid">
+
+      <!-- The drawer mock -->
+      <div class="drawer-mock">
+        <div class="drawer-mock-head">
+          <div class="left">
+            <div class="label">Velora drawer</div>
+            <div class="title">Ravi Shankar Iyengar · 58M · CKD on PD</div>
+            <div class="sub">Viewer: Dr. Meera Krishnan · Nephrology</div>
+          </div>
+          <span class="play">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Play
+          </span>
+        </div>
+
+        <!-- STACK 1 -->
+        <div class="stack-label">
+          <span class="l"><span class="num">Stack 1 ·</span> Hospital records</span>
+          <span class="r fact">Factual · cited</span>
+        </div>
+        <div class="stack-1">
+          <div class="fact-card">
+            <div class="h">From Cardiology · 03 Feb 2026 · <span class="pid">0 cross-refs</span></div>
+            <div class="body">Cardiology OPD · Holter Report Review and AF Diagnosis</div>
+            <div class="meta">Dr. Suresh Pillai</div>
+          </div>
+          <div class="fact-card">
+            <div class="h">Renal panel · 28 Jan 2026</div>
+            <div class="body">Creatinine = <span class="v">9.8 mg/dL</span> (ref: <1.2)</div>
+            <div class="meta">Ordered by: Dr. Meera Krishnan · Nephrology</div>
+          </div>
+          <div class="fact-card">
+            <div class="h">Cardiology read · 06 Jan 2026 · 2D Echocardiogram</div>
+            <div class="body">EF <span class="v">38%</span>, LV hypertrophy, Grade II diastolic dysfunction</div>
+            <div class="meta">Ordered by: Dr. Meera Krishnan · Nephrology</div>
+          </div>
+        </div>
+
+        <!-- STACK 2 -->
+        <div class="stack-label">
+          <span class="l"><span class="num">Stack 2 ·</span> AI Interpretation</span>
+          <span class="r suggested">Informational only</span>
+        </div>
+        <div class="stack-2">
+          <div class="ai-card">
+            <div class="h"><span class="plus">+</span>AI suggested · ISN-India</div>
+            <div class="title">PD adequacy panel · ISN-India 2020</div>
+            <table>
+              <tr><td class="lbl">KT/V (weekly)</td><td class="val">1.21</td><td class="tgt">target ≥ <span class="warn">1.7 ⚠</span></td></tr>
+              <tr><td class="lbl">Serum Albumin</td><td class="val">2.6</td><td class="tgt">target ≥ <span class="warn">3.0 ⚠</span></td></tr>
+              <tr><td class="lbl">Haemoglobin</td><td class="val">7.8</td><td class="tgt">target <span class="warn">10–11 ⚠</span></td></tr>
+            </table>
+            <div class="src">ISN-India PD §4.2 · §4.4</div>
+          </div>
+          <div class="ai-card">
+            <div class="h"><span class="plus">+</span>AI suggested · ESC</div>
+            <div class="title">AF anticoagulation status · ESC 2024</div>
+            <table>
+              <tr><td class="lbl">CHA<sub>2</sub>DS<sub>2</sub>-VASc Score</td><td class="val">4</td><td class="tgt">target ≥ 2 → AC indicated</td></tr>
+              <tr><td class="lbl">DOAC</td><td class="val">Apixaban</td><td class="tgt">Apixaban preferred for CKD eGFR<15</td></tr>
+            </table>
+            <div class="src">ESC 2024 AF §6.1 · §6.3</div>
+          </div>
+          <div class="ai-card">
+            <div class="h"><span class="plus">+</span>AI suggested · ESC-ESH</div>
+            <div class="title">Resistant HTN panel · ESC/ESH 2023</div>
+            <table>
+              <tr><td class="lbl">ABPM Daytime mean</td><td class="val">172/98 mmHg</td><td class="tgt">target <span class="warn"><135/85 ⚠</span></td></tr>
+              <tr><td class="lbl">ABPM Nocturnal mean</td><td class="val">170/96 mmHg</td><td class="tgt">target <120/70 (non-dipper)</td></tr>
+              <tr><td class="lbl">Antihypertensive count</td><td class="val">4</td><td class="tgt">active drugs</td></tr>
+            </table>
+            <div class="src">ESC/ESH 2023 §5.4 · §9.1</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right column explanation -->
+      <aside class="drawer-explain">
+        <div class="eyebrow"><span class="pip"></span>What you're watching</div>
+        <p>Watch how <span class="strong">Stack 1</span> surfaces facts from other specialties — a Cardiology note, a renal lab, an echo read — all already inside the hospital's records.</p>
+        <p>Then <span class="strong">Stack 2</span> layers in guideline-anchored synthesis (ISN-India, ESC, ESC/ESH) with citations — framed in dashed indigo so it is always visually distinct from clinical fact.</p>
+        <div class="footer-note"><span class="strong" style="color:var(--ink)">Defence:</span> the clinical authority is the guideline body, not Velora. Every card cites its source guideline section.</div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ THE PRODUCT ════════════════ -->
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow"><span class="pip"></span>The product</div>
+    <h2 class="h-section">The hospital's data is a filing cabinet. Velora reads it.</h2>
+    <p class="narrow">Hospitals already invest in clinical, billing, lab, and pharmacy systems. Velora doesn't replace any of them. It is a clinical intelligence layer that reads <em>across</em> the hospital's complete data and surfaces only what needs cross-specialty attention — through its own surface.</p>
+
+    <div class="product-flow">
+      <div class="pbox">
+        <span class="ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+        </span>
+        <h4>Hospital data</h4>
+        <p>notes · labs · imaging<br/>prescriptions · billing</p>
+      </div>
+      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="pbox">
+        <span class="ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="13" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="19" r="2.2"/><line x1="7.5" y1="7.5" x2="10.5" y2="11.5"/><line x1="16.5" y1="7.5" x2="13.5" y2="11.5"/><line x1="7.5" y1="17.5" x2="10.5" y2="14.5"/><line x1="16.5" y1="17.5" x2="13.5" y2="14.5"/></svg>
+        </span>
+        <h4>Velora knowledge graph</h4>
+        <p>cross-department<br/>relationships</p>
+      </div>
+      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="pbox">
+        <span class="ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg>
+        </span>
+        <h4>Velora drawer</h4>
+        <p>3–5 cards, 10-second read<br/>cited and verifiable</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 18px;"><span class="strong">Single ETL contract with the HIS team. Velora ships its own surface. No new clinical workflow imposed; doctors keep what they already use.</span></p>
+  </div>
+</section>
+
+<!-- ════════════════ TWO STACKS EXPLANATION ════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><span class="pip"></span>How the drawer is structured</div>
+    <h2 class="h-section">Two stacks. Two epistemic levels. Visually separated.</h2>
+    <p class="narrow">The drawer never mixes hospital fact with AI inference. They live in different visual containers, each with its own framing.</p>
+
+    <div class="two-stacks">
+      <!-- Stack 1 -->
+      <div class="stk s1">
+        <div class="stk-head">
+          <span class="l"><span class="num">Stack 1</span> Hospital records</span>
+          <span class="r">Fact</span>
+        </div>
+        <h3>Cross-specialty data already in the hospital's records, attributed and verifiable. <span class="no-ai">No AI authoring.</span></h3>
+        <p class="desc">Click any card to open the source note in the hospital's records.</p>
+        <ul>
+          <li>Notes from other departments — title, doctor, date, citation count</li>
+          <li>Lab results — grouped by clinical panel (Renal, Cardiac, Diabetes)</li>
+          <li>PACS findings — radiologist or cardiologist's read, verbatim</li>
+          <li>Plans on record — verbatim quotes from other clinicians' notes</li>
+        </ul>
+        <div class="defence"><b>Defence:</b> every line traces to a single query against the hospital's records. Click → open source. Reproducible.</div>
+      </div>
+
+      <!-- Stack 2 -->
+      <div class="stk s2">
+        <div class="stk-head">
+          <span class="l"><span class="num">Stack 2</span> AI Interpretation · informational only</span>
+          <span class="r">Suggested</span>
+        </div>
+        <h3>Curated clinical groupings from <span class="no-ai">published guidelines</span> (KDIGO, ESC, ICMR, ISN-India), applied to this patient's data. AI picks <em>which guideline panels apply</em>; AI does not author clinical claims.</h3>
+        <ul>
+          <li>PD adequacy panel (KDIGO 2006 / ISN-India 2020)</li>
+          <li>Anaemia in CKD panel (KDIGO 2012)</li>
+          <li>AF anticoagulation status (ESC 2024)</li>
+          <li>Resistant HTN panel (ESC/ESH 2023)</li>
+          <li>Diabetes glycaemic control (ICMR 2018)</li>
+        </ul>
+        <div class="defence"><b>Defence:</b> the clinical authority is the guideline body, not Velora. Every card cites its source guideline section.</div>
+      </div>
+    </div>
+
+    <p class="two-stacks-foot">Stack 1 is always above Stack 2. A doctor with 5 seconds reads only Stack 1. A doctor with 15 seconds reads both.</p>
+  </div>
+</section>
+
+<!-- ════════════════ SAME PATIENT, DIFFERENT HOSPITAL ════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><span class="pip"></span>Indian + global guidelines</div>
+    <h2 class="h-section">Same patient. Different hospital. Different rule wins.</h2>
+    <p class="narrow">For PD adequacy, two guideline bodies cover the same clinical area: <span class="strong">KDIGO</span> (international, US-led) and <span class="strong">ISN-India</span> (Indian Society of Nephrology, 2020). Targets differ slightly because Indian dialysis-population baselines differ.</p>
+    <p class="narrow">The hospital's deployment config picks which one wins for that hospital's clinicians. <span class="strong">Same code, same rule library, different hospital config.</span></p>
+
+    <div class="same-pt-banner">
+      <span class="lbl">Same patient</span>
+      <span><span class="strong">Ravi Shankar</span> · 58M · CKD-5D on PD · AF · HTN · T2DM</span>
+      <span class="muted">|</span>
+      <span>Same Velora codebase. Same shared rule library. Two deployments. Different rules win.</span>
+    </div>
+
+    <div class="config-grid">
+
+      <!-- Hospital A (Medanta India) -->
+      <div class="hosp-card">
+        <div class="hosp-card-head">
+          <div class="h-l">
+            <div class="eyebrow-mini">Hospital A</div>
+            <div class="name">Medanta Hospitals</div>
+          </div>
+          <div class="h-r india">India context</div>
+        </div>
+        <div class="hosp-section-title">hospital.yaml · active rules</div>
+        <div class="rule-row"><div class="l"><div class="meta">Nephrology · PD adequacy</div><div class="gd">ISN-India 2020</div></div><span class="r"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Nephrology · Anaemia</div><div class="gd">KDIGO 2012</div></div><span class="r"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Cardiology · AF</div><div class="gd">ESC 2024</div></div><span class="r"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Gen Med · Diabetes</div><div class="gd">ICMR 2018</div></div><span class="r"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Gen Med · Resistant HTN</div><div class="gd">ESC/ESH 2023</div></div><span class="r"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Oncology · Breast surveillance</div><div class="gd">NCG India</div></div><span class="r"></span></div>
+        <div class="hosp-foot"><span class="strong">Ravi's PD card shows albumin floor 3.0 g/dL</span> · diabetes targets reflect ICMR cohort guidance.</div>
+      </div>
+
+      <!-- Velora Core (shared rule library) -->
+      <div class="hosp-card center">
+        <div class="hosp-card-head">
+          <div class="h-l">
+            <div class="eyebrow-mini">Velora Core</div>
+            <div class="name">Shared rule library</div>
+          </div>
+          <div class="h-r">one codebase</div>
+        </div>
+        <p style="font-size:13.5px;color:var(--slate-700);margin-bottom:10px;">Every rule is tagged <code style="font-family:var(--mono);font-size:12.5px;color:var(--indigo-600);">domain.subdomain + guideline_body</code>. Hospitals pick which body wins per domain.</p>
+
+        <div class="core-rule">
+          <div class="key">nephrology.pd_adequacy</div>
+          <div class="tags"><span class="tag">KDIGO 2006</span> <span class="tag">ISN-India 2020</span></div>
+        </div>
+        <div class="core-rule">
+          <div class="key">nephrology.anaemia</div>
+          <div class="tags"><span class="tag">KDIGO 2012</span> <span class="tag">ISN-India 2021</span></div>
+        </div>
+        <div class="core-rule">
+          <div class="key">cardiology.atrial_fibrillation</div>
+          <div class="tags"><span class="tag">ESC 2024</span> <span class="tag">AHA/ACC 2023</span></div>
+        </div>
+        <div class="core-rule">
+          <div class="key">general_medicine.diabetes</div>
+          <div class="tags"><span class="tag">ICMR 2018</span> <span class="tag">ADA 2024</span></div>
+        </div>
+        <div class="core-rule">
+          <div class="key">general_medicine.resistant_hypertension</div>
+          <div class="tags"><span class="tag">ESC/ESH 2023</span> <span class="tag">AHA 2017</span></div>
+        </div>
+        <div class="core-rule">
+          <div class="key">oncology.breast_surveillance</div>
+          <div class="tags"><span class="tag">NCG India</span> <span class="tag">NCCN 2024</span></div>
+        </div>
+        <div class="hosp-foot">Add a new guideline body once → every hospital can opt in via config.</div>
+      </div>
+
+      <!-- Hospital B (Mayo Clinic US) -->
+      <div class="hosp-card">
+        <div class="hosp-card-head">
+          <div class="h-l">
+            <div class="eyebrow-mini">Hospital B</div>
+            <div class="name">Mayo Clinic</div>
+          </div>
+          <div class="h-r us">US context</div>
+        </div>
+        <div class="hosp-section-title">hospital.yaml · active rules</div>
+        <div class="rule-row"><div class="l"><div class="meta">Nephrology · PD adequacy</div><div class="gd">KDIGO 2006</div></div><span class="r" style="background:var(--slate-300);box-shadow:0 0 0 2px var(--slate-100);"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Nephrology · Anaemia</div><div class="gd">KDIGO 2012</div></div><span class="r" style="background:var(--slate-300);box-shadow:0 0 0 2px var(--slate-100);"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Cardiology · AF</div><div class="gd">AHA/ACC 2023</div></div><span class="r" style="background:var(--slate-300);box-shadow:0 0 0 2px var(--slate-100);"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Gen Med · Diabetes</div><div class="gd">ADA 2024</div></div><span class="r" style="background:var(--slate-300);box-shadow:0 0 0 2px var(--slate-100);"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Gen Med · Resistant HTN</div><div class="gd">AHA 2017</div></div><span class="r" style="background:var(--slate-300);box-shadow:0 0 0 2px var(--slate-100);"></span></div>
+        <div class="rule-row"><div class="l"><div class="meta">Oncology · Breast surveillance</div><div class="gd">NCCN 2024</div></div><span class="r" style="background:var(--slate-300);box-shadow:0 0 0 2px var(--slate-100);"></span></div>
+        <div class="hosp-foot"><span class="strong">Ravi's PD card shows albumin floor 3.5 g/dL</span> · AF DOAC selection cites AHA/ACC.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer class="site-footer">
+  <div class="wrap">
+    Velora · MDT brief · the cross-specialty intelligence layer
+    <div class="links">
+      <a href="velora-intent-mdt.html">MDT</a> ·
+      <a href="velora-intent-open-loops.html">Open loops</a> ·
+      <a href="velora-intent-active-meds.html">Active meds</a> ·
+      <a href="velora-intent-trends.html">Trends</a> ·
+      <a href="velora-intent-why-flagged.html">Why flagged today</a>
+    </div>
+    <div style="margin-top:8px; color:var(--slate-400); font-size:11.5px;">© Zyvelor Labs · 2026 · zyvelorlabs@tatvacare.in</div>
+  </div>
+</footer>
+
+</body>
+</html>

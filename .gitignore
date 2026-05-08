@@ -1,0 +1,43 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# LibreOffice / Office lock + temp files
+.~lock.*
+~$*
+*.tmp
+
+# Locally-generated PDF previews (regenerable)
+velora-chat-ui.pdf
+
+# Node / JS scratch (none currently, but future-proofing)
+node_modules/
+.npm/
+*.log
+
+# Python (in case we add scripts)
+__pycache__/
+*.py[cod]
+.venv/
+
+# Editor / IDE
+.vscode/
+.idea/
+*.iml
+
+# Local secrets — never commit
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets.json
+
+# Build outputs (none yet)
+dist/
+build/
+out/

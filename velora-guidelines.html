@@ -1,0 +1,2445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Velora · Clinical Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* Inherits visual language from velora-home.html — same tokens. */
+  :root {
+    --bg: #FFFFFF;
+    --bg-soft: #FAFAFC;
+    --bg-tint: #F4F4F8;
+    --panel: #FFFFFF;
+    --ink: #0A0A14;
+    --ink-2: #1A1A28;
+    --slate-700: #2E2E40;
+    --slate-600: #4A4A5E;
+    --slate-500: #6B6B80;
+    --slate-400: #9A9AAA;
+    --slate-300: #C5C5D2;
+    --slate-200: #E2E2EB;
+    --slate-100: #EFEFF4;
+    --slate-50:  #F7F7FA;
+    --indigo-700: #3735A8;
+    --indigo-600: #4742C6;
+    --indigo-500: #5B5BD6;
+    --indigo-400: #7C7CE5;
+    --indigo-300: #A6A6F0;
+    --indigo-100: #E6E6F8;
+    --indigo-50:  #F0F0FB;
+    --rose-600: #D14B52;
+    --rose-100: #FBE5E7;
+    --emerald-600: #0E8A6F;
+    --emerald-100: #DCF3EC;
+    --amber-600: #B7791F;
+    --amber-100: #FAEFD3;
+    --c-mdt: #5B5BD6;
+    --c-loops: #B7791F;
+    --c-meds: #D14B52;
+    --c-trends: #0E8A6F;
+    --c-flags: #C53030;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+  /* ── Top nav (mirrors home) ─────────────────────────────── */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--slate-100);
+  }
+  nav.top .inner {
+    max-width: 1240px; margin: 0 auto; padding: 0 32px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 800; font-size: 16px;
+    letter-spacing: -0.2px; color: var(--ink);
+  }
+  .brand .mark {
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, var(--indigo-500), var(--indigo-700));
+    display: inline-flex; align-items: center; justify-content: center;
+    color: white;
+  }
+  .brand .v {
+    font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; font-size: 14.5px;
+  }
+  nav.top .links { display: inline-flex; align-items: center; gap: 28px; }
+  nav.top .links a { font-size: 13.5px; font-weight: 500; color: var(--slate-600); transition: color .12s; }
+  nav.top .links a:hover { color: var(--ink); }
+  nav.top .links a.active { color: var(--ink); font-weight: 600; }
+  nav.top .right { display: inline-flex; gap: 10px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; font-size: 13.5px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: transform .1s, box-shadow .15s, background .12s; }
+  .btn-primary { background: var(--ink); color: white; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -10px rgba(10,10,20,0.4); }
+  .btn-ghost { border-color: var(--slate-200); background: white; color: var(--ink); }
+  .btn-ghost:hover { background: var(--bg-soft); border-color: var(--slate-300); }
+
+  /* ── Sub-nav (mirrors home) ─────────────────────────────── */
+  .subnav {
+    position: sticky; top: 64px; z-index: 40;
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--slate-100);
+    transition: transform .25s ease, opacity .25s ease;
+    will-change: transform;
+  }
+  .subnav.subnav-hidden {
+    transform: translateY(-100%); opacity: 0; pointer-events: none;
+  }
+  .subnav-inner {
+    max-width: 1240px; margin: 0 auto; padding: 0 32px;
+    height: 38px;
+    display: flex; align-items: center; gap: 18px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .subnav-inner::-webkit-scrollbar { display: none; }
+  .subnav-label {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 1.3px;
+    text-transform: uppercase; color: var(--slate-400); flex-shrink: 0;
+  }
+  .subnav a {
+    font-size: 12px; font-weight: 500; color: var(--slate-500);
+    padding: 5px 8px; border-radius: 6px;
+    display: inline-flex; align-items: center; gap: 5px;
+    flex-shrink: 0; transition: color .12s, background .12s; white-space: nowrap;
+  }
+  .subnav a:hover { color: var(--ink); background: var(--slate-50); }
+  .subnav a .dot { width: 5px; height: 5px; border-radius: 999px; background: var(--indigo-400); flex-shrink: 0; }
+  .subnav a.c-loops .dot { background: var(--amber-600); }
+  .subnav a.c-meds .dot { background: var(--rose-600); }
+  .subnav a.c-trends .dot { background: var(--emerald-600); }
+  .subnav a.c-flags .dot { background: #C53030; }
+
+  /* ── Hero ───────────────────────────────────────────────── */
+  section { padding: 96px 0; }
+  section.tinted { background: var(--bg-soft); border-top: 1px solid var(--slate-100); border-bottom: 1px solid var(--slate-100); }
+
+  .hero { padding: 88px 0 56px; }
+  .hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; background: var(--indigo-50); color: var(--indigo-600);
+    border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.4px;
+    margin-bottom: 24px; border: 1px solid var(--indigo-100);
+  }
+  .hero .eyebrow .pip { width: 6px; height: 6px; background: var(--indigo-500); border-radius: 999px; }
+  .hero h1 {
+    font-size: 64px; line-height: 1.04; font-weight: 800; letter-spacing: -1.8px;
+    color: var(--ink); margin: 0 0 20px; max-width: 920px;
+  }
+  .hero h1 .accent { color: var(--indigo-500); }
+  .hero .lede {
+    font-size: 20px; line-height: 1.5; color: var(--slate-600);
+    max-width: 780px; margin: 0 0 28px; font-weight: 400;
+  }
+
+  .stats-row {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--slate-100);
+    border-bottom: 1px solid var(--slate-100);
+  }
+  @media (max-width: 820px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+  .stat { padding: 22px 24px 22px 0; border-right: 1px solid var(--slate-100); }
+  .stat:last-child { border-right: 0; }
+  .stat .v { font-size: 28px; font-weight: 700; letter-spacing: -0.6px; color: var(--ink); line-height: 1.1; }
+  .stat .v .unit { font-size: 14px; font-weight: 500; color: var(--slate-500); margin-left: 4px; }
+  .stat .l { font-size: 12.5px; color: var(--slate-500); margin-top: 4px; line-height: 1.4; }
+
+  /* ── Section heads ──────────────────────────────────────── */
+  .section-head { max-width: 800px; margin: 0 0 36px; }
+  .section-head .eyebrow {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--indigo-500); margin-bottom: 14px;
+  }
+  .section-head h2 {
+    font-size: 38px; line-height: 1.1; font-weight: 700; letter-spacing: -0.8px;
+    color: var(--ink); margin: 0 0 16px;
+  }
+  .section-head p {
+    font-size: 16.5px; line-height: 1.6; color: var(--slate-600); margin: 0 0 14px;
+  }
+  .section-head p strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Configurability callout ─────────────────────────────── */
+  .config-callout {
+    margin-top: 32px;
+    padding: 22px 26px;
+    background: linear-gradient(135deg, var(--indigo-50) 0%, var(--bg-soft) 100%);
+    border: 1px solid var(--indigo-100);
+    border-radius: 16px;
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .config-callout .ico {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--indigo-100);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--indigo-600);
+  }
+  .config-callout .body p {
+    font-size: 14.5px; line-height: 1.6; color: var(--slate-700); margin: 0 0 8px;
+  }
+  .config-callout .body p:last-child { margin-bottom: 0; }
+  .config-callout .body strong { color: var(--ink); font-weight: 600; }
+
+  /* ── How config works (3 example hospitals) ──────────────── */
+  .config-examples {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  @media (max-width: 880px) { .config-examples { grid-template-columns: 1fr; } }
+  .config-card {
+    padding: 22px;
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    background: white;
+  }
+  .config-card .meta {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--slate-500); margin-bottom: 6px;
+  }
+  .config-card h4 {
+    font-family: var(--sans); font-size: 17px; font-weight: 700;
+    margin: 0 0 4px; color: var(--ink); letter-spacing: -0.2px;
+  }
+  .config-card .who { font-size: 12.5px; color: var(--slate-500); margin-bottom: 14px; }
+  .config-card pre {
+    background: var(--bg-soft);
+    border: 1px solid var(--slate-100);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--slate-700);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .config-card pre .k { color: var(--indigo-600); }
+  .config-card pre .v { color: var(--ink); font-weight: 600; }
+  .config-card pre .c { color: var(--slate-400); }
+
+  /* ── Specialty section ────────────────────────────────────── */
+  .specialty-block { padding: 64px 0 32px; border-top: 1px solid var(--slate-100); }
+  .specialty-block:first-of-type { border-top: 0; padding-top: 32px; }
+  .specialty-head {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 32px;
+    margin-bottom: 22px; flex-wrap: wrap;
+  }
+  .specialty-head .left .eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--slate-400); margin-bottom: 6px;
+  }
+  .specialty-head .left h2 {
+    font-size: 32px; font-weight: 700; letter-spacing: -0.5px; color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .specialty-head .left p {
+    font-size: 14.5px; color: var(--slate-600); margin: 0;
+    max-width: 620px; line-height: 1.55;
+  }
+  .specialty-head .right {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg-soft);
+    border: 1px solid var(--slate-200);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--slate-600);
+  }
+  .specialty-head .right .pip { width: 6px; height: 6px; border-radius: 999px; background: var(--indigo-500); }
+
+  .body-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 980px) { .body-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .body-grid { grid-template-columns: 1fr; } }
+
+  /* ── Body card with hover-revealed source ────────────────── */
+  .body-card {
+    position: relative;
+    padding: 18px 20px 20px;
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    background: white;
+    transition: border-color .12s, box-shadow .12s, transform .12s;
+  }
+  .body-card:hover {
+    border-color: var(--indigo-300);
+    box-shadow: 0 14px 38px -22px rgba(91,91,214,0.35);
+    transform: translateY(-2px);
+  }
+  .body-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .body-card .acronym {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    color: var(--ink);
+  }
+  .body-card .region {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    color: var(--slate-600);
+    border: 1px solid var(--slate-200);
+    white-space: nowrap;
+  }
+  .body-card .region.in { background: var(--amber-100); color: var(--amber-600); border-color: transparent; }
+  .body-card .region.us { background: var(--indigo-50); color: var(--indigo-600); border-color: transparent; }
+  .body-card .region.eu { background: var(--emerald-100); color: var(--emerald-600); border-color: transparent; }
+  .body-card .region.global { background: var(--bg-tint); color: var(--slate-700); border-color: transparent; }
+
+  .body-card .full {
+    font-size: 13px;
+    color: var(--slate-700);
+    margin: 6px 0 4px;
+    line-height: 1.45;
+    font-weight: 500;
+  }
+  .body-card .ver {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--slate-500);
+    margin-bottom: 10px;
+  }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+  .chip {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 10.5px;
+    font-weight: 600;
+    background: var(--bg-tint);
+    color: var(--slate-700);
+    letter-spacing: 0.1px;
+  }
+
+  /* Source-of-truth footer — appears at hover */
+  .body-card .source {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--slate-200);
+    font-size: 11.5px;
+    color: var(--slate-500);
+    line-height: 1.5;
+    transition: opacity .12s;
+  }
+  .body-card .source .label {
+    display: block;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--slate-400);
+    margin-bottom: 3px;
+  }
+  .body-card .source .org { color: var(--slate-700); display: block; margin-bottom: 2px; font-weight: 500; }
+  .body-card .source .url {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--indigo-500);
+    word-break: break-all;
+  }
+
+  /* ── Configuration example ─────────────────────────────── */
+  .config-example {
+    margin-top: 32px;
+    background: var(--ink);
+    color: white;
+    border-radius: 18px;
+    padding: 32px 36px;
+  }
+  .config-example .label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--indigo-300); margin-bottom: 12px;
+  }
+  .config-example h3 {
+    font-size: 24px; font-weight: 700; color: white; margin: 0 0 8px; letter-spacing: -0.4px;
+  }
+  .config-example p {
+    color: rgba(255,255,255,0.7); margin: 0 0 22px; font-size: 14px; line-height: 1.55;
+  }
+  .config-example pre {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.92);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .config-example pre .k { color: #A6A6F0; }
+  .config-example pre .v { color: #B5E3D5; }
+  .config-example pre .c { color: rgba(255,255,255,0.4); font-style: italic; }
+
+  /* ── Sourcing methodology section ────────────────────────── */
+  .source-methodology {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 880px) { .source-methodology { grid-template-columns: 1fr; } }
+  .method-card {
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+  }
+  .method-card .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--slate-400);
+    margin-bottom: 8px;
+  }
+  .method-card h4 {
+    font-size: 17px; font-weight: 700; margin: 0 0 8px; color: var(--ink); letter-spacing: -0.2px;
+  }
+  .method-card p {
+    font-size: 13.5px; line-height: 1.6; color: var(--slate-600); margin: 0;
+  }
+
+  /* ── Footer ────────────────────────────────────────────── */
+  footer.site {
+    padding: 60px 0 80px;
+    border-top: 1px solid var(--slate-100);
+    background: var(--bg-soft);
+  }
+  footer.site .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
+  footer.site .col h5 { font-size: 11.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); margin: 0 0 12px; }
+  footer.site .col a { display: block; padding: 4px 0; font-size: 13px; color: var(--slate-600); }
+  footer.site .col a:hover { color: var(--ink); }
+  footer.site .credits { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--slate-200); font-size: 12px; color: var(--slate-400); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="velora-home.html">
+      <span class="mark">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L13.7 8.7L20.5 11L13.7 13.3L12 20L10.3 13.3L3.5 11L10.3 8.7L12 2Z" fill="white"/>
+        </svg>
+      </span>
+      <span class="v">Velora</span>
+    </a>
+    <div class="links">
+      <a href="velora-home.html">Home</a>
+      <a href="velora-home.html#story">Story</a>
+      <a href="velora-home.html#intents">Intents</a>
+      <a href="velora-home.html#matrix">Matrix</a>
+      <a class="active" href="velora-guidelines.html">Clinical Guidelines</a>
+    </div>
+    <div class="right">
+      <a class="btn btn-primary" href="velora-home.html">Back to home
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════ SUB-NAV ════════════════ -->
+<div class="subnav" role="navigation" aria-label="Quick intent links">
+  <div class="subnav-inner">
+    <span class="subnav-label">Intents</span>
+    <a href="velora-intent-mdt.html"><span class="dot"></span>MDT</a>
+    <a class="c-loops" href="velora-intent-open-loops.html"><span class="dot"></span>Open loops</a>
+    <a class="c-meds" href="velora-intent-active-meds.html"><span class="dot"></span>Active meds</a>
+    <a class="c-trends" href="velora-intent-trends.html"><span class="dot"></span>Trends</a>
+    <a class="c-flags" href="velora-intent-why-flagged.html"><span class="dot"></span>Why flagged today</a>
+  </div>
+</div>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="pip"></span>Clinical Guidelines</div>
+    <h1>Every clinical claim cites a body. <span class="accent">The hospital chooses which.</span></h1>
+    <p class="lede">Velora catalogues the recognised guideline bodies for every specialty — global, regional, and India-specific. The hospital's deployment config picks which body wins per condition. Use one, mix several, swap mid-pilot. The engine doesn't change; the cited authority does.</p>
+
+    <div class="config-callout">
+      <span class="ico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </span>
+      <div class="body">
+        <p><strong>How configurability works.</strong> Hospitals don't have to follow every guideline listed below. They follow the ones their clinical advisory board has signed off on.</p>
+        <p>One hospital might use <strong>only ESC 2024 for AF</strong> and <strong>AHA/ACC 2022 for HF</strong>. Another might mix bodies — <strong>ICMR for diabetes, ADA for lipids, KDIGO for CKD staging</strong>. A smaller centre might run a single set across the board. Velora reads the signed config; cards cite the body that won.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="v">15<span class="unit"> specialties</span></div>
+        <div class="l">covered in V0 · more added per pilot demand</div>
+      </div>
+      <div class="stat">
+        <div class="v">80+<span class="unit"> bodies</span></div>
+        <div class="l">global, US, EU, UK, and India-specific guideline organisations</div>
+      </div>
+      <div class="stat">
+        <div class="v">3<span class="unit"> regions</span></div>
+        <div class="l">global · US/EU · India — each badged on every card</div>
+      </div>
+      <div class="stat">
+        <div class="v">100%<span class="unit"> sourced</span></div>
+        <div class="l">every body shows its publishing organisation and where the latest version lives</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ HOW CONFIG WORKS — 3 EXAMPLE HOSPITALS ════════════════ -->
+<section id="examples" class="tinted">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How three hospitals could configure the same library</div>
+      <h2>Same code. Three deployments. Three different rules win.</h2>
+      <p>Each hospital signs off its own preference per condition. Velora applies the chosen body per claim and cites the section.</p>
+    </div>
+
+    <div class="config-examples">
+      <div class="config-card">
+        <div class="meta">Hospital A · India</div>
+        <h4>Mixed · India + global</h4>
+        <div class="who">A multi-spec hospital using India-context bodies where they exist, falling back to global for niche conditions.</div>
+        <pre><span class="k">cardiology.atrial_fibrillation</span>: <span class="v">ESC 2024</span>
+<span class="k">cardiology.heart_failure</span>:        <span class="v">AHA/ACC 2022</span>
+<span class="k">nephrology.pd_adequacy</span>:          <span class="v">ISN-India 2020</span>
+<span class="k">endocrinology.diabetes</span>:          <span class="v">ICMR 2018</span>
+<span class="k">general_medicine.htn</span>:            <span class="v">ICMR HTN</span>
+<span class="k">oncology.breast_surveillance</span>:    <span class="v">NCG India</span></pre>
+      </div>
+      <div class="config-card">
+        <div class="meta">Hospital B · US</div>
+        <h4>Single set · US</h4>
+        <div class="who">A US-based academic centre that prefers a unified American guideline set across departments.</div>
+        <pre><span class="k">cardiology.atrial_fibrillation</span>: <span class="v">AHA/ACC 2023</span>
+<span class="k">cardiology.heart_failure</span>:        <span class="v">AHA/ACC 2022</span>
+<span class="k">nephrology.pd_adequacy</span>:          <span class="v">KDIGO 2006</span>
+<span class="k">endocrinology.diabetes</span>:          <span class="v">ADA 2024</span>
+<span class="k">general_medicine.htn</span>:            <span class="v">AHA 2017</span>
+<span class="k">oncology.breast_surveillance</span>:    <span class="v">NCCN 2024</span></pre>
+      </div>
+      <div class="config-card">
+        <div class="meta">Hospital C · India</div>
+        <h4>Specialty-led mix</h4>
+        <div class="who">A district hospital where each department head picks its own body. No single regional preference.</div>
+        <pre><span class="k">cardiology.atrial_fibrillation</span>: <span class="v">ESC 2024</span>
+<span class="k">cardiology.heart_failure</span>:        <span class="v">ESC 2021</span>
+<span class="k">nephrology.pd_adequacy</span>:          <span class="v">ISN-India 2020</span>
+<span class="k">endocrinology.diabetes</span>:          <span class="v">RSSDI 2022</span>
+<span class="k">general_medicine.htn</span>:            <span class="v">WHO HEARTS 2023</span>
+<span class="k">obgyn.gdm</span>:                       <span class="v">DIPSI</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ PER-SPECIALTY GUIDELINE CATALOGUE ════════════════ -->
+<section id="specialties">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The catalogue</div>
+      <h2>Every recognised body, by specialty.</h2>
+      <p>Hover any card to see the publishing organisation and the source where the latest version is available. The list is curated — bodies appear here only if they are actively maintained and either widely adopted (≥ 1 large clinical society endorsement) or the standard for India-specific deployments.</p>
+    </div>
+
+    <style>
+      .sp-jump {
+        margin: 0 0 36px;
+        padding: 16px;
+        background: var(--bg-soft);
+        border: 1px solid var(--slate-200);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .sp-jump .jump-label {
+        font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+        color: var(--slate-500); margin-right: 6px;
+      }
+      .sp-jump a {
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: white;
+        border: 1px solid var(--slate-200);
+        font-size: 12.5px;
+        font-weight: 500;
+        color: var(--slate-700);
+        transition: border-color .12s, color .12s, transform .1s;
+        display: inline-flex; align-items: center; gap: 6px;
+      }
+      .sp-jump a:hover {
+        border-color: var(--indigo-300);
+        color: var(--indigo-600);
+        transform: translateY(-1px);
+      }
+      .sp-jump a .num {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        color: var(--slate-400);
+        font-weight: 600;
+      }
+      .sp-jump a:hover .num { color: var(--indigo-500); }
+    </style>
+
+    <nav class="sp-jump" aria-label="Jump to specialty">
+      <span class="jump-label">Jump to</span>
+      <a href="#sp-cardio"><span class="num">01</span>Cardiology</a>
+      <a href="#sp-nephro"><span class="num">02</span>Nephrology</a>
+      <a href="#sp-endo"><span class="num">03</span>Endocrinology</a>
+      <a href="#sp-genmed"><span class="num">04</span>General Medicine</a>
+      <a href="#sp-pulmo"><span class="num">05</span>Pulmonology</a>
+      <a href="#sp-onco"><span class="num">06</span>Oncology</a>
+      <a href="#sp-peds"><span class="num">07</span>Pediatrics</a>
+      <a href="#sp-obgyn"><span class="num">08</span>Ob-Gyn</a>
+      <a href="#sp-icu"><span class="num">09</span>ICU</a>
+      <a href="#sp-neuro"><span class="num">10</span>Neurology</a>
+      <a href="#sp-gastro"><span class="num">11</span>Gastro</a>
+      <a href="#sp-id"><span class="num">12</span>Infectious Dz</a>
+      <a href="#sp-derm"><span class="num">13</span>Dermatology</a>
+      <a href="#sp-psych"><span class="num">14</span>Psychiatry</a>
+      <a href="#sp-rheum"><span class="num">15</span>Rheumatology</a>
+    </nav>
+
+    <!-- ═════════ CARDIOLOGY ═════════ -->
+    <div class="specialty-block" id="sp-cardio">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">01</div>
+          <h2>Cardiology</h2>
+          <p>Atrial fibrillation · heart failure · ACS · hypertension · lipids · valvular disease · pulmonary hypertension · cardio-oncology.</p>
+        </div>
+        <div class="right"><span class="pip"></span>6 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ESC</div>
+            <span class="region eu">EU · global</span>
+          </div>
+          <div class="full">European Society of Cardiology</div>
+          <div class="ver">Latest: AF 2024 · HF 2021/2023 · ACS 2023 · HTN/ESH 2023</div>
+          <div class="chips">
+            <span class="chip">AF</span><span class="chip">HF</span><span class="chip">ACS</span><span class="chip">HTN</span><span class="chip">Lipids</span><span class="chip">Valvular</span><span class="chip">Pulm HTN</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Society of Cardiology</span>
+            <span class="url">escardio.org/Guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AHA / ACC</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Heart Association &amp; American College of Cardiology</div>
+          <div class="ver">Latest: AF 2023 · HF 2022 · ACS 2025 · HTN 2017 · Lipids 2018</div>
+          <div class="chips">
+            <span class="chip">AF</span><span class="chip">HF</span><span class="chip">ACS</span><span class="chip">HTN</span><span class="chip">Lipids</span><span class="chip">Valvular</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">AHA Professional · ACC Clinical</span>
+            <span class="url">professional.heart.org · acc.org/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">CSI</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Cardiological Society of India</div>
+          <div class="ver">Position statements · Indian-population context</div>
+          <div class="chips">
+            <span class="chip">AF</span><span class="chip">HTN</span><span class="chip">ACS</span><span class="chip">Lipids</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Cardiological Society of India</span>
+            <span class="url">csi.org.in</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">HRS</div>
+            <span class="region us">US · global</span>
+          </div>
+          <div class="full">Heart Rhythm Society</div>
+          <div class="ver">Arrhythmia-focused guidelines · co-authored with AHA/ACC for AF</div>
+          <div class="chips">
+            <span class="chip">AF</span><span class="chip">VT/VF</span><span class="chip">Pacing</span><span class="chip">CIED</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Heart Rhythm Society</span>
+            <span class="url">hrsonline.org/Practice-Guidance</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">WHF</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">World Heart Federation</div>
+          <div class="ver">Global cardiovascular health policy roadmaps</div>
+          <div class="chips">
+            <span class="chip">RHD</span><span class="chip">CVD prevention</span><span class="chip">HTN policy</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">World Heart Federation</span>
+            <span class="url">world-heart-federation.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">API</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Association of Physicians of India</div>
+          <div class="ver">Indian guidelines spanning internal medicine + cardiology</div>
+          <div class="chips">
+            <span class="chip">HTN</span><span class="chip">DM-CV</span><span class="chip">Lipids</span><span class="chip">CKD-CV</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Association of Physicians of India</span>
+            <span class="url">api-india.org</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ NEPHROLOGY ═════════ -->
+    <div class="specialty-block" id="sp-nephro">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">02</div>
+          <h2>Nephrology</h2>
+          <p>CKD · AKI · PD/HD adequacy · anaemia · BP in CKD · MBD · glomerular disease · diabetes in CKD.</p>
+        </div>
+        <div class="right"><span class="pip"></span>5 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">KDIGO</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">Kidney Disease: Improving Global Outcomes</div>
+          <div class="ver">CKD 2024 · BP in CKD 2021 · DM in CKD 2022 · Anaemia 2012 · MBD 2017 · GN 2021 · AKI 2012</div>
+          <div class="chips">
+            <span class="chip">CKD</span><span class="chip">AKI</span><span class="chip">Anaemia</span><span class="chip">BP-CKD</span><span class="chip">MBD</span><span class="chip">GN</span><span class="chip">DM-CKD</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Kidney Disease: Improving Global Outcomes</span>
+            <span class="url">kdigo.org/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">KDOQI</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">Kidney Disease Outcomes Quality Initiative · National Kidney Foundation</div>
+          <div class="ver">US-context supplements to KDIGO</div>
+          <div class="chips">
+            <span class="chip">CKD</span><span class="chip">HD adequacy</span><span class="chip">Vascular access</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">National Kidney Foundation · KDOQI</span>
+            <span class="url">kidney.org/professionals/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ISN-India</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Society of Nephrology</div>
+          <div class="ver">PD adequacy 2020 · HD position · CKD-anaemia (Indian targets)</div>
+          <div class="chips">
+            <span class="chip">PD adequacy</span><span class="chip">HD adequacy</span><span class="chip">CKD anaemia</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Society of Nephrology</span>
+            <span class="url">isn-india.com · indianjnephrol.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ISN</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">International Society of Nephrology</div>
+          <div class="ver">Global advocacy + regional capacity-building guidelines</div>
+          <div class="chips">
+            <span class="chip">CKD policy</span><span class="chip">AKI policy</span><span class="chip">RRT access</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">International Society of Nephrology</span>
+            <span class="url">theisn.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ERA</div>
+            <span class="region eu">EU</span>
+          </div>
+          <div class="full">European Renal Association</div>
+          <div class="ver">European-context guidelines + research outputs</div>
+          <div class="chips">
+            <span class="chip">CKD</span><span class="chip">Transplant</span><span class="chip">GN</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Renal Association</span>
+            <span class="url">era-online.org</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ ENDOCRINOLOGY ═════════ -->
+    <div class="specialty-block" id="sp-endo">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">03</div>
+          <h2>Endocrinology</h2>
+          <p>Diabetes (T1, T2, GDM) · thyroid · obesity · lipids in DM · adrenal · pituitary · bone health.</p>
+        </div>
+        <div class="right"><span class="pip"></span>8 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ADA</div>
+            <span class="region us">US · global</span>
+          </div>
+          <div class="full">American Diabetes Association</div>
+          <div class="ver">Standards of Care · annual (2024)</div>
+          <div class="chips">
+            <span class="chip">T1DM</span><span class="chip">T2DM</span><span class="chip">GDM</span><span class="chip">Lipids in DM</span><span class="chip">CKD-DM</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Diabetes Association</span>
+            <span class="url">diabetes.org/standards-of-care</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AACE</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Association of Clinical Endocrinology</div>
+          <div class="ver">Comprehensive Type 2 Diabetes Management 2023 · Thyroid 2022</div>
+          <div class="chips">
+            <span class="chip">T2DM</span><span class="chip">Thyroid</span><span class="chip">Obesity</span><span class="chip">Lipids</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Association of Clinical Endocrinology</span>
+            <span class="url">aace.com/clinical-guidance</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ICMR</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Council of Medical Research</div>
+          <div class="ver">Diabetes 2018 · Thyroid · LDL targets in Indian DM</div>
+          <div class="chips">
+            <span class="chip">T2DM</span><span class="chip">GDM</span><span class="chip">Lipids in DM</span><span class="chip">Thyroid</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Council of Medical Research</span>
+            <span class="url">icmr.gov.in/guideline</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">RSSDI</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Research Society for the Study of Diabetes in India</div>
+          <div class="ver">Clinical Practice Recommendations · annual (2022 / 2024)</div>
+          <div class="chips">
+            <span class="chip">T2DM</span><span class="chip">DM-CV</span><span class="chip">DM-CKD</span><span class="chip">Insulin</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">RSSDI</span>
+            <span class="url">rssdi.in/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">DIPSI</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Diabetes In Pregnancy Study Group of India</div>
+          <div class="ver">Single-step OGTT for GDM · Indian standard</div>
+          <div class="chips">
+            <span class="chip">GDM</span><span class="chip">OGTT</span><span class="chip">Pregnancy</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Diabetes In Pregnancy Study Group of India</span>
+            <span class="url">diabetesinpregnancy.in</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ATA</div>
+            <span class="region us">US · global</span>
+          </div>
+          <div class="full">American Thyroid Association</div>
+          <div class="ver">Hypothyroidism · Hyperthyroidism · Thyroid nodules · Pregnancy</div>
+          <div class="chips">
+            <span class="chip">Hypothyroid</span><span class="chip">Hyperthyroid</span><span class="chip">Nodules</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Thyroid Association</span>
+            <span class="url">thyroid.org/professionals/ata-professional-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IDF</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">International Diabetes Federation</div>
+          <div class="ver">Global standards · Diabetes Atlas · clinical care recommendations</div>
+          <div class="chips">
+            <span class="chip">T2DM</span><span class="chip">GDM</span><span class="chip">Diabetic foot</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">International Diabetes Federation</span>
+            <span class="url">idf.org/our-activities/care-prevention</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ITS</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Thyroid Society</div>
+          <div class="ver">Indian-context thyroid disease management</div>
+          <div class="chips">
+            <span class="chip">Hypothyroid</span><span class="chip">Pregnancy</span><span class="chip">Iodine</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Thyroid Society</span>
+            <span class="url">indianthyroidsociety.com</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ GENERAL MEDICINE ═════════ -->
+    <div class="specialty-block" id="sp-genmed">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">04</div>
+          <h2>General Medicine</h2>
+          <p>Hypertension · polypharmacy · adult vaccination · screening · primary prevention · sepsis stewardship.</p>
+        </div>
+        <div class="right"><span class="pip"></span>7 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">NICE</div>
+            <span class="region eu">UK</span>
+          </div>
+          <div class="full">National Institute for Health and Care Excellence</div>
+          <div class="ver">NG136 (HTN) · NG28 (T2DM) · NG56 (Polypharmacy) · NG203 (CVD prevention)</div>
+          <div class="chips">
+            <span class="chip">HTN</span><span class="chip">Polypharmacy</span><span class="chip">CVD prev</span><span class="chip">T2DM</span><span class="chip">CKD</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">National Institute for Health and Care Excellence</span>
+            <span class="url">nice.org.uk/guidance</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">USPSTF</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">US Preventive Services Task Force</div>
+          <div class="ver">Adult screening grades A–D · cancer screening · CVD risk · diabetes</div>
+          <div class="chips">
+            <span class="chip">Cancer screening</span><span class="chip">CVD risk</span><span class="chip">Statin primary prev</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">US Preventive Services Task Force</span>
+            <span class="url">uspreventiveservicestaskforce.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">WHO HEARTS</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">World Health Organization · HEARTS technical package</div>
+          <div class="ver">Hypertension treatment protocols 2023 · CVD prevention</div>
+          <div class="chips">
+            <span class="chip">HTN protocol</span><span class="chip">CVD prev</span><span class="chip">Risk-based Rx</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">World Health Organization</span>
+            <span class="url">who.int/teams/noncommunicable-diseases/hearts</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">CDC</div>
+            <span class="region us">US · global</span>
+          </div>
+          <div class="full">Centers for Disease Control and Prevention</div>
+          <div class="ver">ACIP adult immunisation · STI · antibiotic stewardship</div>
+          <div class="chips">
+            <span class="chip">Vaccines</span><span class="chip">Stewardship</span><span class="chip">STI</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Centers for Disease Control and Prevention</span>
+            <span class="url">cdc.gov/vaccines/acip</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ICMR</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Council of Medical Research</div>
+          <div class="ver">National HTN protocol · Antibiotic stewardship · Cancer screening (rural)</div>
+          <div class="chips">
+            <span class="chip">HTN</span><span class="chip">Stewardship</span><span class="chip">Screening</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Council of Medical Research</span>
+            <span class="url">icmr.gov.in/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">API</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Association of Physicians of India</div>
+          <div class="ver">Internal medicine consensus · HTN · DM · stewardship</div>
+          <div class="chips">
+            <span class="chip">HTN</span><span class="chip">Stewardship</span><span class="chip">Polypharmacy</span><span class="chip">Geriatric</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Association of Physicians of India</span>
+            <span class="url">api-india.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AIIMS</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">All India Institute of Medical Sciences</div>
+          <div class="ver">Department-led clinical protocols · widely referenced in tertiary care</div>
+          <div class="chips">
+            <span class="chip">Sepsis</span><span class="chip">Antibiotic Rx</span><span class="chip">Acute care</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">All India Institute of Medical Sciences</span>
+            <span class="url">aiims.edu</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ PULMONOLOGY ═════════ -->
+    <div class="specialty-block" id="sp-pulmo">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">05</div>
+          <h2>Pulmonology &amp; Respiratory</h2>
+          <p>COPD · asthma · tuberculosis · ILD · sleep · pulmonary HTN.</p>
+        </div>
+        <div class="right"><span class="pip"></span>6 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">GOLD</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">Global Initiative for Chronic Obstructive Lung Disease</div>
+          <div class="ver">Global Strategy for COPD · annual update (2024)</div>
+          <div class="chips">
+            <span class="chip">COPD</span><span class="chip">AECOPD</span><span class="chip">Inhalers</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">GOLD</span>
+            <span class="url">goldcopd.org/2024-gold-report</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">GINA</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">Global Initiative for Asthma</div>
+          <div class="ver">Global Strategy for Asthma · annual update (2024)</div>
+          <div class="chips">
+            <span class="chip">Asthma</span><span class="chip">Severe asthma</span><span class="chip">Pregnancy</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Global Initiative for Asthma</span>
+            <span class="url">ginasthma.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ATS / ERS</div>
+            <span class="region eu">US + EU</span>
+          </div>
+          <div class="full">American Thoracic Society &amp; European Respiratory Society</div>
+          <div class="ver">ILD · pulmonary HTN · sleep · ARDS · pneumonia</div>
+          <div class="chips">
+            <span class="chip">ILD</span><span class="chip">Pulm HTN</span><span class="chip">OSA</span><span class="chip">CAP</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">ATS · ERS Joint Documents</span>
+            <span class="url">thoracic.org/statements · ersnet.org/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ICS</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Chest Society</div>
+          <div class="ver">India-context COPD · Asthma · ILD · TB-co-infection</div>
+          <div class="chips">
+            <span class="chip">COPD</span><span class="chip">Asthma</span><span class="chip">TB</span><span class="chip">ILD</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Chest Society</span>
+            <span class="url">indianchestsociety.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">NTEP</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">National Tuberculosis Elimination Programme</div>
+          <div class="ver">India national TB guidelines · DOTS protocols · drug-resistant TB</div>
+          <div class="chips">
+            <span class="chip">TB</span><span class="chip">MDR-TB</span><span class="chip">DOTS</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Central TB Division · Govt of India</span>
+            <span class="url">tbcindia.gov.in</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">WHO TB</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">World Health Organization · Global TB Programme</div>
+          <div class="ver">Consolidated TB guidelines · diagnosis · drug-resistant TB</div>
+          <div class="chips">
+            <span class="chip">TB</span><span class="chip">MDR-TB</span><span class="chip">Latent TB</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">World Health Organization · Global TB Programme</span>
+            <span class="url">who.int/teams/global-tuberculosis-programme</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ ONCOLOGY ═════════ -->
+    <div class="specialty-block" id="sp-onco">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">06</div>
+          <h2>Oncology</h2>
+          <p>Solid tumours · screening · supportive care · pediatric oncology · India-specific cancer programmes.</p>
+        </div>
+        <div class="right"><span class="pip"></span>6 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">NCCN</div>
+            <span class="region us">US · global</span>
+          </div>
+          <div class="full">National Comprehensive Cancer Network</div>
+          <div class="ver">NCCN Clinical Practice Guidelines in Oncology · annual updates per cancer</div>
+          <div class="chips">
+            <span class="chip">Breast</span><span class="chip">Lung</span><span class="chip">CRC</span><span class="chip">Lymphoma</span><span class="chip">Pediatric</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">National Comprehensive Cancer Network</span>
+            <span class="url">nccn.org/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ESMO</div>
+            <span class="region eu">EU · global</span>
+          </div>
+          <div class="full">European Society for Medical Oncology</div>
+          <div class="ver">Clinical Practice Guidelines · per cancer site (2023–2024)</div>
+          <div class="chips">
+            <span class="chip">Breast</span><span class="chip">Lung</span><span class="chip">GI</span><span class="chip">Sarcoma</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Society for Medical Oncology</span>
+            <span class="url">esmo.org/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ASCO</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Society of Clinical Oncology</div>
+          <div class="ver">Practice guidelines · biomarker testing · supportive care</div>
+          <div class="chips">
+            <span class="chip">Adjuvant</span><span class="chip">Biomarker</span><span class="chip">Supportive</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Society of Clinical Oncology</span>
+            <span class="url">asco.org/practice-patients/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">NCG India</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">National Cancer Grid · India</div>
+          <div class="ver">India-context resource-stratified guidelines · 2024</div>
+          <div class="chips">
+            <span class="chip">Breast</span><span class="chip">Cervix</span><span class="chip">Oral</span><span class="chip">Pediatric</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">National Cancer Grid · Tata Memorial Centre coordinated</span>
+            <span class="url">ncgindia.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">TMC</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Tata Memorial Centre Practice Guidelines</div>
+          <div class="ver">Tertiary centre standard of care · per cancer site</div>
+          <div class="chips">
+            <span class="chip">All sites</span><span class="chip">Indian context</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Tata Memorial Centre · Mumbai</span>
+            <span class="url">tmc.gov.in</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IARC</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">International Agency for Research on Cancer · WHO</div>
+          <div class="ver">Cancer registry standards · screening programmes · epidemiology</div>
+          <div class="chips">
+            <span class="chip">Screening</span><span class="chip">Epi data</span><span class="chip">Registry</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">IARC · WHO</span>
+            <span class="url">iarc.who.int</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ PEDIATRICS ═════════ -->
+    <div class="specialty-block" id="sp-peds">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">07</div>
+          <h2>Pediatrics</h2>
+          <p>Immunisation · growth · neonatal care · childhood illness · pediatric obesity.</p>
+        </div>
+        <div class="right"><span class="pip"></span>5 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IAP</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Academy of Pediatrics</div>
+          <div class="ver">Immunisation schedule (annual) · growth charts · childhood obesity</div>
+          <div class="chips">
+            <span class="chip">Vaccines</span><span class="chip">Growth</span><span class="chip">Obesity</span><span class="chip">ARI</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Academy of Pediatrics</span>
+            <span class="url">iapindia.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AAP</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Academy of Pediatrics</div>
+          <div class="ver">Bright Futures · disease-specific guidelines · neonatal jaundice</div>
+          <div class="chips">
+            <span class="chip">Vaccines</span><span class="chip">Newborn</span><span class="chip">Adolescent</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Academy of Pediatrics</span>
+            <span class="url">aap.org/en/practice-management</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">WHO Child</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">World Health Organization · Child Growth Standards</div>
+          <div class="ver">Z-score charts · IMNCI · WHO breastfeeding</div>
+          <div class="chips">
+            <span class="chip">Growth</span><span class="chip">IMNCI</span><span class="chip">Breastfeeding</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">World Health Organization</span>
+            <span class="url">who.int/tools/child-growth-standards</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">NNF</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">National Neonatology Forum of India</div>
+          <div class="ver">Neonatal hyperbilirubinaemia · sepsis · resuscitation · feeding</div>
+          <div class="chips">
+            <span class="chip">Neonatal jaundice</span><span class="chip">NICU</span><span class="chip">Sepsis</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">National Neonatology Forum · India</span>
+            <span class="url">nnfi.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IMNCI</div>
+            <span class="region in">India · WHO</span>
+          </div>
+          <div class="full">Integrated Management of Neonatal &amp; Childhood Illness</div>
+          <div class="ver">India-adapted WHO IMCI · primary-care algorithms</div>
+          <div class="chips">
+            <span class="chip">Acute illness</span><span class="chip">Primary care</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Ministry of Health and Family Welfare · India</span>
+            <span class="url">nhm.gov.in · who.int/maternal_child_adolescent</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ OB-GYN ═════════ -->
+    <div class="specialty-block" id="sp-obgyn">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">08</div>
+          <h2>Obstetrics &amp; Gynecology</h2>
+          <p>Antenatal care · GDM · hypertensive disorders of pregnancy · screening · PCOS · fertility.</p>
+        </div>
+        <div class="right"><span class="pip"></span>7 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">FOGSI</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Federation of Obstetric and Gynaecological Societies of India</div>
+          <div class="ver">GCPRs · ANC · GDM · HTN-pregnancy · PCOS</div>
+          <div class="chips">
+            <span class="chip">ANC</span><span class="chip">GDM</span><span class="chip">HDP</span><span class="chip">PCOS</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Federation of Obstetric and Gynaecological Societies of India</span>
+            <span class="url">fogsi.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ACOG</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American College of Obstetricians and Gynecologists</div>
+          <div class="ver">Practice Bulletins · Committee Opinions · per condition</div>
+          <div class="chips">
+            <span class="chip">ANC</span><span class="chip">HDP</span><span class="chip">GDM</span><span class="chip">Cervical screening</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American College of Obstetricians and Gynecologists</span>
+            <span class="url">acog.org/clinical</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">RCOG</div>
+            <span class="region eu">UK</span>
+          </div>
+          <div class="full">Royal College of Obstetricians and Gynaecologists</div>
+          <div class="ver">Green-top Guidelines · per condition</div>
+          <div class="chips">
+            <span class="chip">ANC</span><span class="chip">HDP</span><span class="chip">PPH</span><span class="chip">GTN</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Royal College of Obstetricians and Gynaecologists</span>
+            <span class="url">rcog.org.uk/guidance</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">DIPSI</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Diabetes In Pregnancy Study Group of India</div>
+          <div class="ver">Single-step OGTT for GDM · India standard</div>
+          <div class="chips">
+            <span class="chip">GDM</span><span class="chip">OGTT</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Diabetes In Pregnancy Study Group of India</span>
+            <span class="url">diabetesinpregnancy.in</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IADPSG</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">International Association of Diabetes and Pregnancy Study Groups</div>
+          <div class="ver">75 g OGTT criteria · global GDM standard</div>
+          <div class="chips">
+            <span class="chip">GDM</span><span class="chip">OGTT</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">IADPSG</span>
+            <span class="url">iadpsg.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">WHO ANC</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">World Health Organization · Antenatal Care</div>
+          <div class="ver">2016 · 8-contact ANC model · LMIC focus</div>
+          <div class="chips">
+            <span class="chip">ANC</span><span class="chip">Anaemia</span><span class="chip">HDP screening</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">World Health Organization</span>
+            <span class="url">who.int/publications/i/item/9789241549912</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ESHRE</div>
+            <span class="region eu">EU · global</span>
+          </div>
+          <div class="full">European Society of Human Reproduction and Embryology</div>
+          <div class="ver">PCOS 2023 · IVF · endometriosis</div>
+          <div class="chips">
+            <span class="chip">PCOS</span><span class="chip">IVF</span><span class="chip">Endometriosis</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Society of Human Reproduction and Embryology</span>
+            <span class="url">eshre.eu/Guidelines-and-Legal</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ ICU ═════════ -->
+    <div class="specialty-block" id="sp-icu">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">09</div>
+          <h2>ICU &amp; Critical Care</h2>
+          <p>Sepsis · ARDS · stroke · VTE prophylaxis · ICU sedation · acute decompensation.</p>
+        </div>
+        <div class="right"><span class="pip"></span>5 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">SCCM</div>
+            <span class="region us">US · global</span>
+          </div>
+          <div class="full">Society of Critical Care Medicine</div>
+          <div class="ver">Surviving Sepsis 2021 · ICU sedation · pain · delirium</div>
+          <div class="chips">
+            <span class="chip">Sepsis</span><span class="chip">PADIS</span><span class="chip">Sedation</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Society of Critical Care Medicine</span>
+            <span class="url">sccm.org/Clinical-Resources/Guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ESICM</div>
+            <span class="region eu">EU</span>
+          </div>
+          <div class="full">European Society of Intensive Care Medicine</div>
+          <div class="ver">ARDS · haemodynamics · post-ICU recovery</div>
+          <div class="chips">
+            <span class="chip">ARDS</span><span class="chip">Haemodynamics</span><span class="chip">PICS</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Society of Intensive Care Medicine</span>
+            <span class="url">esicm.org/research-publications/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ISCCM</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Society of Critical Care Medicine</div>
+          <div class="ver">India-context sepsis · ARDS · VTE · early mobility</div>
+          <div class="chips">
+            <span class="chip">Sepsis</span><span class="chip">ARDS</span><span class="chip">VTE</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Society of Critical Care Medicine</span>
+            <span class="url">isccm.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">SSC</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">Surviving Sepsis Campaign</div>
+          <div class="ver">2021 update · co-authored by SCCM and ESICM</div>
+          <div class="chips">
+            <span class="chip">Sepsis</span><span class="chip">Septic shock</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Surviving Sepsis Campaign</span>
+            <span class="url">survivingsepsis.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ACCP</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American College of Chest Physicians</div>
+          <div class="ver">VTE prophylaxis · anticoagulation · respiratory failure</div>
+          <div class="chips">
+            <span class="chip">VTE</span><span class="chip">Anticoag</span><span class="chip">Resp failure</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American College of Chest Physicians · CHEST</span>
+            <span class="url">chestnet.org/Guidelines-and-Resources</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ NEUROLOGY ═════════ -->
+    <div class="specialty-block" id="sp-neuro">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">10</div>
+          <h2>Neurology</h2>
+          <p>Acute stroke · epilepsy · Parkinson's · headache · neuromuscular disease.</p>
+        </div>
+        <div class="right"><span class="pip"></span>5 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AAN</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Academy of Neurology</div>
+          <div class="ver">Practice guidelines · per condition · evidence-based</div>
+          <div class="chips">
+            <span class="chip">Epilepsy</span><span class="chip">Migraine</span><span class="chip">PD</span><span class="chip">MS</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Academy of Neurology</span>
+            <span class="url">aan.com/practice/clinical-practice-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AHA / ASA</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Stroke Association</div>
+          <div class="ver">Acute ischemic stroke 2019 update · ICH 2022 · TIA</div>
+          <div class="chips">
+            <span class="chip">AIS</span><span class="chip">ICH</span><span class="chip">TIA</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Stroke Association</span>
+            <span class="url">stroke.org/professional-resources</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">INSA</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Stroke Association</div>
+          <div class="ver">India-context stroke management · thrombolysis access</div>
+          <div class="chips">
+            <span class="chip">AIS</span><span class="chip">Thrombolysis</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Stroke Association</span>
+            <span class="url">stroke-india.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IAN</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Academy of Neurology</div>
+          <div class="ver">India guidelines on epilepsy · headache · PD</div>
+          <div class="chips">
+            <span class="chip">Epilepsy</span><span class="chip">Headache</span><span class="chip">PD</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Academy of Neurology</span>
+            <span class="url">annalsofian.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">EAN</div>
+            <span class="region eu">EU</span>
+          </div>
+          <div class="full">European Academy of Neurology</div>
+          <div class="ver">European-context guidelines · neuro-immunology · stroke</div>
+          <div class="chips">
+            <span class="chip">MS</span><span class="chip">Epilepsy</span><span class="chip">Stroke</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Academy of Neurology</span>
+            <span class="url">ean.org/research/ean-guidelines</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ GASTROENTEROLOGY ═════════ -->
+    <div class="specialty-block" id="sp-gastro">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">11</div>
+          <h2>Gastroenterology &amp; Hepatology</h2>
+          <p>IBD · GERD · NAFLD/NASH · viral hepatitis · liver cirrhosis · HCC surveillance.</p>
+        </div>
+        <div class="right"><span class="pip"></span>6 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AGA</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Gastroenterological Association</div>
+          <div class="ver">IBD · GERD · IBS · pancreatitis · liver</div>
+          <div class="chips">
+            <span class="chip">IBD</span><span class="chip">GERD</span><span class="chip">IBS</span><span class="chip">Pancreatitis</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Gastroenterological Association</span>
+            <span class="url">gastro.org/practice-guidance/clinical-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AASLD</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Association for the Study of Liver Diseases</div>
+          <div class="ver">HCV · HBV · NAFLD · cirrhosis · HCC</div>
+          <div class="chips">
+            <span class="chip">HBV</span><span class="chip">HCV</span><span class="chip">NAFLD</span><span class="chip">HCC</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Association for the Study of Liver Diseases</span>
+            <span class="url">aasld.org/practice-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">EASL</div>
+            <span class="region eu">EU</span>
+          </div>
+          <div class="full">European Association for the Study of the Liver</div>
+          <div class="ver">CPGs per liver disease · per year</div>
+          <div class="chips">
+            <span class="chip">HBV</span><span class="chip">HCV</span><span class="chip">NAFLD</span><span class="chip">HCC</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Association for the Study of the Liver</span>
+            <span class="url">easl.eu/publication/easl-clinical-practice-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">INASL</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian National Association for Study of the Liver</div>
+          <div class="ver">India consensus · NAFLD · HCV elimination · ACLF</div>
+          <div class="chips">
+            <span class="chip">NAFLD</span><span class="chip">HCV</span><span class="chip">ACLF</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian National Association for Study of the Liver</span>
+            <span class="url">inasl.org.in</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ISG</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Society of Gastroenterology</div>
+          <div class="ver">IBD India · IBS · GERD · India context</div>
+          <div class="chips">
+            <span class="chip">IBD</span><span class="chip">IBS</span><span class="chip">GERD</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Society of Gastroenterology</span>
+            <span class="url">isgcon.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">WGO</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">World Gastroenterology Organisation</div>
+          <div class="ver">Global Guidelines · resource-stratified per condition</div>
+          <div class="chips">
+            <span class="chip">IBD</span><span class="chip">GERD</span><span class="chip">HBV</span><span class="chip">NAFLD</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">World Gastroenterology Organisation</span>
+            <span class="url">worldgastroenterology.org/guidelines</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ INFECTIOUS DISEASE ═════════ -->
+    <div class="specialty-block" id="sp-id">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">12</div>
+          <h2>Infectious Disease</h2>
+          <p>Antimicrobial stewardship · sepsis · HIV · viral hepatitis · tropical diseases · MDR organisms.</p>
+        </div>
+        <div class="right"><span class="pip"></span>5 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IDSA</div>
+            <span class="region us">US · global</span>
+          </div>
+          <div class="full">Infectious Diseases Society of America</div>
+          <div class="ver">Practice guidelines · per pathogen / syndrome</div>
+          <div class="chips">
+            <span class="chip">CAP</span><span class="chip">UTI</span><span class="chip">SSTI</span><span class="chip">HAP/VAP</span><span class="chip">Stewardship</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Infectious Diseases Society of America</span>
+            <span class="url">idsociety.org/practice-guideline</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ESCMID</div>
+            <span class="region eu">EU</span>
+          </div>
+          <div class="full">European Society of Clinical Microbiology and Infectious Diseases</div>
+          <div class="ver">European-context infection management · stewardship</div>
+          <div class="chips">
+            <span class="chip">Stewardship</span><span class="chip">CRE</span><span class="chip">MDR-TB</span><span class="chip">Sepsis</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Society of Clinical Microbiology and Infectious Diseases</span>
+            <span class="url">escmid.org/research_projects/escmid_guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ICMR-AMR</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">ICMR Antimicrobial Resistance Surveillance Network</div>
+          <div class="ver">National antibiotic stewardship · empirical therapy guidelines · India</div>
+          <div class="chips">
+            <span class="chip">Stewardship</span><span class="chip">Empiric Rx</span><span class="chip">AMR data</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Council of Medical Research · AMRSN</span>
+            <span class="url">main.icmr.nic.in/content/antimicrobial-resistance</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">NCDC</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">National Centre for Disease Control · India</div>
+          <div class="ver">Outbreak response · stewardship · zoonoses</div>
+          <div class="chips">
+            <span class="chip">Outbreak</span><span class="chip">Zoonosis</span><span class="chip">HAI</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">National Centre for Disease Control · MoHFW India</span>
+            <span class="url">ncdc.gov.in</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">NACO</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">National AIDS Control Organisation · India</div>
+          <div class="ver">India HIV programme · ART guidelines · co-infection management</div>
+          <div class="chips">
+            <span class="chip">HIV/ART</span><span class="chip">TB-HIV</span><span class="chip">PrEP</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">National AIDS Control Organisation · MoHFW India</span>
+            <span class="url">naco.gov.in/guidelines</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ DERMATOLOGY ═════════ -->
+    <div class="specialty-block" id="sp-derm">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">13</div>
+          <h2>Dermatology</h2>
+          <p>Psoriasis · atopic dermatitis · acne · STIs · skin cancer screening · fungal infections.</p>
+        </div>
+        <div class="right"><span class="pip"></span>4 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">AAD</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Academy of Dermatology</div>
+          <div class="ver">Psoriasis · AD · acne · skin cancer surveillance</div>
+          <div class="chips">
+            <span class="chip">Psoriasis</span><span class="chip">AD</span><span class="chip">Acne</span><span class="chip">Skin Ca</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Academy of Dermatology</span>
+            <span class="url">aad.org/member/clinical-quality/guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IADVL</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Association of Dermatologists, Venereologists and Leprologists</div>
+          <div class="ver">India guidelines on psoriasis · vitiligo · STIs · leprosy</div>
+          <div class="chips">
+            <span class="chip">Psoriasis</span><span class="chip">Vitiligo</span><span class="chip">STI</span><span class="chip">Leprosy</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Association of Dermatologists, Venereologists and Leprologists</span>
+            <span class="url">iadvl.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">EADV</div>
+            <span class="region eu">EU</span>
+          </div>
+          <div class="full">European Academy of Dermatology and Venereology</div>
+          <div class="ver">European-context CPGs · psoriasis · AD · biologics</div>
+          <div class="chips">
+            <span class="chip">Psoriasis</span><span class="chip">AD</span><span class="chip">HS</span><span class="chip">Biologics</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Academy of Dermatology and Venereology</span>
+            <span class="url">eadv.org/our-mission/clinical-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">BAD</div>
+            <span class="region eu">UK</span>
+          </div>
+          <div class="full">British Association of Dermatologists</div>
+          <div class="ver">UK clinical guidelines · biologic therapy · skin cancer</div>
+          <div class="chips">
+            <span class="chip">Psoriasis</span><span class="chip">AD</span><span class="chip">Biologics</span><span class="chip">Skin Ca</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">British Association of Dermatologists</span>
+            <span class="url">bad.org.uk/clinical-services/guidelines</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ PSYCHIATRY ═════════ -->
+    <div class="specialty-block" id="sp-psych">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">14</div>
+          <h2>Psychiatry</h2>
+          <p>Depression · anxiety · schizophrenia · bipolar · substance use · child &amp; adolescent psychiatry.</p>
+        </div>
+        <div class="right"><span class="pip"></span>4 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">APA</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American Psychiatric Association</div>
+          <div class="ver">DSM-5-TR · practice guidelines · per disorder</div>
+          <div class="chips">
+            <span class="chip">MDD</span><span class="chip">Bipolar</span><span class="chip">Schizophrenia</span><span class="chip">SUD</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American Psychiatric Association</span>
+            <span class="url">psychiatry.org/psychiatrists/practice/clinical-practice-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IPS</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Psychiatric Society</div>
+          <div class="ver">India CPGs on depression · schizophrenia · OCD · child psychiatry</div>
+          <div class="chips">
+            <span class="chip">MDD</span><span class="chip">OCD</span><span class="chip">Schizophrenia</span><span class="chip">Child psych</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Psychiatric Society</span>
+            <span class="url">indianpsychiatricsociety.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">RCPsych</div>
+            <span class="region eu">UK</span>
+          </div>
+          <div class="full">Royal College of Psychiatrists · UK</div>
+          <div class="ver">UK CPGs · perinatal psychiatry · psychiatric emergencies</div>
+          <div class="chips">
+            <span class="chip">MDD</span><span class="chip">Perinatal</span><span class="chip">Psy emergency</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Royal College of Psychiatrists</span>
+            <span class="url">rcpsych.ac.uk/improving-care/clinical-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">WPA</div>
+            <span class="region global">Global</span>
+          </div>
+          <div class="full">World Psychiatric Association</div>
+          <div class="ver">Global mental health policy · resource-stratified guidance</div>
+          <div class="chips">
+            <span class="chip">Mental health policy</span><span class="chip">SUD</span><span class="chip">Suicide prev</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">World Psychiatric Association</span>
+            <span class="url">wpanet.org</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════ RHEUMATOLOGY ═════════ -->
+    <div class="specialty-block" id="sp-rheum">
+      <div class="specialty-head">
+        <div class="left">
+          <div class="eyebrow">15</div>
+          <h2>Rheumatology</h2>
+          <p>RA · SLE · spondyloarthritis · gout · vasculitis · osteoporosis · pediatric rheum.</p>
+        </div>
+        <div class="right"><span class="pip"></span>4 bodies</div>
+      </div>
+      <div class="body-grid">
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">ACR</div>
+            <span class="region us">US</span>
+          </div>
+          <div class="full">American College of Rheumatology</div>
+          <div class="ver">Practice guidelines · RA · SLE · gout · biologic therapy</div>
+          <div class="chips">
+            <span class="chip">RA</span><span class="chip">SLE</span><span class="chip">Gout</span><span class="chip">Vasculitis</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">American College of Rheumatology</span>
+            <span class="url">rheumatology.org/practice-quality/clinical-support/clinical-practice-guidelines</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">EULAR</div>
+            <span class="region eu">EU</span>
+          </div>
+          <div class="full">European Alliance of Associations for Rheumatology</div>
+          <div class="ver">European recommendations · RA · SLE · spondyloarthritis</div>
+          <div class="chips">
+            <span class="chip">RA</span><span class="chip">SLE</span><span class="chip">SpA</span><span class="chip">Vasculitis</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">European Alliance of Associations for Rheumatology</span>
+            <span class="url">eular.org/recommendations</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">IRA</div>
+            <span class="region in">India</span>
+          </div>
+          <div class="full">Indian Rheumatology Association</div>
+          <div class="ver">India CPGs · biologics access · TB screening before biologics</div>
+          <div class="chips">
+            <span class="chip">RA</span><span class="chip">Biologics</span><span class="chip">TB pre-biologic</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Indian Rheumatology Association</span>
+            <span class="url">indianrheumatology.org</span>
+          </div>
+        </div>
+
+        <div class="body-card">
+          <div class="body-card-head">
+            <div class="acronym">APLAR</div>
+            <span class="region global">Asia-Pacific</span>
+          </div>
+          <div class="full">Asia Pacific League of Associations for Rheumatology</div>
+          <div class="ver">Asia-Pacific recommendations · RA · SLE · gout</div>
+          <div class="chips">
+            <span class="chip">RA</span><span class="chip">SLE</span><span class="chip">Gout</span>
+          </div>
+          <div class="source">
+            <span class="label">Source of truth</span>
+            <span class="org">Asia Pacific League of Associations for Rheumatology</span>
+            <span class="url">aplar.org</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ CONFIGURATION YAML EXAMPLE ════════════════ -->
+<section class="tinted">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How a hospital configures the library</div>
+      <h2>One file. Signed off. Read by Velora at every claim.</h2>
+      <p>The hospital's <code style="font-family:var(--mono);font-size:14px;color:var(--indigo-600);">hospital.yaml</code> binds each <code style="font-family:var(--mono);font-size:14px;color:var(--indigo-600);">domain.subdomain</code> to one or more guideline bodies. Velora's engine reads the chosen body, applies its rule, and cites the section on the answer card.</p>
+    </div>
+
+    <div class="config-example">
+      <div class="label">Sample · medanta_hospital.yaml</div>
+      <h3>What 12 lines of config buy you</h3>
+      <p>A nephrologist at Medanta sees Ravi Shankar's PD adequacy card cite <code style="background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:4px;color:#B5E3D5;">ISN-India 2020 §4.2</code>. The same patient at Mayo would see the same card cite <code style="background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:4px;color:#B5E3D5;">KDIGO 2006 §weekly Kt/V</code>. Same engine, same patient, different body — because the config said so.</p>
+
+      <pre><span class="c"># medanta_hospital.yaml — clinical advisory board signed 2026-04-15</span>
+
+<span class="c"># Cardiology</span>
+<span class="k">cardiology.atrial_fibrillation</span>: <span class="v">ESC 2024</span>
+<span class="k">cardiology.heart_failure</span>:        <span class="v">AHA/ACC 2022</span>
+<span class="k">cardiology.acs</span>:                  <span class="v">ESC 2023</span>
+<span class="k">cardiology.lipids</span>:               <span class="v">ESC 2019</span>
+
+<span class="c"># Nephrology</span>
+<span class="k">nephrology.pd_adequacy</span>:          <span class="v">ISN-India 2020</span>
+<span class="k">nephrology.ckd_staging</span>:          <span class="v">KDIGO 2024</span>
+<span class="k">nephrology.anaemia</span>:              <span class="v">KDIGO 2012</span>
+
+<span class="c"># Endocrinology</span>
+<span class="k">endocrinology.t2dm</span>:              <span class="v">ICMR 2018</span>
+<span class="k">endocrinology.gdm</span>:               <span class="v">DIPSI</span>
+
+<span class="c"># Critical care</span>
+<span class="k">icu.sepsis</span>:                      <span class="v">SSC 2021</span>
+<span class="k">icu.vte_prophylaxis</span>:             <span class="v">ISCCM</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SOURCING METHODOLOGY ════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How this list is curated</div>
+      <h2>How we chose what's in the library — and the proof per body.</h2>
+      <p>The list above isn't speculative. Every body included meets at least one of three criteria. Hover any body's card to see its publishing organisation and its source URL — that is the proof.</p>
+    </div>
+
+    <div class="source-methodology">
+      <div class="method-card">
+        <div class="num">01</div>
+        <h4>Adoption signal</h4>
+        <p>Endorsed by a major clinical society, taught at residency level, cited in MoHFW programmes, or referenced in standard textbooks at Indian medical schools.</p>
+      </div>
+      <div class="method-card">
+        <div class="num">02</div>
+        <h4>Active maintenance</h4>
+        <p>Updated within the last 5 years, with a public update cadence. Bodies that are dormant or merged into successor organisations are excluded or flagged.</p>
+      </div>
+      <div class="method-card">
+        <div class="num">03</div>
+        <h4>India relevance</h4>
+        <p>Either a global body widely used in India, an India-specific society (FOGSI, IAP, ICMR, ISN-India, etc.), or a national programme (NTEP, MoHFW maternal health).</p>
+      </div>
+      <div class="method-card">
+        <div class="num">04</div>
+        <h4>Public source</h4>
+        <p>Each body must have a publicly accessible homepage and a published location for its latest guidance. Closed-only or paywalled-only bodies aren't included unless the abstract layer (rule + section) is public.</p>
+      </div>
+    </div>
+
+    <div class="config-callout" style="margin-top: 32px;">
+      <span class="ico" style="background: var(--bg-soft);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </span>
+      <div class="body">
+        <p><strong>If a body is missing.</strong> The list is not exhaustive. If a body matters at your hospital and isn't here, the rule library accepts it as long as it meets the four criteria above. New bodies are added once and immediately available to every hospital via config — without a code change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="row">
+      <div class="col" style="max-width: 320px;">
+        <div class="brand" style="margin-bottom: 8px;">
+          <span class="mark">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L13.7 8.7L20.5 11L13.7 13.3L12 20L10.3 13.3L3.5 11L10.3 8.7L12 2Z" fill="white"/>
+            </svg>
+          </span>
+          <span class="v">Velora</span>
+        </div>
+        <p style="font-size:13px; color: var(--slate-500); margin: 0 0 8px;">Clinical intelligence layer for the multi-specialty hospital. A librarian, not a clinician.</p>
+        <p style="font-size:12px; color: var(--slate-400); margin: 0;">By Zyvelor Labs · zyvelorlabs@tatvacare.in</p>
+      </div>
+      <div class="col">
+        <h5>Five intents</h5>
+        <a href="velora-intent-mdt.html">MDT brief</a>
+        <a href="velora-intent-open-loops.html">Open loops</a>
+        <a href="velora-intent-active-meds.html">Active meds &amp; safety</a>
+        <a href="velora-intent-trends.html">Trends across visits</a>
+        <a href="velora-intent-why-flagged.html">Why flagged today</a>
+      </div>
+      <div class="col">
+        <h5>Specs</h5>
+        <a href="Velora_V0_Spec.docx">V0 product spec</a>
+        <a href="Velora_V0_Intent_Spec.md">Intent spec (MD)</a>
+        <a href="velora-guidelines.html">Clinical Guidelines</a>
+      </div>
+      <div class="col">
+        <h5>Home</h5>
+        <a href="velora-home.html">Velora home</a>
+        <a href="velora-home.html#story">The story</a>
+        <a href="velora-home.html#matrix">Intent × Patient matrix</a>
+      </div>
+    </div>
+    <div class="credits">
+      © Zyvelor Labs · 2026 · Velora is a research-stage clinical intelligence layer · It is observational, not directive · Every claim cites a source.
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll-hide for sub-nav -->
+<script>
+  (function () {
+    var sub = document.querySelector('.subnav');
+    if (!sub) return;
+    var lastY = window.scrollY;
+    var ticking = false;
+    function update() {
+      var y = window.scrollY;
+      if (y > 120 && y > lastY + 4) sub.classList.add('subnav-hidden');
+      else if (y < lastY - 4 || y < 80) sub.classList.remove('subnav-hidden');
+      lastY = y;
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>
