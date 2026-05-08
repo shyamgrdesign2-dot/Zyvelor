@@ -691,7 +691,7 @@
   .briefer-row:last-of-type { border-bottom: 0; }
   .briefer-row.flagged { background: linear-gradient(to right, var(--rose-50, #FDF3F4) 0%, transparent 30%); }
   .briefer-row.flagged-amber { background: linear-gradient(to right, #FBF5E5 0%, transparent 30%); }
-  .briefer-row .slot-time { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: -0.3px; }
+  .briefer-row .slot-time { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--slate-700); letter-spacing: 0.6px; padding: 4px 8px; background: var(--slate-100); border-radius: 6px; text-align: center; display: inline-block; align-self: start; }
   .briefer-row .pname { font-weight: 600; color: var(--ink); font-size: 13.5px; }
   .briefer-row .ptags { font-family: var(--mono); font-size: 11.5px; color: var(--slate-500); margin-top: 2px; }
   .briefer-row .flags { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -796,7 +796,7 @@
     <div class="section-head">
       <div class="eyebrow">The four intents · what Velora does for a doctor</div>
       <h2>One platform. Four jobs every multi-specialty doctor has, every day.</h2>
-      <p>MDT is the anchor — the cross-specialty deep-dive when a patient walks in. The other three orbit it: the morning flag-list of who's coming today, the safety check at the prescribe click, and the visit recap when a returning patient is on your schedule. Same engine. Same citations. Each tuned to a different moment.</p>
+      <p>MDT is the anchor — the cross-specialty deep-dive when a patient walks in. The other three orbit it, each with its own UI shape: Care Gaps as a population list, Medication Red Flags as a prescribe-time checkpoint, Visit recap as a return-visit timeline. Same engine. Same citations. Different shape per intent — the MDT format isn't force-fit on any of them.</p>
     </div>
 
     <aside id="why-four" style="max-width: 720px; margin: 0 0 32px; padding: 18px 22px; background: var(--indigo-50); border-left: 3px solid var(--indigo-500); border-radius: 8px;">
@@ -817,11 +817,11 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </span>
       </a>
-      <a href="velora-intent-why-flagged.html" class="intent-card c-flags">
+      <a href="velora-intent-why-flagged.html" class="intent-card c-trends">
         <div>
-          <div class="num">02 · Today's panel</div>
-          <h3>Why flagged today — what's waiting on your morning list</h3>
-          <p>For each patient on today's OPD or round, the structured events that fired since their last contact — admission, unreviewed critical lab, threshold breach, polypharmacy. Each event already exists in the records.</p>
+          <div class="num">02 · Population</div>
+          <h3>Care Gaps — expected next step is missing</h3>
+          <p>Of the patients you've touched, who has an action that should have happened by now and didn't. Discharged 22 d ago · no follow-up booked. HbA1c returned high · no clinical note attached. Referral sent · no destination visit. Each gap anchored to a structured event that already happened.</p>
         </div>
         <span class="open">Open
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -829,9 +829,9 @@
       </a>
       <a href="velora-intent-active-meds.html" class="intent-card c-meds">
         <div>
-          <div class="num">03 · At the prescribe click</div>
-          <h3>Active meds &amp; safety — don't write blind</h3>
-          <p>Active meds, allergies, recent labs, DDI flags from the hospital's chosen source. Each card cites a Lexicomp / formulary / ADA rule. The doctor accepts or overrides; nothing is auto-stopped.</p>
+          <div class="num">03 · Action checkpoint</div>
+          <h3>Medication Red Flags — DDI · allergy · target</h3>
+          <p>At the prescribe click: drug-drug interaction, allergy match, drug-target mismatch (HbA1c &gt; 8 on metformin, BP uncontrolled on a BP drug), polypharmacy. Each card cites a Lexicomp / formulary / ICMR rule. The doctor accepts or overrides; nothing is auto-stopped.</p>
         </div>
         <span class="open">Open
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -864,97 +864,97 @@
     <div class="briefer">
       <div class="briefer-head">
         <div>
-          <div class="label">Intent #2 · Why flagged today — live demo</div>
+          <div class="label">Intent #2 · Care Gaps — live demo</div>
           <div class="title">Dr. A. Pandey · GenMed · Wed 8 May 2026</div>
-          <div class="sub">18 OPD slots · 4 admitted · 6 patients flagged</div>
+          <div class="sub">142 active patients · 23 with an open gap · grouped by category</div>
         </div>
         <div class="right">refreshed 06:14 IST</div>
       </div>
 
       <div class="briefer-row flagged">
-        <div class="slot-time">09:20</div>
+        <div class="slot-time">DSCH</div>
         <div>
           <div class="pname">Ramesh Kumar · 58M</div>
-          <div class="ptags">post-MI · CKD stage 3</div>
+          <div class="ptags">discharged 21 Apr · post-MI</div>
         </div>
         <div class="flags">
-          <span class="flag-chip crit">K+ 5.9 unreviewed · 5 d</span>
-          <span class="flag-chip warn">post-discharge day 17</span>
+          <span class="flag-chip crit">17 d · no follow-up booked</span>
+          <span class="flag-chip warn">expected within 30 d</span>
         </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open brief →</a>
-      </div>
-
-      <div class="briefer-row flagged-amber">
-        <div class="slot-time">09:40</div>
-        <div>
-          <div class="pname">Sunita Pillai · 52F</div>
-          <div class="ptags">HTN · T2DM</div>
-        </div>
-        <div class="flags">
-          <span class="flag-chip warn">Endo referral 18 d · no destination visit</span>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open brief →</a>
-      </div>
-
-      <div class="briefer-row">
-        <div class="slot-time">10:00</div>
-        <div>
-          <div class="pname">Anand Mehta · 45M</div>
-          <div class="ptags">essential HTN</div>
-        </div>
-        <div class="flags">
-          <span class="flag-chip none">no flags · routine follow-up</span>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open brief →</a>
-      </div>
-
-      <div class="briefer-row flagged-amber">
-        <div class="slot-time">10:20</div>
-        <div>
-          <div class="pname">Lakshmi Pandey · 64F</div>
-          <div class="ptags">T2DM · neuropathy</div>
-        </div>
-        <div class="flags">
-          <span class="flag-chip warn">statin · 110 d no in-hospital fill</span>
-          <span class="flag-chip warn">Cardiology referral · 85 d stale</span>
-        </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open brief →</a>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
       </div>
 
       <div class="briefer-row flagged">
-        <div class="slot-time">10:40</div>
+        <div class="slot-time">LAB</div>
         <div>
-          <div class="pname">Suresh Iyer · 62M</div>
-          <div class="ptags">post-MI · T2DM</div>
+          <div class="pname">Lakshmi Pandey · 64F</div>
+          <div class="ptags">K+ 5.9 returned 22 Apr</div>
         </div>
         <div class="flags">
-          <span class="flag-chip crit">DDI risk · ibuprofen pending + apixaban active</span>
+          <span class="flag-chip crit">5 d · no clinical note attached</span>
+          <span class="flag-chip warn">critical-flagged at lab</span>
         </div>
-        <a class="open-link" href="velora-intent-mdt.html">Open brief →</a>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="briefer-row flagged-amber">
+        <div class="slot-time">REF</div>
+        <div>
+          <div class="pname">Lakshmi Pandey · 64F</div>
+          <div class="ptags">Cardiology referral sent 12 Feb</div>
+        </div>
+        <div class="flags">
+          <span class="flag-chip warn">85 d · no destination visit</span>
+        </div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="briefer-row flagged-amber">
+        <div class="slot-time">DRUG</div>
+        <div>
+          <div class="pname">Suresh Iyer · 62M</div>
+          <div class="ptags">on metformin · last HbA1c 8.4 (4 mo)</div>
+        </div>
+        <div class="flags">
+          <span class="flag-chip warn">target mismatch · no plan change</span>
+        </div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
+      </div>
+
+      <div class="briefer-row flagged-amber">
+        <div class="slot-time">REF</div>
+        <div>
+          <div class="pname">Mohammed Faisal · 61M</div>
+          <div class="ptags">Endo referral sent 22 Mar</div>
+        </div>
+        <div class="flags">
+          <span class="flag-chip warn">47 d · no destination visit</span>
+        </div>
+        <a class="open-link" href="velora-intent-mdt.html">Open MDT →</a>
       </div>
 
       <div class="briefer-row">
-        <div class="slot-time">11:00</div>
+        <div class="slot-time">+18</div>
         <div>
-          <div class="pname">+ 13 more OPD slots</div>
-          <div class="ptags">no flags</div>
+          <div class="pname">+ 18 more gaps across categories</div>
+          <div class="ptags">discharge follow-up · lab unread · referral · drug-target</div>
         </div>
         <div class="flags">
-          <span class="flag-chip none">routine</span>
+          <span class="flag-chip none">view all 23</span>
         </div>
-        <a class="open-link" href="#">View full schedule</a>
+        <a class="open-link" href="velora-intent-why-flagged.html">Open Care Gaps →</a>
       </div>
 
       <div class="briefer-foot">
-        Each flag traces to a structured event id (lab · referral · admission · prescription) · severity tier from rules, never LLM-classified · click any name to open the full cross-specialty brief
+        Every gap is anchored to an event that <em>already happened</em> — discharge_id, result_id, referral_id, rx_id — paired with the expected next step that didn't. No "patients we've never seen" framing. Severity tier from rules, never LLM-classified.
       </div>
     </div>
 
     <div class="brief-teaser">
       <div>
-        <div class="label">Click any flagged name → Intent #1 · MDT brief</div>
-        <h3>From the morning list to the deep cross-specialty view.</h3>
-        <p>The morning list above is intent #2. Click any patient's name and you're in intent #1 — the MDT brief. Cross-specialty timeline (Stack 1 facts), guideline-anchored panels (Stack 2 with citations), trajectory of key metrics if 3+ readings exist, active meds with prescriber attribution. Same engine; deeper view.</p>
+        <div class="label">Click any patient → Intent #1 · MDT brief</div>
+        <h3>From the gap list to the cross-specialty deep dive.</h3>
+        <p>Care Gaps is a population list — same KG, dashboard shape. When a row is worth more attention, the doctor clicks the patient and lands in Intent #1, the MDT brief: cross-specialty timeline (Stack 1 facts), guideline-anchored panels (Stack 2 with citations), trajectory of key metrics if 3+ readings exist, active meds with prescriber attribution. Different shape; same engine.</p>
       </div>
       <a class="open-cta" href="velora-intent-mdt.html">See the MDT brief
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1098,7 +1098,7 @@
     <div class="closing">
       <div>
         <h2>Ready to see the four intents land at Zydus?</h2>
-        <p>60-day pilot · 5–10 doctors · one department (start with General Medicine — the broadest cross-specialty exposure). All four intents against the hospital's real data: MDT brief, Why flagged today, Active meds &amp; safety, Visit recap. The day-60 success bar is one line — a Zydus doctor opened an intent and acted on it.</p>
+        <p>60-day pilot · 5–10 doctors · one department (start with General Medicine — the broadest cross-specialty exposure). All four intents against the hospital's real data: MDT brief, Care Gaps, Medication Red Flags, Visit recap. The day-60 success bar is one line — a Zydus doctor opened an intent and acted on it.</p>
         <div class="ctas">
           <a class="btn btn-primary btn-lg" href="velora-intent-mdt.html">Start with the MDT walkthrough
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1110,8 +1110,8 @@
         <h4>What ships at day 60</h4>
         <ul>
           <li>· MDT brief — Stack 1 facts + Stack 2 guideline panels with patient journey</li>
-          <li>· Why flagged today — annotated OPD + admitted list with severity-tier flags</li>
-          <li>· Active meds &amp; safety — DDI, allergy, target, duplicate at the prescribe view</li>
+          <li>· Care Gaps — annotated OPD + admitted list with severity-tier flags</li>
+          <li>· Medication Red Flags — DDI, allergy, target, duplicate at the prescribe view</li>
           <li>· Visit recap — last visit's plan + status of every order, referral, follow-up since</li>
           <li>· 3 starter rule sets (KDIGO PD · ESC AF · ICMR T2DM)</li>
           <li>· Trace on every claim · doctor verifies before acting</li>
@@ -1140,8 +1140,8 @@
       <div class="col">
         <h5>Four intents</h5>
         <a href="velora-intent-mdt.html">MDT brief — anchor</a>
-        <a href="velora-intent-why-flagged.html">Why flagged today</a>
-        <a href="velora-intent-active-meds.html">Active meds &amp; safety</a>
+        <a href="velora-intent-why-flagged.html">Care Gaps</a>
+        <a href="velora-intent-active-meds.html">Medication Red Flags</a>
         <a href="velora-intent-open-loops.html">Visit recap</a>
       </div>
       <div class="col">
